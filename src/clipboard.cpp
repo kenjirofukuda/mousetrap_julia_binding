@@ -2,7 +2,7 @@
 
 // ### CLIPBOARD
 
-static void implement_clipboard(jlcxx::Module& module)
+void implement_clipboard(jlcxx::Module& module)
 {
     auto clipboard = module.add_type(Clipboard)
     .constructor([](void* internal) -> Clipboard*{

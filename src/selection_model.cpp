@@ -2,7 +2,7 @@
 
 // ### SELECTION MODEL
 
-static void implement_selection_model(jlcxx::Module& module)
+void implement_selection_model(jlcxx::Module& module)
 {
     define_enum_in(module, SelectionMode);
     module.add_enum_value(SelectionMode, SELECTION_MODE, NONE);

@@ -2,7 +2,7 @@
 
 // ### STYLUS EVENT CONTROLLER
 
-static void implement_stylus_event_controller(jlcxx::Module& module)
+void implement_stylus_event_controller(jlcxx::Module& module)
 {
     define_enum_in(module, ToolType);
     module.add_enum_value(ToolType, TOOL_TYPE, UNKNOWN);

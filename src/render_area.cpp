@@ -2,7 +2,7 @@
 
 // ### RENDER AREA
 
-static void implement_render_area(jlcxx::Module& module)
+void implement_render_area(jlcxx::Module& module)
 {
     auto render_area = module.add_type(RenderArea)
     .add_constructor()

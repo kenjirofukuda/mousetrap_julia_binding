@@ -2,7 +2,7 @@
 
 // ### SPINNER
 
-static void implement_spinner(jlcxx::Module& module)
+void implement_spinner(jlcxx::Module& module)
 {
     auto spinner = module.add_type(Spinner)
     .add_constructor()

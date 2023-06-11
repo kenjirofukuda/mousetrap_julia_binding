@@ -2,7 +2,7 @@
 
 // ### ALIGNMENT
 
-static void implement_alignment(jlcxx::Module& module)
+void implement_alignment(jlcxx::Module& module)
 {
     define_enum_in(module, Alignment);
     module.add_enum_value(Alignment, ALIGNMENT, START);

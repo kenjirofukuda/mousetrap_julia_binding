@@ -12,7 +12,7 @@ enum SectionFormat
 
 // ### MENU MODEL
 
-static void implement_menu_model(jlcxx::Module& module)
+void implement_menu_model(jlcxx::Module& module)
 {
     define_enum_in(module, SectionFormat);
     module.add_enum_value(SectionFormat, SECTION_FORMAT, NORMAL);

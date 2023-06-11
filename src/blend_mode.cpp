@@ -2,7 +2,7 @@
 
 // ### BLEND MODE
 
-static void implement_blend_mode(jlcxx::Module& module)
+void implement_blend_mode(jlcxx::Module& module)
 {
     define_enum_in(module, BlendMode);
     module.add_enum_value(BlendMode, BLEND_MODE, NONE);

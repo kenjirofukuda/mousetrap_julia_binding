@@ -2,7 +2,7 @@
 
 // ### COLOR
 
-static void implement_color(jlcxx::Module& module)
+void implement_color(jlcxx::Module& module)
 {
     module.method("rgba_to_hsva", [](jl_value_t* rgba)
     {

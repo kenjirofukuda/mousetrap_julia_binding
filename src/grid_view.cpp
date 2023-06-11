@@ -2,7 +2,7 @@
 
 // ### GRID VIEW
 
-static void implement_grid_view(jlcxx::Module& module)
+void implement_grid_view(jlcxx::Module& module)
 {
     auto grid = module.add_type(GridView)
     .add_constructor(Orientation, SelectionMode)

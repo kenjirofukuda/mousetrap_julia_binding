@@ -2,7 +2,7 @@
 
 // ### LIST VIEW
 
-static void implement_list_view(jlcxx::Module& module)
+void implement_list_view(jlcxx::Module& module)
 {
     auto list_view = module.add_type(ListView)
     .add_constructor(Orientation, SelectionMode)

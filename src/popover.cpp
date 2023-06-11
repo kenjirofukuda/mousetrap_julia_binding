@@ -2,7 +2,7 @@
 
 // ### POPOVER
 
-static void implement_popover(jlcxx::Module& module)
+void implement_popover(jlcxx::Module& module)
 {
     auto popover = module.add_type(Popover)
     .add_type_method(Popover, popup, !)

@@ -2,7 +2,7 @@
 
 // ### FRAME CLOCK
 
-static void implement_frame_clock(jlcxx::Module& module)
+void implement_frame_clock(jlcxx::Module& module)
 {
     auto frame_clock = module.add_type(FrameClock)
     .constructor([](void* internal){

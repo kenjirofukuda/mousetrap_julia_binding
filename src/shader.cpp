@@ -2,7 +2,7 @@
 
 // ### SHADER
 
-static void implement_shader(jlcxx::Module& module)
+void implement_shader(jlcxx::Module& module)
 {
     define_enum_in(module, ShaderType);
     module.add_enum_value(ShaderType, SHADER_TYPE, FRAGMENT);

@@ -3,7 +3,7 @@
 
 // ### JUSTIFY MODE
 
-static void implement_justify_mode(jlcxx::Module& module)
+void implement_justify_mode(jlcxx::Module& module)
 {
     define_enum_in(module, JustifyMode);
     module.add_enum_value(JustifyMode, JUSTIFY_MODE, LEFT);

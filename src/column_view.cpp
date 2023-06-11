@@ -4,7 +4,7 @@
 
 using ColumnViewColumn = ColumnView::Column;
 
-static void implement_column_view(jlcxx::Module& module)
+void implement_column_view(jlcxx::Module& module)
 {
     auto column = module.add_type(ColumnViewColumn)
     .constructor([](void* internal){

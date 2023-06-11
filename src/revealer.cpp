@@ -2,7 +2,7 @@
 
 // ### REVEALER
 
-static void implement_revealer(jlcxx::Module& module)
+void implement_revealer(jlcxx::Module& module)
 {
     define_enum_in(module, RevealerTransitionType);
     module.add_enum_value(RevealerTransitionType, REVEALER_TRANSITION_TYPE, NONE);

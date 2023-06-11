@@ -2,7 +2,7 @@
 
 // ### TOGGLE BUTTON
 
-static void implement_toggle_button(jlcxx::Module& module)
+void implement_toggle_button(jlcxx::Module& module)
 {
     auto toggle = module.add_type(ToggleButton)
     .add_constructor()

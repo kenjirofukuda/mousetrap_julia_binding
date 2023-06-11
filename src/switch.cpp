@@ -2,7 +2,7 @@
 
 // ### SWITCH
 
-static void implement_switch(jlcxx::Module& module)
+void implement_switch(jlcxx::Module& module)
 {
     auto widget = module.add_type(Switch)
     .add_constructor()

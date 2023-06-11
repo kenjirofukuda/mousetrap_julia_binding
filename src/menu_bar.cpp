@@ -2,7 +2,7 @@
 
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_menu_bar(jlcxx::Module& module)
+void implement_menu_bar(jlcxx::Module& module)
 {
     auto menubar = module.add_type(MenuBar)
     .add_constructor(const MenuModel&)

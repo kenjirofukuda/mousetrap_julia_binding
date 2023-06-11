@@ -2,7 +2,7 @@
 
 // ### SEPARATOR
 
-static void implement_separator(jlcxx::Module& module)
+void implement_separator(jlcxx::Module& module)
 {
     auto separator = module.add_type(Separator)
     .add_constructor(float, Orientation)

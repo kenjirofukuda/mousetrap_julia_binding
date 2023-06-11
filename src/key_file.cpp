@@ -2,7 +2,7 @@
 
 // ### KEY FILE
 
-static void implement_key_file(jlcxx::Module& module)
+void implement_key_file(jlcxx::Module& module)
 {
     auto key_file = module.add_type(KeyFile)
     .add_constructor()

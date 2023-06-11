@@ -5,7 +5,7 @@
 
 // ### NOTEBOOK
 
-static void implement_notebook(jlcxx::Module& module)
+void implement_notebook(jlcxx::Module& module)
 {
     auto notebook = module.add_type(Notebook)
     .add_constructor()

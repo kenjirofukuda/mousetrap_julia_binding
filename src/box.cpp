@@ -2,7 +2,7 @@
 
 // ### BOX
 
-static void implement_box(jlcxx::Module& module)
+void implement_box(jlcxx::Module& module)
 {
     auto box = module.add_type(Box)
     .add_constructor(Orientation)

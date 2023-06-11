@@ -2,7 +2,7 @@
 
 // ### GRID
 
-static void implement_grid(jlcxx::Module& module)
+void implement_grid(jlcxx::Module& module)
 {
     auto grid = module.add_type(Grid)
     .add_constructor()

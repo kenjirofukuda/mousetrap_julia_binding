@@ -6,7 +6,7 @@
 
 // ### LONG PRESS EVENT CONTROLLER
 
-static void implement_long_press_event_controller(jlcxx::Module& module)
+void implement_long_press_event_controller(jlcxx::Module& module)
 {
     auto long_press = module.add_type(LongPressEventController)
     .add_type_method(LongPressEventController, set_delay_factor)

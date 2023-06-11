@@ -2,4 +2,4 @@
 
 // ### TODO
 
-static void implement_music(jlcxx::Module& module) {}
+void implement_music(jlcxx::Module& module) {}

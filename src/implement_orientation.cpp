@@ -4,7 +4,7 @@
 
 // ### ORIENTATION
 
-static void implement_orientation(jlcxx::Module& module)
+void implement_orientation(jlcxx::Module& module)
 {
     define_enum_in(module, Orientation);
     module.add_enum_value(Orientation, ORIENTATION, HORIZONTAL);

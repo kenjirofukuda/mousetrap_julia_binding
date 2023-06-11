@@ -2,7 +2,7 @@
 
 // ### TEXTURE
 
-static void implement_texture(jlcxx::Module& module)
+void implement_texture(jlcxx::Module& module)
 {
     define_enum_in(module, TextureWrapMode);
     module.add_enum_value(TextureWrapMode, TEXTURE_WRAP_MODE, ZERO);

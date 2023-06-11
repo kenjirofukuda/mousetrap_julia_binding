@@ -1,6 +1,6 @@
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_key_codes(jlcxx::Module& module)
+void implement_key_codes(jlcxx::Module& module)
 {
     module.set_const("KEY_VoidSymbol", (guint) mousetrap::KEY_VoidSymbol);
     module.set_const("KEY_BackSpace", (guint) mousetrap::KEY_BackSpace);

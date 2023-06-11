@@ -2,7 +2,7 @@
 
 // ### OVERLAY
 
-static void implement_overlay(jlcxx::Module& module)
+void implement_overlay(jlcxx::Module& module)
 {
     auto overlay = module.add_type(Overlay)
     .add_constructor()

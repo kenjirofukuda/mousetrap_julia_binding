@@ -1,9 +1,6 @@
-
-/ ### PROGRESS BAR
-
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_progress_bar(jlcxx::Module& module)
+void implement_progress_bar(jlcxx::Module& module)
 {
     define_enum_in(module, ProgressBarDisplayMode);
     module.add_enum_value(ProgressBarDisplayMode, PROGRESS_BAR_DISPLAY_MODE, SHOW_TEXT);

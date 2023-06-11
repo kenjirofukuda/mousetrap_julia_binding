@@ -3,4 +3,4 @@
 
 // ### TODO
 
-static void implement_sound_buffer(jlcxx::Module& module) {}
+void implement_sound_buffer(jlcxx::Module& module) {}

@@ -1,6 +1,6 @@
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_stack(jlcxx::Module& module)
+void implement_stack(jlcxx::Module& module)
 {
     define_enum_in(module, StackTransitionType);
     module.add_enum_value(StackTransitionType, STACK_TRANSITION_TYPE, NONE);

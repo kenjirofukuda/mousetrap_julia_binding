@@ -1,8 +1,8 @@
-include "../mousetrap_julia_binding.hpp"
+#include "../mousetrap_julia_binding.hpp"
 
 // ### IMAGE DISPLAY
 
-static void implement_image_display(jlcxx::Module& module)
+void implement_image_display(jlcxx::Module& module)
 {
     auto image_display = module.add_type(ImageDisplay)
     .add_constructor(const std::string&)

@@ -2,7 +2,7 @@
 
 // ### BUTTON
 
-static void implement_button(jlcxx::Module& module)
+void implement_button(jlcxx::Module& module)
 {
     auto button = module.add_type(Button)
     .add_constructor()

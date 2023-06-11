@@ -2,7 +2,7 @@
 
 // ### WIDGET
 
-static void implement_widget(jlcxx::Module& module)
+void implement_widget(jlcxx::Module& module)
 {
     define_enum_in(module, TickCallbackResult);
     module.add_enum_value(TickCallbackResult, TICK_CALLBACK_RESULT, CONTINUE);

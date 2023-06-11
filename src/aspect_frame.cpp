@@ -2,7 +2,7 @@
 
 // ### ASPECT FRAME
 
-static void implement_aspect_frame(jlcxx::Module& module)
+void implement_aspect_frame(jlcxx::Module& module)
 {
     auto aspect_frame = module.add_type(AspectFrame)
     .constructor([](float ratio, float x_alignment, float y_alignment){

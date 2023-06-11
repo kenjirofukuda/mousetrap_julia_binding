@@ -2,7 +2,7 @@
 
 // ### POPOVER MENU
 
-static void implement_popover_menu(jlcxx::Module& module)
+void implement_popover_menu(jlcxx::Module& module)
 {
     auto popover_menu = module.add_type(PopoverMenu)
     .add_constructor(const MenuModel&)

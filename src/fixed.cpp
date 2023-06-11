@@ -2,7 +2,7 @@
 
 // ### FIXED
 
-static void implement_fixed(jlcxx::Module& module)
+void implement_fixed(jlcxx::Module& module)
 {
     auto fixed = module.add_type(Fixed)
     .add_constructor()

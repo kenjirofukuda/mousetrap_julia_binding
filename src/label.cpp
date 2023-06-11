@@ -2,7 +2,7 @@
 
 // ### LABEL
 
-static void implement_label(jlcxx::Module& module)
+void implement_label(jlcxx::Module& module)
 {
     define_enum_in(module, EllipsizeMode)
     module.add_enum_value(EllipsizeMode, ELLIPSIZE_MODE, NONE);

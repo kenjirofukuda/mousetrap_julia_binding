@@ -2,7 +2,7 @@
 
 // ### EXPANDER
 
-static void implement_expander(jlcxx::Module& module)
+void implement_expander(jlcxx::Module& module)
 {
     auto expander = module.add_type(Expander)
     .method("set_child!", [](Expander& x, void* widget) {

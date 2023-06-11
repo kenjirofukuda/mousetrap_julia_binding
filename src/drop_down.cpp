@@ -2,7 +2,7 @@
 
 // ### DROP DOWN
 
-static void implement_drop_down(jlcxx::Module& module)
+void implement_drop_down(jlcxx::Module& module)
 {
     auto drop_down = module.add_type(DropDown)
     .add_constructor()

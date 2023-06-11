@@ -2,7 +2,7 @@
 
 // ### VIEWPORT
 
-static void implement_viewport(jlcxx::Module& module)
+void implement_viewport(jlcxx::Module& module)
 {
     define_enum_in(module, ScrollbarVisibilityPolicy);
     module.add_enum_value(ScrollbarVisibilityPolicy, SCROLLBAR_VISIBILITY_POLICY, NEVER);

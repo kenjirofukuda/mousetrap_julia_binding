@@ -2,7 +2,7 @@
 
 // ### FILE MONITOR
 
-static void implement_file_monitor(jlcxx::Module& module)
+void implement_file_monitor(jlcxx::Module& module)
 {
     define_enum_in(module, FileMonitorEvent);
     module.add_enum_value(FileMonitorEvent, FILE_MONITOR_EVENT, CHANGED);

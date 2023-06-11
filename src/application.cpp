@@ -2,7 +2,7 @@
 
 // ### APPLICATION
 
-static void implement_application(jlcxx::Module& module)
+void implement_application(jlcxx::Module& module)
 {
     auto application = module.add_type(Application)
     .add_constructor(const std::string&)

@@ -2,7 +2,7 @@
 
 // ### CHECK BUTTON
 
-static void implement_check_button(jlcxx::Module& module)
+void implement_check_button(jlcxx::Module& module)
 {
     define_enum_in(module, CheckButtonState);
     module.add_enum_value(CheckButtonState, CHECK_BUTTON_STATE, ACTIVE);

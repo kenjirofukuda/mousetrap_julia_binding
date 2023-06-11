@@ -2,7 +2,7 @@
 
 // ### EVENT CONTROLLER
 
-static void implement_event_controller(jlcxx::Module& module)
+void implement_event_controller(jlcxx::Module& module)
 {
     define_enum_in(module, PropagationPhase);
     module.add_enum_value(PropagationPhase, PROPAGATION_PHASE, NONE);

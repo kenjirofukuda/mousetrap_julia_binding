@@ -6,7 +6,7 @@
 
 // ### RENDER TASK
 
-static void implement_render_task(jlcxx::Module& module)
+void implement_render_task(jlcxx::Module& module)
 {
     auto render_task = module.add_type(RenderTask)
     .constructor([](Shape& shape, void* shader_maybe, void* transform_maybe, BlendMode blend_mode) -> RenderTask* {

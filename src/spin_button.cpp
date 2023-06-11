@@ -2,7 +2,7 @@
 
 // ### SPIN BUTTON
 
-static void implement_spin_button(jlcxx::Module& module)
+void implement_spin_button(jlcxx::Module& module)
 {
     auto spin = module.add_type(SpinButton)
     .add_constructor(float, float, float, Orientation)

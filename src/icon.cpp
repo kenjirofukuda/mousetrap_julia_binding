@@ -2,7 +2,7 @@
 
 // ### ICON
 
-static void implement_icon(jlcxx::Module& module)
+void implement_icon(jlcxx::Module& module)
 {
     module.add_type(Icon)
     .add_constructor()

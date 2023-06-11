@@ -2,7 +2,7 @@
 
 // ### ENTRY
 
-static void implement_entry(jlcxx::Module& module)
+void implement_entry(jlcxx::Module& module)
 {
     auto entry = module.add_type(Entry)
     .constructor()

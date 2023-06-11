@@ -3,7 +3,7 @@
 
 // ### GL TRANSFORM
 
-static void implement_gl_transform(jlcxx::Module& module)
+void implement_gl_transform(jlcxx::Module& module)
 {
     auto transform = module.add_type(GLTransform)
     .add_constructor()

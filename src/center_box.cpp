@@ -2,7 +2,7 @@
 
 // ### CENTER BOX
 
-static void implement_center_box(jlcxx::Module& module)
+void implement_center_box(jlcxx::Module& module)
 {
     auto center_box = module.add_type(CenterBox)
     .add_constructor(Orientation)

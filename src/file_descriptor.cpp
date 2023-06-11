@@ -2,7 +2,7 @@
 
 // ### FILE DESCRIPTOR
 
-static void implement_file_descriptor(jlcxx::Module& module)
+void implement_file_descriptor(jlcxx::Module& module)
 {
     auto file = module.add_type(FileDescriptor)
     .add_constructor()

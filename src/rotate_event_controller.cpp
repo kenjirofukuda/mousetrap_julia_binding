@@ -2,7 +2,7 @@
 
 // ### ROTATE EVENT CONTROLLER
 
-static void implement_rotate_event_controller(jlcxx::Module& module)
+void implement_rotate_event_controller(jlcxx::Module& module)
 {
     auto rotate = module.add_type(RotateEventController)
     .add_constructor()

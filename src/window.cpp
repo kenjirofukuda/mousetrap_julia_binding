@@ -2,7 +2,7 @@
 
 // ### WINDOW
 
-static void implement_window(jlcxx::Module& module)
+void implement_window(jlcxx::Module& module)
 {
     define_enum_in(module, WindowCloseRequestResult);
     module.add_enum_value(WindowCloseRequestResult, WINDOW_CLOSE_REQUEST_RESULT, ALLOW_CLOSE);

@@ -1,6 +1,6 @@
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_motion_event_controller(jlcxx::Module& module)
+void implement_motion_event_controller(jlcxx::Module& module)
 {
     auto motion = module.add_type(MotionEventController)
     .add_constructor()

@@ -6,7 +6,7 @@
 
 // ### ADJUSTMENT
 
-static void implement_adjustment(jlcxx::Module& module)
+void implement_adjustment(jlcxx::Module& module)
 {
     auto adjustment = module.add_type(Adjustment)
     .constructor([](void* internal){

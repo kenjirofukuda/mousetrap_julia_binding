@@ -2,7 +2,7 @@
 
 // ### SHAPE
 
-static void implement_shape(jlcxx::Module& module)
+void implement_shape(jlcxx::Module& module)
 {
     auto vertex = module.add_type(Vertex)
     .constructor([](float x, float y, jl_value_t* rgba){

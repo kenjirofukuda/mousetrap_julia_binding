@@ -2,7 +2,7 @@
 
 // ### LEVEL BAR
 
-static void implement_level_bar(jlcxx::Module& module)
+void implement_level_bar(jlcxx::Module& module)
 {
     define_enum_in(module, LevelBarMode);
     module.add_enum_value(LevelBarMode, LEVEL_BAR_MODE, CONTINUOUS);

@@ -1,8 +1,8 @@
-#include "../mousetrap_julia_binding.hpp
+#include "../mousetrap_julia_binding.hpp"
 
 // ### RELATIVE POSITION
 
-static void implement_relative_position(jlcxx::Module& module)
+void implement_relative_position(jlcxx::Module& module)
 {
     define_enum_in(module, RelativePosition);
     module.add_enum_value(RelativePosition, RELATIVE_POSITION, ABOVE);

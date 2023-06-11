@@ -2,7 +2,7 @@
 
 // ### LOG
 
-static void implement_log(jlcxx::Module& module)
+void implement_log(jlcxx::Module& module)
 {
     define_enum_in(module, LogLevel);
     module.add_enum_value(LogLevel, LOG_LEVEL, DEBUG);

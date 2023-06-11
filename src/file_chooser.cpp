@@ -2,7 +2,7 @@
 
 // ### FILE CHOOSER
 
-static void implement_file_chooser(jlcxx::Module& module)
+void implement_file_chooser(jlcxx::Module& module)
 {
     define_enum_in(module, FileChooserAction);
     module.add_enum_value(FileChooserAction, FILE_CHOOSER_ACTION, OPEN_FILE);

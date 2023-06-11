@@ -2,7 +2,7 @@
 
 // ### SCROLLBAR
 
-static void implement_scrollbar(jlcxx::Module& module)
+void implement_scrollbar(jlcxx::Module& module)
 {
     auto scrollbar = module.add_type(Scrollbar)
     .add_constructor(Orientation)

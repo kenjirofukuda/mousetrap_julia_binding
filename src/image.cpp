@@ -2,7 +2,7 @@
 
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_image(jlcxx::Module& module)
+void implement_image(jlcxx::Module& module)
 {
     define_enum_in(module, InterpolationType);
     module.add_enum_value(InterpolationType, INTERPOLATION_TYPE, NEAREST);

@@ -2,7 +2,7 @@
 
 // ### CLICK EVENT CONTROLLER
 
-static void implement_click_event_controller(jlcxx::Module& module)
+void implement_click_event_controller(jlcxx::Module& module)
 {
     auto click = module.add_type(ClickEventController)
     .add_constructor()

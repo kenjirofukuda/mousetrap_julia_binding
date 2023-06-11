@@ -2,7 +2,7 @@
 
 // ### ACTION
 
-static void implement_action(jlcxx::Module& module)
+void implement_action(jlcxx::Module& module)
 {
     auto action = module.add_type(Action)
     .constructor( [](const std::string& id, void* app_ptr){

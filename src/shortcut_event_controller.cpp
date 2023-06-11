@@ -2,7 +2,7 @@
 
 // ### SHORTCUT EVENT CONTROLLER
 
-static void implement_shortcut_event_controller(jlcxx::Module& module)
+void implement_shortcut_event_controller(jlcxx::Module& module)
 {
     define_enum_in(module, ShortcutScope);
     module.add_enum_value(ShortcutScope, SHORTCUT_SCOPE, LOCAL);

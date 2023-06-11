@@ -1,8 +1,8 @@
 #include "../mousetrap_julia_binding.hpp"
 
-/ ### TIME
+// ### TIME
 
-static void implement_time(jlcxx::Module& module)
+void implement_time(jlcxx::Module& module)
 {
     module.method("ns_to_minutes", [](size_t ns) -> double {
         return nanoseconds(ns).as_minutes();

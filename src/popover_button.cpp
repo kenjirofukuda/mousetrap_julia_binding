@@ -1,6 +1,6 @@
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_popover_button(jlcxx::Module& module)
+void implement_popover_button(jlcxx::Module& module)
 {
     auto popover_button = module.add_type(PopoverButton)
     .add_constructor()

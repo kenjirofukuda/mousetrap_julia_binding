@@ -1,11 +1,10 @@
-#include "../mousetrap_julia_binding.hpp
+#include "../mousetrap_julia_binding.hpp"
 
 // ### KEY EVENT CONTROLLER
 
-static void implement_key_event_controller(jlcxx::Module& module)
+void implement_key_event_controller(jlcxx::Module& module)
 {
     module.add_bits<ModifierState>("_ModifierState", jl_int32_type);
-    export_key_codes(module);
 
     auto key = module.add_type(KeyEventController)
     .add_constructor()

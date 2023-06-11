@@ -2,7 +2,7 @@
 
 // ### FRAME
 
-static void implement_frame(jlcxx::Module& module)
+void implement_frame(jlcxx::Module& module)
 {
     auto frame = module.add_type(Frame)
     .add_constructor()

@@ -5,7 +5,7 @@
 
 // ### DRAG EVENT CONTROLLER
 
-static void implement_drag_event_controller(jlcxx::Module& module)
+void implement_drag_event_controller(jlcxx::Module& module)
 {
     auto drag = module.add_type(DragEventController)
     .constructor()

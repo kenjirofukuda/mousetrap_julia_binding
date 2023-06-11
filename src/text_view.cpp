@@ -2,7 +2,7 @@
 
 // ### TEXT VIEW
 
-static void implement_text_view(jlcxx::Module& module)
+void implement_text_view(jlcxx::Module& module)
 {
     auto text_view = module.add_type(TextView)
     .add_constructor()

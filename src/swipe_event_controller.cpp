@@ -2,7 +2,7 @@
 
 // ### SWIPE EVENT CONTROLLER
 
-static void implement_swipe_event_controller(jlcxx::Module& module)
+void implement_swipe_event_controller(jlcxx::Module& module)
 {
     auto swipe = module.add_type(SwipeEventController)
     .add_constructor(Orientation)

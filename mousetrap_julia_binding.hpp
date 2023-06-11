@@ -405,286 +405,176 @@ void add_signal_render(Arg_t type, const std::string& name)
     type._DEFINE_ADD_SIGNAL_INVARIANT(render)
 }
 
-static void implement_adjustment(jlcxx::Module& module);
+void implement_adjustment(jlcxx::Module& module);
 
-static void implement_action(jlcxx::Module& module);
+void implement_action(jlcxx::Module& module);
 
-static void implement_alignment(jlcxx::Module& module);
+void implement_alignment(jlcxx::Module& module);
 
-static void implement_application(jlcxx::Module& module);
+void implement_application(jlcxx::Module& module);
 
-static void implement_aspect_frame(jlcxx::Module& module);
+void implement_aspect_frame(jlcxx::Module& module);
 
-static void implement_blend_mode(jlcxx::Module& module);
+void implement_blend_mode(jlcxx::Module& module);
 
-static void implement_box(jlcxx::Module& module);
+void implement_box(jlcxx::Module& module);
 
-static void implement_button(jlcxx::Module& module);
+void implement_button(jlcxx::Module& module);
 
-static void implement_center_box(jlcxx::Module& module);
+void implement_center_box(jlcxx::Module& module);
 
-static void implement_check_button(jlcxx::Module& module);
+void implement_check_button(jlcxx::Module& module);
 
-static void implement_click_event_controller(jlcxx::Module& module);
+void implement_click_event_controller(jlcxx::Module& module);
 
-static void implement_clipboard(jlcxx::Module& module);
+void implement_clipboard(jlcxx::Module& module);
 
-static void implement_color(jlcxx::Module& module);
+void implement_color(jlcxx::Module& module);
 
-static void implement_column_view(jlcxx::Module& module);
+void implement_column_view(jlcxx::Module& module);
 
-static void implement_cursor_type(jlcxx::Module& module);
+void implement_cursor_type(jlcxx::Module& module);
 
-static void implement_drag_event_controller(jlcxx::Module& module);
+void implement_drag_event_controller(jlcxx::Module& module);
 
-static void implement_drop_down(jlcxx::Module& module);
+void implement_drop_down(jlcxx::Module& module);
 
-static void implement_entry(jlcxx::Module& module);
+void implement_entry(jlcxx::Module& module);
 
-static void implement_event_controller(jlcxx::Module& module);
+void implement_event_controller(jlcxx::Module& module);
 
-static void implement_expander(jlcxx::Module& module);
+void implement_expander(jlcxx::Module& module);
 
-static void implement_file_monitor(jlcxx::Module& module);
+void implement_file_monitor(jlcxx::Module& module);
 
-static void implement_file_descriptor(jlcxx::Module& module);
+void implement_file_descriptor(jlcxx::Module& module);
 
-static void implement_file_system(jlcxx::Module& module);
+void implement_file_system(jlcxx::Module& module);
 
-static void implement_file_chooser(jlcxx::Module& module);
+void implement_file_chooser(jlcxx::Module& module);
 
-static void implement_fixed(jlcxx::Module& module);
+void implement_fixed(jlcxx::Module& module);
 
-static void implement_focus_event_controller(jlcxx::Module& module);
+void implement_focus_event_controller(jlcxx::Module& module);
 
-static void implement_frame(jlcxx::Module& module);
+void implement_frame(jlcxx::Module& module);
 
-static void implement_frame_clock(jlcxx::Module& module);
+void implement_frame_clock(jlcxx::Module& module);
 
-static void implement_gl_transform(jlcxx::Module& module);
+void implement_gl_transform(jlcxx::Module& module);
 
-static void implement_grid(jlcxx::Module& module);
+void implement_grid(jlcxx::Module& module);
 
-static void implement_grid_view(jlcxx::Module& module);
+void implement_grid_view(jlcxx::Module& module);
 
-static void implement_header_bar(jlcxx::Module& module);
+void implement_header_bar(jlcxx::Module& module);
 
-static void implement_icon(jlcxx::Module& module);
+void implement_icon(jlcxx::Module& module);
 
-static void implement_image(jlcxx::Module& module);
+void implement_image(jlcxx::Module& module);
 
-static void implement_image_display(jlcxx::Module& module);
+void implement_image_display(jlcxx::Module& module);
 
-static void implement_justify_mode(jlcxx::Module& module);
+void implement_justify_mode(jlcxx::Module& module);
 
-static void implement_key_codes(jlcxx::Module& module);
+void implement_key_codes(jlcxx::Module& module);
 
-static void implement_key_event_controller(jlcxx::Module& module);
+void implement_key_event_controller(jlcxx::Module& module);
 
-static void implement_key_file(jlcxx::Module& module);
+void implement_key_file(jlcxx::Module& module);
 
-static void implement_label(jlcxx::Module& module);
+void implement_label(jlcxx::Module& module);
 
-static void implement_level_bar(jlcxx::Module& module);
+void implement_level_bar(jlcxx::Module& module);
 
-static void implement_list_view(jlcxx::Module& module);
+void implement_list_view(jlcxx::Module& module);
 
-static void implement_log(jlcxx::Module& module);
+void implement_log(jlcxx::Module& module);
 
-static void implement_long_press_event_controller(jlcxx::Module& module);
+void implement_long_press_event_controller(jlcxx::Module& module);
 
-static void implement_menu_model(jlcxx::Module& module);
+void implement_menu_model(jlcxx::Module& module);
 
-static void implement_menu_bar(jlcxx::Module& module);
+void implement_menu_bar(jlcxx::Module& module);
 
-static void implement_motion_event_controller(jlcxx::Module& module);
+void implement_motion_event_controller(jlcxx::Module& module);
 
-static void implement_music(jlcxx::Module& module);
+void implement_music(jlcxx::Module& module);
 
-static void implement_notebook(jlcxx::Module& module);
+void implement_notebook(jlcxx::Module& module);
 
-static void implement_orientation(jlcxx::Module& module);
+void implement_orientation(jlcxx::Module& module);
 
-static void implement_overlay(jlcxx::Module& module);
+void implement_overlay(jlcxx::Module& module);
 
-static void implement_pan_event_controller(jlcxx::Module& module);
+void implement_pan_event_controller(jlcxx::Module& module);
 
-static void implement_paned(jlcxx::Module& module);
+void implement_paned(jlcxx::Module& module);
 
-static void implement_pinch_zoom_event_controller(jlcxx::Module& module);
+void implement_pinch_zoom_event_controller(jlcxx::Module& module);
 
-static void implement_popover(jlcxx::Module& module);
+void implement_popover(jlcxx::Module& module);
 
-static void implement_popover_button(jlcxx::Module& module);
+void implement_popover_button(jlcxx::Module& module);
 
-static void implement_popover_menu(jlcxx::Module& module);
+void implement_popover_menu(jlcxx::Module& module);
 
-static void implement_progress_bar(jlcxx::Module& module);
+void implement_progress_bar(jlcxx::Module& module);
 
-static void implement_relative_position(jlcxx::Module& module);
+void implement_relative_position(jlcxx::Module& module);
 
-static void implement_render_area(jlcxx::Module& module);
+void implement_render_area(jlcxx::Module& module);
 
-static void implement_render_task(jlcxx::Module& module);
+void implement_render_task(jlcxx::Module& module);
 
-static void implement_revealer(jlcxx::Module& module);
+void implement_revealer(jlcxx::Module& module);
 
-static void implement_rotate_event_controller(jlcxx::Module& module);
+void implement_rotate_event_controller(jlcxx::Module& module);
 
-static void implement_scale(jlcxx::Module& module);
+void implement_scale(jlcxx::Module& module);
 
-static void implement_scroll_event_controller(jlcxx::Module& module);
+void implement_scroll_event_controller(jlcxx::Module& module);
 
-static void implement_scrollbar(jlcxx::Module& module);
+void implement_scrollbar(jlcxx::Module& module);
 
-static void implement_selection_model(jlcxx::Module& module);
+void implement_selection_model(jlcxx::Module& module);
 
-static void implement_separator(jlcxx::Module& module);
+void implement_separator(jlcxx::Module& module);
 
-static void implement_shader(jlcxx::Module& module);
+void implement_shader(jlcxx::Module& module);
 
-static void implement_shape(jlcxx::Module& module);
+void implement_shape(jlcxx::Module& module);
 
-static void implement_shortcut_event_controller(jlcxx::Module& module);
+void implement_shortcut_event_controller(jlcxx::Module& module);
 
-static void implement_sound(jlcxx::Module& module);
+void implement_sound(jlcxx::Module& module);
 
-static void implement_sound_buffer(jlcxx::Module& module);
+void implement_sound_buffer(jlcxx::Module& module);
 
-static void implement_spin_button(jlcxx::Module& module);
+void implement_spin_button(jlcxx::Module& module);
 
-static void implement_spinner(jlcxx::Module& module);
+void implement_spinner(jlcxx::Module& module);
 
-static void implement_stack(jlcxx::Module& module);
+void implement_stack(jlcxx::Module& module);
 
-static void implement_stylus_event_controller(jlcxx::Module& module);
+void implement_stylus_event_controller(jlcxx::Module& module);
 
-static void implement_swipe_event_controller(jlcxx::Module& module);
+void implement_swipe_event_controller(jlcxx::Module& module);
 
-static void implement_switch(jlcxx::Module& module);
+void implement_switch(jlcxx::Module& module);
 
-static void implement_text_view(jlcxx::Module& module);
+void implement_text_view(jlcxx::Module& module);
 
-static void implement_time(jlcxx::Module& module);
+void implement_time(jlcxx::Module& module);
 
-static void implement_texture(jlcxx::Module& module);
+void implement_texture(jlcxx::Module& module);
 
-static void implement_toggle_button(jlcxx::Module& module);
+void implement_toggle_button(jlcxx::Module& module);
 
-static void implement_viewport(jlcxx::Module& module);
+void implement_viewport(jlcxx::Module& module);
 
-static void implement_widget(jlcxx::Module& module);
+void implement_widget(jlcxx::Module& module);
 
-static void implement_window(jlcxx::Module& module);
+void implement_window(jlcxx::Module& module);
 
-JLCXX_MODULE define_julia_module(jlcxx::Module& module)
-{
-    module.set_const("GTK_MAJOR_VERSION", (int) GTK_MAJOR_VERSION);
-    module.set_const("GTK_MINOR_VERSION", (int) GTK_MINOR_VERSION);
-
-    implement_orientation(module);
-    implement_time(module);
-
-    implement_adjustment(module);
-    implement_action(module);
-    implement_alignment(module);
-    implement_application(module);
-    implement_window(module);
-
-    implement_file_monitor(module);
-    implement_file_descriptor(module);
-    implement_file_system(module);
-
-    implement_event_controller(module);
-    implement_drag_event_controller(module);
-    implement_click_event_controller(module);
-    implement_focus_event_controller(module);
-    implement_key_event_controller(module);
-    implement_long_press_event_controller(module);
-    implement_motion_event_controller(module);
-    implement_pinch_zoom_event_controller(module);
-    implement_rotate_event_controller(module);
-    implement_scroll_event_controller(module);
-    implement_shortcut_event_controller(module);
-    implement_stylus_event_controller(module);
-    implement_swipe_event_controller(module);
-    implement_pan_event_controller(module);
-
-    implement_color(module);
-    implement_icon(module);
-    implement_image(module);
-    implement_cursor_type(module);
-
-    implement_relative_position(module);
-    implement_menu_model(module);
-    implement_menu_bar(module);
-    implement_popover_menu(module);
-    implement_popover(module);
-    implement_popover_button(module);
-    implement_progress_bar(module);
-
-    implement_aspect_frame(module);
-    implement_blend_mode(module);
-    implement_box(module);
-    implement_button(module);
-    implement_center_box(module);
-    implement_check_button(module);
-    implement_clipboard(module);
-
-    implement_selection_model(module);
-    implement_list_view(module);
-    implement_grid_view(module);
-    implement_column_view(module);
-    implement_grid(module);
-
-    implement_image_display(module);
-    implement_drop_down(module);
-    implement_entry(module);
-    implement_expander(module);
-    implement_file_chooser(module);
-
-    implement_fixed(module);
-    implement_frame(module);
-    implement_frame_clock(module);
-
-    implement_header_bar(module);
-    implement_key_file(module);
-
-    implement_justify_mode(module);
-    implement_label(module);
-    implement_text_view(module);
-
-    implement_level_bar(module);
-    implement_log(module);
-
-    implement_notebook(module);
-    implement_overlay(module);
-    implement_paned(module);
-
-    implement_revealer(module);
-    implement_scale(module);
-    implement_scrollbar(module);
-    implement_separator(module);
-    implement_spin_button(module);
-    implement_spinner(module);
-    implement_switch(module);
-    implement_toggle_button(module);
-    implement_sound(module);
-    implement_sound_buffer(module);
-    implement_music(module);
-
-    implement_stack(module);
-    implement_viewport(module);
-
-    implement_widget(module);
-
-    implement_gl_transform(module);
-    implement_texture(module);
-    implement_shader(module);
-    implement_shape(module);
-    implement_render_task(module);
-    implement_render_area(module);
-
-    implement_key_codes(module);
-}
-
+JLCXX_MODULE define_julia_module(jlcxx::Module& module);

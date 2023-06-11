@@ -2,7 +2,7 @@
 
 // ### CURSOR_TYPE
 
-static void implement_cursor_type(jlcxx::Module& module)
+void implement_cursor_type(jlcxx::Module& module)
 {
     define_enum_in(module, CursorType);
     module.add_enum_value(CursorType, CURSOR_TYPE, NONE);

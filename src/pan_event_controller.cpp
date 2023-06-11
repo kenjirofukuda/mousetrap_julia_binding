@@ -2,7 +2,7 @@
 
 #include "../mousetrap_julia_binding.hpp"
 
-static void implement_pan_event_controller(jlcxx::Module& module)
+void implement_pan_event_controller(jlcxx::Module& module)
 {
     define_enum_in(module, PanDirection);
     module.add_enum_value(PanDirection, PAN_DIRECTION, LEFT);

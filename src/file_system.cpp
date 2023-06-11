@@ -2,7 +2,7 @@
 
 // ### FILE SYSTEM
 
-static void implement_file_system(jlcxx::Module& module)
+void implement_file_system(jlcxx::Module& module)
 {
     module.method("create_file_at!", [](const FileDescriptor& destination, bool replace) {
         return file_system::create_file_at(destination, replace);

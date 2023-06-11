@@ -2,7 +2,7 @@
 
 // ### HEADER BAR
 
-static void implement_header_bar(jlcxx::Module& module)
+void implement_header_bar(jlcxx::Module& module)
 {
     auto bar = module.add_type(HeaderBar)
     .add_constructor()

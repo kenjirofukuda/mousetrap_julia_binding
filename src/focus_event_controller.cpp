@@ -2,7 +2,7 @@
 
 // ### FOCUS EVENT CONTROLLER
 
-static void implement_focus_event_controller(jlcxx::Module& module)
+void implement_focus_event_controller(jlcxx::Module& module)
 {
     auto focus = module.add_type(FocusEventController)
     .add_constructor()

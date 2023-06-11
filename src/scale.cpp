@@ -3,7 +3,7 @@
 
 // ### SCALE
 
-static void implement_scale(jlcxx::Module& module)
+void implement_scale(jlcxx::Module& module)
 {
     auto scale = module.add_type(Scale)
     .add_constructor(float, float, float, Orientation)
