@@ -23,4 +23,9 @@ void implement_color(jlcxx::Module& module)
     {
         return box_rgba(html_code_to_rgba(code));
     });
+
+    module.method("is_valid_html_code", [](const std::string& code) -> bool {
+        auto _ = RGBA(0, 0, 0, 0);
+        return mousetrap::is_valid_html_code(code, _);
+    });
 }
