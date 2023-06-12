@@ -1,5 +1,5 @@
 using CxxWrap, Pkg.Artifacts, Test
 
 function __init__() @initcxx end
-@wrapmodule("./libmousetrap_julia_binding.so")
+@wrapmodule("./cmake-build-debug/libmousetrap_julia_binding.a")
 @test true

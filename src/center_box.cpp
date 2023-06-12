@@ -15,9 +15,9 @@ void implement_center_box(jlcxx::Module& module)
     .method("set_end_child!", [](CenterBox& box, void* widget) {
         box.set_end_child(*((Widget*) widget));
     })
-    .add_type_method(CenterBox, remove_start_widget, !)
-    .add_type_method(CenterBox, remove_center_widget, !)
-    .add_type_method(CenterBox, remove_end_widget, !)
+    .add_type_method(CenterBox, remove_start_child, !)
+    .add_type_method(CenterBox, remove_center_child, !)
+    .add_type_method(CenterBox, remove_end_child, !)
     .add_type_method(CenterBox, get_orientation)
     .add_type_method(CenterBox, set_orientation, !)
     ;
