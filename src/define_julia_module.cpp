@@ -1,5 +1,40 @@
 #include "../mousetrap_julia_binding.hpp"
 
+namespace mousetrap::detail
+{
+    struct _GCSentinel
+    {
+        GObject parent;
+        jl_value_t* target;
+    };
+    using GCSentinel = _GCSentinel;
+
+    DECLARE_NEW_TYPE(GCSentinel, gc_sentinel, GC_SENTINEL)
+    DEFINE_NEW_TYPE_TRIVIAL_INIT(GCSentinel, gc_sentinel, GC_SENTINEL)
+
+    static void gc_sentinel_finalize(GObject* object)
+    {
+        auto* self = MOUSETRAP_GC_SENTINEL(object);
+        G_OBJECT_CLASS(gc_sentinel_parent_class)->finalize(object);
+
+        std::cout << "gc unprotected: " << self->target << std::endl;
+        jlcxx::unprotect_from_gc(self->target);
+    }
+
+    DEFINE_NEW_TYPE_TRIVIAL_CLASS_INIT(GCSentinel, gc_sentinel, GC_SENTINEL)
+
+    static GCSentinel* gc_sentinel_new(jl_value_t* native)
+    {
+        auto* self = (GCSentinel*) g_object_new(gc_sentinel_get_type(), nullptr);
+        gc_sentinel_init(self);
+
+        self->target = native;
+        std::cout << "gc protecting: " << self->target << std::endl;
+        jlcxx::protect_from_gc(self->target);
+        return self;
+    }
+}
+
 JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 {
     module.set_const("GTK_MAJOR_VERSION", (int) GTK_MAJOR_VERSION);
@@ -116,9 +151,5 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 
     module.method("_unref", [](void* ptr){
         g_object_unref(G_OBJECT(ptr));
-    });
-
-    module.method("test_vector2f", []() -> jl_value_t* {
-        return box_vector2f(Vector2f(12, 34));
     });
 }

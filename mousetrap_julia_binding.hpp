@@ -48,113 +48,33 @@ static inline jl_value_t* jl_wrap(Ts... args)
     return jl_calln(wrap, args...);
 }
 
-static jl_value_t* box_vector2f(Vector2f in)
+// RAII-style safeguard, protects from the GC until the wrapper is deallocated
+
+jl_value_t* gc_protect_aux(NativeObject host, jl_value_t* value);
+
+template<typename Host_t, typename Value_t>
+jl_value_t* gc_protect(Host_t& host, Value_t* value)
 {
-    static auto* ctor = jl_eval_string("mousetrap.Vector2f");
-    return jl_calln(ctor, jl_box_float32(in.x), jl_box_float32(in.y));
+    return gc_protect_aux(G_OBJECT(host.get_internal()), value);
 }
 
-static Vector2f unbox_vector2f(jl_value_t* in)
-{
-    return Vector2f {
-    jl_unbox_float32(jl_get_property(in, "x")),
-    jl_unbox_float32(jl_get_property(in, "y"))
-    };
-}
+jl_value_t* box_vector2f(Vector2f in);
+Vector2f unbox_vector2f(jl_value_t* in);
 
-static jl_value_t* box_vector2i(Vector2i in)
-{
-    static auto* ctor = jl_eval_string("mousetrap.Vector2i");
-    return jl_calln(ctor, jl_box_int64(in.x), jl_box_int64(in.y));
-}
+jl_value_t* box_vector2i(Vector2i in);
+Vector2f unbox_vector2i(jl_value_t* in);
 
-static Vector2f unbox_vector2i(jl_value_t* in)
-{
-    return Vector2i {
-    jl_unbox_int64(jl_get_property(in, "x")),
-    jl_unbox_int64(jl_get_property(in, "y"))
-    };
-}
+jl_value_t* box_vector3f(Vector3f in);
+Vector3f unbox_vector3f(jl_value_t* in);
 
-static jl_value_t* box_vector3f(Vector3f in)
-{
-    static auto* ctor = jl_eval_string("mousetrap.Vector3f");
-    return jl_calln(ctor, jl_box_float32(in.x), jl_box_float32(in.y), jl_box_float32(in.z));
-}
+jl_value_t* box_vector4f(Vector4f in);
+Vector4f unbox_vector4f(jl_value_t* in);
 
-static Vector3f unbox_vector3f(jl_value_t* in)
-{
-    return Vector3f {
-    jl_unbox_float32(jl_get_property(in, "x")),
-    jl_unbox_float32(jl_get_property(in, "y")),
-    jl_unbox_float32(jl_get_property(in, "z"))
-    };
-}
+jl_value_t* box_rgba(RGBA in);
+RGBA unbox_rgba(jl_value_t* in);
 
-static jl_value_t* box_vector4f(Vector4f in)
-{
-    static auto* ctor = jl_eval_string("mousetrap.Vector4f");
-    return jl_calln(ctor,
-                    jl_box_float32(in.x),
-                    jl_box_float32(in.y),
-                    jl_box_float32(in.z),
-                    jl_box_float32(in.z)
-    );
-}
-
-static Vector4f unbox_vector4f(jl_value_t* in)
-{
-    return Vector4f {
-    jl_unbox_float32(jl_get_property(in, "x")),
-    jl_unbox_float32(jl_get_property(in, "y")),
-    jl_unbox_float32(jl_get_property(in, "z")),
-    jl_unbox_float32(jl_get_property(in, "w"))
-    };
-}
-
-static jl_value_t* box_rgba(RGBA in)
-{
-    static auto* ctor = jl_eval_string("return mousetrap.RGBA");
-    return jl_calln(
-    ctor,
-    jl_box_float32(in.r),
-    jl_box_float32(in.g),
-    jl_box_float32(in.b),
-    jl_box_float32(in.a)
-    );
-}
-
-static RGBA unbox_rgba(jl_value_t* in)
-{
-    return RGBA {
-    jl_unbox_float32(jl_get_property(in, "r")),
-    jl_unbox_float32(jl_get_property(in, "g")),
-    jl_unbox_float32(jl_get_property(in, "b")),
-    jl_unbox_float32(jl_get_property(in, "a"))
-    };
-}
-
-static jl_value_t* box_hsva(HSVA in)
-{
-    static auto* ctor = jl_eval_string("return mousetrap.RGBA");
-    return jl_calln(
-    ctor,
-    jl_box_float32(in.h),
-    jl_box_float32(in.s),
-    jl_box_float32(in.v),
-    jl_box_float32(in.a)
-    );
-}
-
-static HSVA unbox_hsva(jl_value_t* in)
-{
-    return HSVA {
-    jl_unbox_float32(jl_get_property(in, "h")),
-    jl_unbox_float32(jl_get_property(in, "s")),
-    jl_unbox_float32(jl_get_property(in, "v")),
-    jl_unbox_float32(jl_get_property(in, "a"))
-    };
-}
+jl_value_t* box_hsva(HSVA in);
+HSVA unbox_hsva(jl_value_t* in);
 
 #define USE_FINALIZERS true
 
@@ -196,7 +116,7 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
                     jl_wrap(jlcxx::box<T&>(instance))\
                 ) \
             ); \
-        }, task); \
+        }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance) -> return_t { \
         return instance.emit_signal_##snake_case(); \
@@ -218,7 +138,7 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
                     jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name)) \
                 ) \
             ); \
-        }, task); \
+        }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name) -> return_t { \
         return instance.emit_signal_##snake_case(arg1_name); \
@@ -240,7 +160,7 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
                     jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name)) \
                 ) \
             ); \
-        }, task); \
+        }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name, arg2_t arg2_name) -> return_t { \
         return instance.emit_signal_##snake_case(arg1_name, arg2_name); \
@@ -262,7 +182,7 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
                     jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name), jlcxx::box<arg3_t>(arg3_name)) \
                 ) \
             ); \
-        }, task); \
+        }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name, arg2_t arg2_name, arg3_t arg3_name) -> return_t { \
         return instance.emit_signal_##snake_case(arg1_name, arg2_name, arg3_name); \
@@ -270,50 +190,101 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
     type._DEFINE_ADD_SIGNAL_INVARIANT(snake_case)      \
 }
 
-#define DEFINE_ADD_SIGNAL_ARG4(snake_case, return_t, arg1_t, arg1_name, arg2_t, arg2_name, arg3_t, arg3_name, arg4_t, arg4_name) \
+#define DEFINE_ADD_SIGNAL_ARG0_VOID(snake_case) \
 template<typename T, typename Arg_t> \
 void add_signal_##snake_case(Arg_t type, const std::string& name) \
 { \
     type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
     { \
-        instance.connect_signal_##snake_case([name](T& instance, arg1_t arg1_name, arg2_t arg2_name, arg3_t arg3_name, arg4_t arg4_name, jl_function_t* task) -> return_t { \
-            return jlcxx::unbox<return_t>( \
+        instance.connect_signal_##snake_case([name](T& instance, jl_function_t* task) -> void { \
+            /*return jlcxx::unbox<return_t>( */\
                 jl_safe_call( \
                     (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
-                    task, \
-                    jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name), jlcxx::box<arg3_t>(arg3_name), jlcxx::box<arg4_t>(arg4_name)) \
+                    task,                                   \
+                    jl_wrap(jlcxx::box<T&>(instance))\
                 ) \
-            ); \
-        }, task); \
+            /*)*/; \
+        }, gc_protect(instance, task)); \
     }) \
-    .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name, arg2_t arg2_name, arg3_t arg3_name, arg4_t arg4_name) -> return_t { \
-        return instance.emit_signal_##snake_case(arg1_name, arg2_name, arg3_name, arg4_name); \
+    .method("emit_signal_" + std::string(#snake_case), [](T& instance) -> void { \
+        return instance.emit_signal_##snake_case(); \
     }); \
     type._DEFINE_ADD_SIGNAL_INVARIANT(snake_case)      \
 }
 
-#define DEFINE_ADD_WIDGET_SIGNAL(snake_case) \
-template<typename T, typename Arg_t>                               \
-void add_signal_##snake_case(Arg_t type, const std::string& name) {\
+#define DEFINE_ADD_SIGNAL_ARG1_VOID(snake_case,arg1_t, arg1_name) \
+template<typename T, typename Arg_t> \
+void add_signal_##snake_case(Arg_t type, const std::string& name) \
+{ \
     type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
     { \
-        instance.connect_signal_##snake_case([name](Widget& instance, jl_function_t* task) -> void { \
-            jl_safe_call((name + "::emit_signal_" + std::string(#snake_case)).c_str(), task, jlcxx::box<T&>(dynamic_cast<T&>(instance))); \
-        }, task); \
+        instance.connect_signal_##snake_case([name](T& instance, arg1_t arg1_name, jl_function_t* task) -> void { \
+            /*return jlcxx::unbox<return_t>(*/ \
+                jl_safe_call( \
+                    (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
+                    task, \
+                    jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name)) \
+                ) \
+            /*)*/; \
+        }, gc_protect(instance, task)); \
     }) \
-    .method("emit_signal_" + std::string(#snake_case), [](T& instance) { \
-        instance.emit_signal_##snake_case(); \
+    .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name) -> void { \
+        return instance.emit_signal_##snake_case(arg1_name); \
     }); \
-    type._DEFINE_ADD_SIGNAL_INVARIANT(snake_case); \
+    type._DEFINE_ADD_SIGNAL_INVARIANT(snake_case)      \
 }
 
-DEFINE_ADD_WIDGET_SIGNAL(realize)
-DEFINE_ADD_WIDGET_SIGNAL(unrealize)
-DEFINE_ADD_WIDGET_SIGNAL(destroy)
-DEFINE_ADD_WIDGET_SIGNAL(hide)
-DEFINE_ADD_WIDGET_SIGNAL(show)
-DEFINE_ADD_WIDGET_SIGNAL(map)
-DEFINE_ADD_WIDGET_SIGNAL(unmap)
+#define DEFINE_ADD_SIGNAL_ARG2_VOID(snake_case, arg1_t, arg1_name, arg2_t, arg2_name) \
+template<typename T, typename Arg_t> \
+void add_signal_##snake_case(Arg_t type, const std::string& name) \
+{ \
+    type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
+    { \
+        instance.connect_signal_##snake_case([name](T& instance, arg1_t arg1_name, arg2_t arg2_name, jl_function_t* task) -> void { \
+            /*return jlcxx::unbox<return_t>(*/ \
+                jl_safe_call( \
+                    (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
+                    task, \
+                    jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name)) \
+                ) \
+            /*)*/; \
+        }, gc_protect(instance, task)); \
+    }) \
+    .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name, arg2_t arg2_name) -> void { \
+        return instance.emit_signal_##snake_case(arg1_name, arg2_name); \
+    }); \
+    type._DEFINE_ADD_SIGNAL_INVARIANT(snake_case)      \
+}
+
+#define DEFINE_ADD_SIGNAL_ARG3_VOID(snake_case, arg1_t, arg1_name, arg2_t, arg2_name, arg3_t, arg3_name) \
+template<typename T, typename Arg_t> \
+void add_signal_##snake_case(Arg_t type, const std::string& name) \
+{ \
+    type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
+    { \
+        instance.connect_signal_##snake_case([name](T& instance, arg1_t arg1_name, arg2_t arg2_name, arg3_t arg3_name, jl_function_t* task) -> void { \
+            /*return jlcxx::unbox<return_t>(*/ \
+                jl_safe_call( \
+                    (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
+                    task, \
+                    jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name), jlcxx::box<arg3_t>(arg3_name)) \
+                ) \
+            /*)*/; \
+        }, gc_protect(instance, task)); \
+    }) \
+    .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name, arg2_t arg2_name, arg3_t arg3_name) -> void { \
+        return instance.emit_signal_##snake_case(arg1_name, arg2_name, arg3_name); \
+    }); \
+    type._DEFINE_ADD_SIGNAL_INVARIANT(snake_case)      \
+}
+
+DEFINE_ADD_SIGNAL_ARG0_VOID(realize)
+DEFINE_ADD_SIGNAL_ARG0_VOID(unrealize)
+DEFINE_ADD_SIGNAL_ARG0_VOID(destroy)
+DEFINE_ADD_SIGNAL_ARG0_VOID(hide)
+DEFINE_ADD_SIGNAL_ARG0_VOID(show)
+DEFINE_ADD_SIGNAL_ARG0_VOID(map)
+DEFINE_ADD_SIGNAL_ARG0_VOID(unmap)
 
 template<typename T, typename Arg_t>
 void add_widget_signals(Arg_t& type, const std::string& name)
@@ -327,62 +298,63 @@ void add_widget_signals(Arg_t& type, const std::string& name)
     add_signal_unmap<T>(type, name);
 }
 
-DEFINE_ADD_SIGNAL_ARG0(activate, void)
-DEFINE_ADD_SIGNAL_ARG0(startup, void)
-DEFINE_ADD_SIGNAL_ARG0(shutdown, void)
-DEFINE_ADD_SIGNAL_ARG0(update, void)
-DEFINE_ADD_SIGNAL_ARG0(paint, void)
+DEFINE_ADD_SIGNAL_ARG0_VOID(activate)
+DEFINE_ADD_SIGNAL_ARG0_VOID(startup)
+DEFINE_ADD_SIGNAL_ARG0_VOID(shutdown)
+DEFINE_ADD_SIGNAL_ARG0_VOID(update)
+DEFINE_ADD_SIGNAL_ARG0_VOID(paint)
 DEFINE_ADD_SIGNAL_ARG0(close_request, WindowCloseRequestResult)
-DEFINE_ADD_SIGNAL_ARG0(activate_default_widget, void)
-DEFINE_ADD_SIGNAL_ARG0(activate_focused_widget, void)
-DEFINE_ADD_SIGNAL_ARG0(clicked, void)
-DEFINE_ADD_SIGNAL_ARG0(toggled, void)
-DEFINE_ADD_SIGNAL_ARG0(text_changed, void)
-DEFINE_ADD_SIGNAL_ARG0(undo, void)
-DEFINE_ADD_SIGNAL_ARG0(redo, void)
-DEFINE_ADD_SIGNAL_ARG2(selection_changed, void, gint, position, gint, n_items)
+DEFINE_ADD_SIGNAL_ARG0_VOID(activate_default_widget)
+DEFINE_ADD_SIGNAL_ARG0_VOID(activate_focused_widget)
+DEFINE_ADD_SIGNAL_ARG0_VOID(clicked)
+DEFINE_ADD_SIGNAL_ARG0_VOID(toggled)
+DEFINE_ADD_SIGNAL_ARG0_VOID(text_changed)
+// DEFINE_ADD_SIGNAL_ARG0_VOID(undo)
+// DEFINE_ADD_SIGNAL_ARG0_VOID(redo)
+DEFINE_ADD_SIGNAL_ARG2_VOID(selection_changed, gint, position, gint, n_items)
 DEFINE_ADD_SIGNAL_ARG3(key_pressed, bool, guint, keyval, guint, keycode, ModifierState, modifier)
-DEFINE_ADD_SIGNAL_ARG3(key_released, void, guint, keyval, guint, keycode, ModifierState, modifier)
-DEFINE_ADD_SIGNAL_ARG3(modifiers_changed, bool, guint, keyval, guint, keycode, ModifierState, modifier)
-DEFINE_ADD_SIGNAL_ARG2(motion_enter, void, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG2(motion, void, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG0(motion_leave, void)
-DEFINE_ADD_SIGNAL_ARG3(click_pressed, void, gint, n_press, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG3(click_released, void, gint, n_press, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG0(click_stopped, void)
-DEFINE_ADD_SIGNAL_ARG2(kinetic_scroll_decelerate, void, double, x_velocity, double, y_velocity)
-DEFINE_ADD_SIGNAL_ARG0(scroll_begin, void)
+DEFINE_ADD_SIGNAL_ARG3_VOID(key_released, guint, keyval, guint, keycode, ModifierState, modifier)
+DEFINE_ADD_SIGNAL_ARG1(modifiers_changed, bool, ModifierState, modifier)
+DEFINE_ADD_SIGNAL_ARG2_VOID(motion_enter, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG2_VOID(motion, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG0_VOID(motion_leave)
+DEFINE_ADD_SIGNAL_ARG3_VOID(click_pressed, gint, n_press, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG3_VOID(click_released, gint, n_press, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG0_VOID(click_stopped)
+DEFINE_ADD_SIGNAL_ARG2_VOID(kinetic_scroll_decelerate, double, x_velocity, double, y_velocity)
+DEFINE_ADD_SIGNAL_ARG0_VOID(scroll_begin)
 DEFINE_ADD_SIGNAL_ARG2(scroll, bool, double, delta_x, double, delta_y)
-DEFINE_ADD_SIGNAL_ARG0(scroll_end, void)
-DEFINE_ADD_SIGNAL_ARG0(focus_gained, void)
-DEFINE_ADD_SIGNAL_ARG0(focus_lost, void)
-DEFINE_ADD_SIGNAL_ARG2(drag_begin, void, double, start_x, double, start_y)
-DEFINE_ADD_SIGNAL_ARG2(drag, void, double, offset_x, double, offset_y)
-DEFINE_ADD_SIGNAL_ARG2(drag_end, void, double, offset_x, double, offset_y)
-DEFINE_ADD_SIGNAL_ARG1(scale_changed, void, double, scale)
-DEFINE_ADD_SIGNAL_ARG2(rotation_changed, void, double, angle_absolute_radians, double, angle_delta_radians)
-DEFINE_ADD_SIGNAL_ARG0(properties_changed, void)
-DEFINE_ADD_SIGNAL_ARG0(value_changed, void)
-DEFINE_ADD_SIGNAL_ARG2(resize, void, gint, width, gint, height)
-DEFINE_ADD_SIGNAL_ARG2(page_added, void, void*, _, guint, page_index)
-DEFINE_ADD_SIGNAL_ARG2(page_removed, void, void*, _, guint, page_index)
-DEFINE_ADD_SIGNAL_ARG2(page_reordered, void, void*, _, guint, page_index)
-DEFINE_ADD_SIGNAL_ARG2(page_selection_changed, void, void*, _, guint, page_index)
-DEFINE_ADD_SIGNAL_ARG0(wrapped, void)
-DEFINE_ADD_SIGNAL_ARG2(pressed, void, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG0(press_cancelled, void)
-DEFINE_ADD_SIGNAL_ARG2(pan, void, PanDirection, direction, double, offset)
-DEFINE_ADD_SIGNAL_ARG2(swipe, void, double, x_velocity, double, y_velocity)
-DEFINE_ADD_SIGNAL_ARG2(stylus_down, void, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG2(stylus_up, void, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG2(proximity, void, double, x, double, y)
-DEFINE_ADD_SIGNAL_ARG2(scroll_child, void, ScrollType, scroll_type, bool, is_horizontal)
-DEFINE_ADD_SIGNAL_ARG0(closed, void)
-DEFINE_ADD_SIGNAL_ARG0(play, void)
-DEFINE_ADD_SIGNAL_ARG0(stop, void)
-DEFINE_ADD_SIGNAL_ARG3(items_changed, void, gint, position, gint, n_removed, gint, n_added)
-DEFINE_ADD_SIGNAL_ARG1(revealed, void, void*, _)
-DEFINE_ADD_SIGNAL_ARG1(activated, void, void*, _)
+DEFINE_ADD_SIGNAL_ARG0_VOID(scroll_end)
+DEFINE_ADD_SIGNAL_ARG0_VOID(focus_gained)
+DEFINE_ADD_SIGNAL_ARG0_VOID(focus_lost)
+DEFINE_ADD_SIGNAL_ARG2_VOID(drag_begin, double, start_x, double, start_y)
+DEFINE_ADD_SIGNAL_ARG2_VOID(drag, double, offset_x, double, offset_y)
+DEFINE_ADD_SIGNAL_ARG2_VOID(drag_end, double, offset_x, double, offset_y)
+DEFINE_ADD_SIGNAL_ARG1_VOID(scale_changed, double, scale)
+DEFINE_ADD_SIGNAL_ARG2_VOID(rotation_changed, double, angle_absolute_radians, double, angle_delta_radians)
+DEFINE_ADD_SIGNAL_ARG0_VOID(properties_changed)
+DEFINE_ADD_SIGNAL_ARG0_VOID(value_changed)
+DEFINE_ADD_SIGNAL_ARG2_VOID(resize, gint, width, gint, height)
+DEFINE_ADD_SIGNAL_ARG2_VOID(page_added, void*, _, guint, page_index)
+DEFINE_ADD_SIGNAL_ARG2_VOID(page_removed, void*, _, guint, page_index)
+DEFINE_ADD_SIGNAL_ARG2_VOID(page_reordered, void*, _, guint, page_index)
+DEFINE_ADD_SIGNAL_ARG2_VOID(page_selection_changed, void*, _, guint, page_index)
+DEFINE_ADD_SIGNAL_ARG0_VOID(wrapped)
+DEFINE_ADD_SIGNAL_ARG2_VOID(pressed, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG0_VOID(press_cancelled)
+DEFINE_ADD_SIGNAL_ARG2_VOID(pan, PanDirection, direction, double, offset)
+DEFINE_ADD_SIGNAL_ARG2_VOID(swipe, double, x_velocity, double, y_velocity)
+DEFINE_ADD_SIGNAL_ARG2_VOID(stylus_down, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG2_VOID(stylus_up, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG2_VOID(proximity, double, x, double, y)
+DEFINE_ADD_SIGNAL_ARG2_VOID(scroll_child, ScrollType, scroll_type, bool, is_horizontal)
+DEFINE_ADD_SIGNAL_ARG0_VOID(closed)
+DEFINE_ADD_SIGNAL_ARG0_VOID(play)
+DEFINE_ADD_SIGNAL_ARG0_VOID(stop)
+DEFINE_ADD_SIGNAL_ARG3_VOID(items_changed, gint, position, gint, n_removed, gint, n_added)
+DEFINE_ADD_SIGNAL_ARG1_VOID(revealed, void*, _)
+DEFINE_ADD_SIGNAL_ARG1_VOID(activated, void*, _)
+
 
 template<typename T, typename Arg_t>
 void add_signal_render(Arg_t type, const std::string& name)
@@ -397,7 +369,7 @@ void add_signal_render(Arg_t type, const std::string& name)
             jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<void*>((void*) context))
             )
             );
-        }, task);
+        }, gc_protect(instance, task));
     })
     .method("emit_signal_render", [](T& instance) {
         instance.emit_signal_render((GdkGLContext*) nullptr);
