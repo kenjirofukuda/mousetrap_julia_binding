@@ -4,16 +4,16 @@
 
 void implement_time(jlcxx::Module& module)
 {
-    module.method("ns_to_minutes", [](size_t ns) -> double {
+    module.method("ns_to_minutes", [](int64_t ns) -> double {
         return nanoseconds(ns).as_minutes();
     });
-    module.method("ns_to_seconds", [](size_t ns) -> double {
+    module.method("ns_to_seconds", [](int64_t ns) -> double {
         return nanoseconds(ns).as_seconds();
     });
-    module.method("ns_to_milliseconds", [](size_t ns) -> double {
+    module.method("ns_to_milliseconds", [](int64_t ns) -> double {
         return nanoseconds(ns).as_milliseconds();
     });
-    module.method("ns_to_microseconds", [](size_t ns) -> double {
+    module.method("ns_to_microseconds", [](int64_t ns) -> double {
         return nanoseconds(ns).as_microseconds();
     });
     module.method("minutes_to_ns", [](double x) -> int64_t {

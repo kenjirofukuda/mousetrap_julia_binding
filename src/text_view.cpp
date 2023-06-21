@@ -30,6 +30,6 @@ void implement_text_view(jlcxx::Module& module)
 
     add_widget_signals<TextView>(text_view, "TextView");
     add_signal_text_changed<TextView>(text_view, "TextView");
-    add_signal_undo<TextView>(text_view, "TextView");
-    add_signal_redo<TextView>(text_view, "TextView");
+    // add_signal_undo<TextView>(text_view, "TextView");
+    // add_signal_redo<TextView>(text_view, "TextView");
 }

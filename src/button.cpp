@@ -15,6 +15,7 @@ void implement_button(jlcxx::Module& module)
     })
     .add_type_method(Button, remove_child, !)
     .add_type_method(Button, set_action, !)
+    .add_type_method(Button, set_icon, !)
     ;
 
     add_widget_signals<Button>(button, "Button");

@@ -18,7 +18,7 @@ void implement_box(jlcxx::Module& module)
     .method("remove!", [](Box& box, void* to_remove) {
         box.remove(*((Widget*) to_remove));
     })
-    .add_type_method(Box, clear)
+    .add_type_method(Box, clear, !)
     .add_type_method(Box, set_homogeneous, !)
     .add_type_method(Box, get_homogeneous)
     .add_type_method(Box, set_spacing, !)

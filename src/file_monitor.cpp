@@ -28,7 +28,7 @@ void implement_file_monitor(jlcxx::Module& module)
                          jl_box_voidpointer(file_self.get_internal()),
                          jl_box_voidpointer(file_other.get_internal())
             );
-        }, task);
+        }, gc_protect(self, task));
     })
     ;
 }

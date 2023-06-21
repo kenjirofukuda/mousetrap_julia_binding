@@ -23,7 +23,7 @@ void implement_action(jlcxx::Module& module)
     action.method("set_function!", [](Action& action, jl_function_t* task) {
         action.set_function([](Action& action, jl_function_t* task){
             jl_safe_call("Action::activate", task, jlcxx::box<Action&>(action));
-        }, task);
+        }, gc_protect(action, task));
     });
 
     action.method("set_stateful_function!", [](Action& action, jl_function_t* task) {
@@ -33,7 +33,7 @@ void implement_action(jlcxx::Module& module)
                 return (bool) jl_unbox_bool(out);
             else
                 return false;
-        }, task);
+        }, gc_protect(action, task));
     });
 
     add_signal_activated<Action>(action, "Action");

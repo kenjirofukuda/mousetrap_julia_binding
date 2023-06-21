@@ -109,4 +109,16 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_render_area(module);
 
     implement_key_codes(module);
+
+    module.method("_ref", [](void* ptr){
+        return (void*) g_object_ref(G_OBJECT(ptr));
+    });
+
+    module.method("_unref", [](void* ptr){
+        g_object_unref(G_OBJECT(ptr));
+    });
+
+    module.method("test_vector2f", []() -> jl_value_t* {
+        return box_vector2f(Vector2f(12, 34));
+    });
 }

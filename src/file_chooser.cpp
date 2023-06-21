@@ -51,12 +51,12 @@ void implement_file_chooser(jlcxx::Module& module)
                 jl_arrayset((jl_array_t*) out, jl_box_voidpointer(files.at(i).get_internal()), i);
 
             jl_safe_call("FileChooser::on_accept", task, jlcxx::box<FileChooser&>(self), out);
-        }, task);
+        }, gc_protect(self, task));
     });
 
     chooser.method("on_cancel!", [](FileChooser& self, jl_value_t* task){
         self.on_cancel([](FileChooser& self, jl_value_t* task) {
             jl_safe_call("FileChooser::on_cancel", task, jlcxx::box<FileChooser&>(self));
-        }, task);
+        }, gc_protect(self, task));
     });
 }

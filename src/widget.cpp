@@ -11,6 +11,9 @@ void implement_widget(jlcxx::Module& module)
     module.method("activate!", [](void* widget) {
         ((Widget*) widget)->activate();
     });
+    module.method("set_size_request!", [](void* widget, jl_value_t* vector2f){
+        ((Widget*) widget)->set_size_request(unbox_vector2f(vector2f));
+    });
     module.method("get_size_request", [](void* widget) {
         return box_vector2f(((Widget*) widget)->get_size_request());
     });
@@ -162,7 +165,10 @@ void implement_widget(jlcxx::Module& module)
         return ((Widget*) widget)->get_frame_clock().get_internal();
     });
     module.method("get_clipboard", [](void* widget) -> void* {
-        return ((Widget*) widget)->get_clipboard().get_internal();
+        auto clipboard = ((Widget*) widget)->get_clipboard();
+        g_object_ref(clipboard.get_internal());
+        mousetrap::detail::attach_ref_to(((Widget*) widget)->get_internal(), clipboard.get_internal());
+        return clipboard.get_internal();
     });
     module.method("set_hide_on_overflow!", [](void* widget, bool x){
         ((Widget*) widget)->set_hide_on_overflow(x);
@@ -172,12 +178,12 @@ void implement_widget(jlcxx::Module& module)
     });
     module.method("set_tick_callback!", [](void* widget, jl_value_t* task){
         ((Widget*) widget)->set_tick_callback([](FrameClock clock, jl_value_t* task){
-            auto* res = jl_safe_call("Widget::tick_callback", jlcxx::box<FrameClock&>(clock));
+            auto* res = jl_safe_call("Widget::tick_callback", task,jlcxx::box<FrameClock&>(clock));
             if (res != nullptr)
                 return jlcxx::unbox<TickCallbackResult>(res);
             else
                 return TickCallbackResult::DISCONTINUE;
-        }, task);
+        }, gc_protect(*((Widget*) widget), task));
     });
     module.method("remove_tick_callback!", [](void* widget) {
         ((Widget*) widget)->remove_tick_callback();

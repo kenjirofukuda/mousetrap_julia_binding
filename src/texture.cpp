@@ -34,8 +34,11 @@ void implement_texture(jlcxx::Module& module)
     module.method("texture_unbind", [](void* texture) -> void {
         ((Texture*) texture)->unbind();
     });
-    module.method("texture_create_from_image!", [](void* texture, size_t width, size_t height) {
+    module.method("texture_create!", [](void* texture, size_t width, size_t height) {
         ((Texture*) texture)->create(width, height);
+    });
+    module.method("texture_create_from_image!", [](void* texture, const Image& image) {
+        ((Texture*) texture)->create_from_image(image);
     });
     module.method("texture_create_from_file!", [](void* texture, const std::string& path) {
         ((Texture*) texture)->create_from_file(path);
@@ -58,6 +61,10 @@ void implement_texture(jlcxx::Module& module)
     module.method("texture_get_native_handle", [](void* texture) -> GLNativeHandle{
         return ((Texture*) texture)->get_native_handle();
     });
-
-    // MSAA RENDER TEXTURE
+    module.method("render_texture_bind_as_render_target", [](void* texture){
+        ((RenderTexture*) texture)->bind_as_render_target();
+    });
+    module.method("render_texture_unbind_as_render_target", [](void* texture){
+        ((RenderTexture*) texture)->unbind_as_render_target();
+    });
 }

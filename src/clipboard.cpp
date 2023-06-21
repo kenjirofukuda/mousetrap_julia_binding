@@ -17,7 +17,7 @@ void implement_clipboard(jlcxx::Module& module)
     })
     .method("get_string", [](Clipboard& self, jl_value_t* task){
         self.get_string([](const Clipboard& self, const std::string& result, jl_value_t* task){
-            jl_safe_call("Clipboard::get_string", jlcxx::box<const Clipboard&>(self), jlcxx::box<const std::string&>(result));
+            jl_safe_call("Clipboard::get_string", task, jlcxx::box<const Clipboard&>(self), jlcxx::box<const std::string&>(result));
         }, task);
     })
     .method("set_image", [](Clipboard& self, Image& image){
@@ -25,7 +25,7 @@ void implement_clipboard(jlcxx::Module& module)
     })
     .method("get_image", [](Clipboard& self, jl_value_t* task){
         self.get_image([](const Clipboard& self, const Image& result, jl_value_t* task){
-            jl_safe_call("Clipboard::get_image", jlcxx::box<const Clipboard&>(self), jlcxx::box<const Image&>(result));
+            jl_safe_call("Clipboard::get_image", task, jlcxx::box<const Clipboard&>(self), jlcxx::box<const Image&>(result));
         }, task);
     })
     .method("set_file", [](Clipboard& self, FileDescriptor& file){

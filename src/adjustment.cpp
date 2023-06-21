@@ -16,11 +16,11 @@ void implement_adjustment(jlcxx::Module& module)
     .add_type_method(Adjustment, get_lower)
     .add_type_method(Adjustment, get_upper)
     .add_type_method(Adjustment, get_value)
-    .add_type_method(Adjustment, get_increment)
+    .add_type_method(Adjustment, get_step_increment)
     .add_type_method(Adjustment, set_lower, !)
     .add_type_method(Adjustment, set_upper, !)
     .add_type_method(Adjustment, set_value, !)
-    .add_type_method(Adjustment, set_increment, !)
+    .add_type_method(Adjustment, set_step_increment, !)
     ;
 
     add_signal_value_changed<Adjustment>(adjustment, "Adjustment");

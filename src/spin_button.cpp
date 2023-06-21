@@ -34,7 +34,7 @@ void implement_spin_button(jlcxx::Module& module)
                 return jl_unbox_float32(res);
             else
                 return button.get_value();
-        }, task);
+        }, gc_protect(button, task));
     })
     .add_type_method(SpinButton, reset_text_to_value_function, !)
     .method("set_value_to_text_function!", [](SpinButton& button, jl_value_t* task) {
@@ -47,7 +47,7 @@ void implement_spin_button(jlcxx::Module& module)
                     return std::string(str);
             }
             return std::string();
-        }, task);
+        }, gc_protect(button, task));
     })
     .add_type_method(SpinButton, reset_value_to_text_function)
     ;

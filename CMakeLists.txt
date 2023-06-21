@@ -7,6 +7,22 @@ project(mousetrap_julia_binding
     LANGUAGES CXX
 )
 
+set(LIBRARY_NAME mousetrap_julia_binding)
+
+add_library(${LIBRARY_NAME} SHARED
+    dummy.hpp
+)
+
+target_compile_features(${LIBRARY_NAME} PUBLIC
+    cxx_std_17
+)
+
+set_target_properties(${LIBRARY_NAME} PROPERTIES
+    LINKER_LANGUAGE CXX
+)
+
+if(FALSE)
+
 if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
 endif()
@@ -17,8 +33,6 @@ find_package(JlCxx REQUIRED)
 find_package(mousetrap REQUIRED)
 
 ### LIBRARY ###
-
-set(LIBRARY_NAME mousetrap_julia_binding)
 
 add_library(${LIBRARY_NAME} SHARED
 
@@ -111,12 +125,15 @@ add_library(${LIBRARY_NAME} SHARED
     src/viewport.cpp
     src/widget.cpp
     src/window.cpp
+    src/box_unbox.cpp
 )
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
     ${MOUSETRAP_LIBRARIES}
     JlCxx::cxxwrap_julia
 )
+
+message(WARNING ${MOUSETRAP_LIBRARIES})
 
 target_include_directories(${LIBRARY_NAME} PUBLIC
     "${MOUSETRAP_INCLUDE_DIRECTORIES}"
@@ -135,3 +152,4 @@ set_target_properties(${LIBRARY_NAME} PROPERTIES
 
 # install(TARGETS ${LIBRARY_NAME}  DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 
+endif()
