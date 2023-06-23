@@ -188,4 +188,7 @@ void implement_widget(jlcxx::Module& module)
     module.method("remove_tick_callback!", [](void* widget) {
         ((Widget*) widget)->remove_tick_callback();
     });
+    module.method("set_listens_for_shortcut_action!", [](void* widget, Action& action){
+        ((Widget*) widget)->set_listens_for_shortcut_actions(action);
+    });
 }
