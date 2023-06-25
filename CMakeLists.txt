@@ -113,7 +113,7 @@ add_library(${LIBRARY_NAME} SHARED
     src/window.cpp
     src/box_unbox.cpp
     src/gc_sentinel.cpp
-)
+        src/color_chooser.cpp)
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
     OpenGL

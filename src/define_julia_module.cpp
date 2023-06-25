@@ -100,6 +100,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_entry(module);
     implement_expander(module);
     implement_file_chooser(module);
+    implement_color_chooser(module);
 
     implement_fixed(module);
     implement_frame(module);

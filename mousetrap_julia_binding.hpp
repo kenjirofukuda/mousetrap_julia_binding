@@ -403,6 +403,8 @@ void implement_clipboard(jlcxx::Module& module);
 
 void implement_color(jlcxx::Module& module);
 
+void implement_color_chooser(jlcxx::Module& module);
+
 void implement_column_view(jlcxx::Module& module);
 
 void implement_cursor_type(jlcxx::Module& module);
