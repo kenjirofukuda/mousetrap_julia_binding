@@ -9,7 +9,7 @@
 void implement_long_press_event_controller(jlcxx::Module& module)
 {
     auto long_press = module.add_type(LongPressEventController)
-    .add_type_method(LongPressEventController, set_delay_factor)
+    .add_type_method(LongPressEventController, set_delay_factor, !)
     .add_type_method(LongPressEventController, get_delay_factor)
     ;
 

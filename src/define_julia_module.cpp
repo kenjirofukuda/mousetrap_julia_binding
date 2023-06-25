@@ -152,4 +152,12 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     module.method("_unref", [](void* ptr){
         g_object_unref(G_OBJECT(ptr));
     });
+
+    module.method("set_gtk_uninitialized_message", [](const std::string& message){
+        mousetrap::detail::notify_if_gtk_uninitialized::message = message;
+    });
+
+    module.method("set_gl_uninitialized_message", [](const std::string& message){
+        mousetrap::detail::notify_if_gl_uninitialized::message = message;
+    });
 }
