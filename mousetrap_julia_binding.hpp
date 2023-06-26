@@ -383,6 +383,8 @@ void implement_action(jlcxx::Module& module);
 
 void implement_alignment(jlcxx::Module& module);
 
+void implement_alert_dialog(jlcxx::Module& module);
+
 void implement_application(jlcxx::Module& module);
 
 void implement_aspect_frame(jlcxx::Module& module);

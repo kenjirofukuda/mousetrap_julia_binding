@@ -9,11 +9,13 @@ void implement_color_chooser(jlcxx::Module& module)
     #if GTK_MINOR_VERSION >= 10
 
     auto chooser = module.add_type(ColorChooser)
-        .add_constructor(const std::string&, bool)
+        .add_constructor(const std::string&)
         .add_type_method(ColorChooser, present, !)
         .method("get_color", [](ColorChooser& self){
             return box_rgba(self.get_color());
         })
+        .add_type_method(ColorChooser, set_is_modal,!)
+        .add_type_method(ColorChooser, get_is_modal)
     ;
 
     chooser.method("on_accept!", [](ColorChooser& self, jl_value_t* task) {
