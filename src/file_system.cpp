@@ -22,4 +22,13 @@ void implement_file_system(jlcxx::Module& module)
     module.method("move_to_trash!", [](const FileDescriptor& file){
         return file_system::move_to_trash(file);
     });
+    module.method("open_file", [](const FileDescriptor& file){
+        file_system::open_file(file);
+    });
+    module.method("open_url", [](const std::string& url){
+        file_system::open_url(url);
+    });
+    module.method("show_in_file_explorer", [](const FileDescriptor& file){
+        file_system::show_in_file_explorer(file);
+    });
 }
