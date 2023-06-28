@@ -11,6 +11,9 @@ void implement_toggle_button(jlcxx::Module& module)
         .method("set_child!", [](ToggleButton& self, void* widget){
             self.set_child(*((Widget*) widget));
         })
+        .method("set_icon!", [](ToggleButton& self, Icon& icon){
+            self.set_icon(icon);
+        })
         .add_type_method(ToggleButton, remove_child)
         .add_type_method(ToggleButton, set_has_frame)
         .add_type_method(ToggleButton, get_has_frame)

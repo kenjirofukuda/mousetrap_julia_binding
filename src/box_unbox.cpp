@@ -88,7 +88,7 @@ RGBA unbox_rgba(jl_value_t* in)
 
 jl_value_t* box_hsva(HSVA in)
 {
-    static auto* ctor = jl_eval_string("return mousetrap.RGBA");
+    static auto* ctor = jl_eval_string("return mousetrap.HSVA");
     return jl_safe_call("box_hsva",
     ctor,
     jl_box_float32(in.h),

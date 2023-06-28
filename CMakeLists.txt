@@ -116,7 +116,7 @@ add_library(${LIBRARY_NAME} SHARED
         src/color_chooser.cpp src/alert_dialog.cpp)
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
-    OpenGL
+    ${OpenGL}
     ${MOUSETRAP_LIBRARIES}
     JlCxx::cxxwrap_julia
 )

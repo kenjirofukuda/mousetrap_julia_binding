@@ -62,8 +62,8 @@ void implement_key_file(jlcxx::Module& module)
     define_get_value_as(double, "double");
     define_set_value_as(double, "double");
 
-    define_set_value_as(Image&, "image");
-    define_get_value_as(Image&, "image");
+    define_set_value_as(Image, "image");
+    define_get_value_as(Image, "image");
 
     define_get_value_as_list(std::string, "string");
 
