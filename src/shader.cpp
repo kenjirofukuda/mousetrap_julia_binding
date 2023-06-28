@@ -4,6 +4,8 @@
 
 void implement_shader(jlcxx::Module& module)
 {
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+
     define_enum_in(module, ShaderType);
     module.add_enum_value(ShaderType, SHADER_TYPE, FRAGMENT);
     module.add_enum_value(ShaderType, SHADER_TYPE, VERTEX);
@@ -53,4 +55,6 @@ void implement_shader(jlcxx::Module& module)
     module.method("shader_get_vertex_texture_coordinate_location", [](){
         return Shader::get_vertex_texture_coordinate_location();
     });
+
+    #endif
 }

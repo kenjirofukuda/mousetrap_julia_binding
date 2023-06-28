@@ -5,6 +5,8 @@
 
 void implement_gl_transform(jlcxx::Module& module)
 {
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+
     auto transform = module.add_type(GLTransform)
     .add_constructor()
     .method("apply_to_2f", [](GLTransform& self, float x, float y){
@@ -33,4 +35,6 @@ void implement_gl_transform(jlcxx::Module& module)
         return self.transform[x][y];
     })
     ;
+
+    #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
 }

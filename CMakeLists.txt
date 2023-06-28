@@ -73,7 +73,6 @@ add_library(${LIBRARY_NAME} SHARED
     src/menu_bar.cpp
     src/menu_model.cpp
     src/motion_event_controller.cpp
-    src/music.cpp
     src/notebook.cpp
     src/overlay.cpp
     src/pan_event_controller.cpp
@@ -96,8 +95,6 @@ add_library(${LIBRARY_NAME} SHARED
     src/shader.cpp
     src/shape.cpp
     src/shortcut_event_controller.cpp
-    src/sound.cpp
-    src/sound_buffer.cpp
     src/spin_button.cpp
     src/spinner.cpp
     src/stack.cpp
@@ -113,7 +110,7 @@ add_library(${LIBRARY_NAME} SHARED
     src/window.cpp
     src/box_unbox.cpp
     src/gc_sentinel.cpp
-        src/color_chooser.cpp src/alert_dialog.cpp)
+    src/color_chooser.cpp src/alert_dialog.cpp)
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
     ${OpenGL}

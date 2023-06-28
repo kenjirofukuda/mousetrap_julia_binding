@@ -39,6 +39,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 {
     module.set_const("GTK_MAJOR_VERSION", (int) GTK_MAJOR_VERSION);
     module.set_const("GTK_MINOR_VERSION", (int) GTK_MINOR_VERSION);
+    module.set_const("MOUSETRAP_ENABLE_OPENGL_COMPONENT", (bool) MOUSETRAP_ENABLE_OPENGL_COMPONENT);
 
     implement_orientation(module);
     implement_time(module);

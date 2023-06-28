@@ -4,6 +4,8 @@
 
 void implement_blend_mode(jlcxx::Module& module)
 {
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+
     define_enum_in(module, BlendMode);
     module.add_enum_value(BlendMode, BLEND_MODE, NONE);
     module.add_enum_value(BlendMode, BLEND_MODE, NORMAL);
@@ -17,4 +19,6 @@ void implement_blend_mode(jlcxx::Module& module)
     module.method("set_current_blend_mode", [](BlendMode mode, bool allow_alpha_blend){
         set_current_blend_mode(mode, allow_alpha_blend);
     });
+
+    #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
 }

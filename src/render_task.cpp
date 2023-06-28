@@ -8,6 +8,8 @@
 
 void implement_render_task(jlcxx::Module& module)
 {
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+
     auto render_task = module.add_type(RenderTask)
     .constructor([](Shape& shape, void* shader_maybe, void* transform_maybe, BlendMode blend_mode) -> RenderTask* {
         return new RenderTask(
@@ -57,4 +59,6 @@ void implement_render_task(jlcxx::Module& module)
         return box_hsva(task.get_uniform_hsva(name));
     })
     ;
+
+    #endif
 }

@@ -4,6 +4,8 @@
 
 void implement_render_area(jlcxx::Module& module)
 {
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+
     auto render_area = module.add_type(RenderArea)
     .add_constructor()
     .method("add_render_task!", [](RenderArea& area, RenderTask& task){
@@ -32,4 +34,6 @@ void implement_render_area(jlcxx::Module& module)
     add_widget_signals<RenderArea>(render_area, "RenderArea");
     add_signal_resize<RenderArea>(render_area, "RenderArea");
     add_signal_render<RenderArea>(render_area, "RenderArea");
+
+    #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
 }

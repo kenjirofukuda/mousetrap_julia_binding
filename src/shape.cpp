@@ -4,6 +4,8 @@
 
 void implement_shape(jlcxx::Module& module)
 {
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+
     auto vertex = module.add_type(Vertex)
     .constructor([](float x, float y, jl_value_t* rgba){
         return new Vertex(x, y, RGBA(
@@ -167,4 +169,6 @@ void implement_shape(jlcxx::Module& module)
         shape.set_texture((TextureObject*) texture);
     })
     ;
+
+    #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
 }
