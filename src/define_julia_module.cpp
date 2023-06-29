@@ -130,9 +130,10 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_spinner(module);
     implement_switch(module);
     implement_toggle_button(module);
-    implement_sound(module);
-    implement_sound_buffer(module);
-    implement_music(module);
+
+    //implement_sound(module);
+    //implement_sound_buffer(module);
+    //implement_music(module);
 
     implement_stack(module);
     implement_viewport(module);

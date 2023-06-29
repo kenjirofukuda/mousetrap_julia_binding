@@ -475,7 +475,7 @@ void implement_menu_bar(jlcxx::Module& module);
 
 void implement_motion_event_controller(jlcxx::Module& module);
 
-void implement_music(jlcxx::Module& module);
+//void implement_music(jlcxx::Module& module);
 
 void implement_notebook(jlcxx::Module& module);
 
@@ -523,9 +523,9 @@ void implement_shape(jlcxx::Module& module);
 
 void implement_shortcut_event_controller(jlcxx::Module& module);
 
-void implement_sound(jlcxx::Module& module);
+//void implement_sound(jlcxx::Module& module);
 
-void implement_sound_buffer(jlcxx::Module& module);
+//void implement_sound_buffer(jlcxx::Module& module);
 
 void implement_spin_button(jlcxx::Module& module);
 

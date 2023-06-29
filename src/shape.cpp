@@ -4,7 +4,7 @@
 
 void implement_shape(jlcxx::Module& module)
 {
-    // #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
     auto vertex = module.add_type(Vertex)
     .constructor([](float x, float y, jl_value_t* rgba){
@@ -170,5 +170,5 @@ void implement_shape(jlcxx::Module& module)
     })
     ;
 
-    // #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
 }
