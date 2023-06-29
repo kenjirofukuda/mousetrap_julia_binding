@@ -4,7 +4,7 @@
 
 void implement_texture(jlcxx::Module& module)
 {
-    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    // #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
     define_enum_in(module, TextureWrapMode);
     module.add_enum_value(TextureWrapMode, TEXTURE_WRAP_MODE, ZERO);
@@ -70,5 +70,5 @@ void implement_texture(jlcxx::Module& module)
         ((RenderTexture*) texture)->unbind_as_render_target();
     });
 
-    #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    // #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
 }

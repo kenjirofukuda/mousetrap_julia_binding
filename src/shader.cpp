@@ -4,7 +4,7 @@
 
 void implement_shader(jlcxx::Module& module)
 {
-    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    // #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
     define_enum_in(module, ShaderType);
     module.add_enum_value(ShaderType, SHADER_TYPE, FRAGMENT);

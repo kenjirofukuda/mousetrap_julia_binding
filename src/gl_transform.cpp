@@ -5,7 +5,7 @@
 
 void implement_gl_transform(jlcxx::Module& module)
 {
-    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    // #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
     auto transform = module.add_type(GLTransform)
     .add_constructor()
@@ -36,5 +36,5 @@ void implement_gl_transform(jlcxx::Module& module)
     })
     ;
 
-    #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    // #endif // MOUSETRAP_ENABLE_OPENGL_COMPONENT
 }
