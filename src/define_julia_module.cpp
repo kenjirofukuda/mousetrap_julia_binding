@@ -157,11 +157,29 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
         g_object_unref(G_OBJECT(ptr));
     });
 
-    module.method("set_gtk_uninitialized_message", [](const std::string& message){
-        mousetrap::detail::notify_if_gtk_uninitialized::message = message;
-    });
+    mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
+    Attempting to construct a widget, but the GTK4 backend has not yet been initialized.
 
-    module.method("set_gl_uninitialized_message", [](const std::string& message){
-        mousetrap::detail::notify_if_gl_uninitialized::message = message;
-    });
+    A typical `.jl` file using mousetrap should look like this:
+    ```julia
+    using mousetrap
+    main() do app::Application
+        # all construction of widgets should happen here
+    end
+    ```
+    You have most likely attempted to construct a widget outside of `main` while using mousetrap interactively.
+    )";
+
+    mousetrap::detail::notify_if_gl_uninitialized::message = R"(
+    Attempting to interact with the global OpenGL context, but it has not yet been initialized.
+
+    A typical `.jl` file using mousetrap should look like this:
+    ```julia
+    using mousetrap
+    main() do app::Application
+        # all OpenGL-related activity should happen here
+    end
+    ```
+    You have most likely attempted to construct an OpenGL-related object outside of `main` while using mousetrap interactively.
+    )";
 }
