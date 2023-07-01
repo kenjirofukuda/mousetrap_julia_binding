@@ -27,6 +27,8 @@ void implement_spin_button(jlcxx::Module& module)
     .add_type_method(SpinButton, get_should_snap_to_ticks)
     .add_type_method(SpinButton, set_allow_only_numeric, !)
     .add_type_method(SpinButton, get_allow_only_numeric)
+    .add_type_method(SpinButton, set_orientation, !)
+    .add_type_method(SpinButton, get_orientation)
     .method("set_text_to_value_function!", [](SpinButton& button, jl_value_t* task) {
         button.set_text_to_value_function([](const SpinButton& button, const std::string& text, jl_value_t* task) -> float {
             auto* res = jl_safe_call("SpinButton::text_to_value", task, jlcxx::box<const SpinButton&>(button), jl_box_string(text));

@@ -15,7 +15,7 @@ void implement_aspect_frame(jlcxx::Module& module)
     .add_type_method(AspectFrame, get_child_x_alignment)
     .add_type_method(AspectFrame, get_child_y_alignment)
     .add_type_method(AspectFrame, remove_child, !)
-    .method("set_child", [](AspectFrame& instance, void* widget){
+    .method("set_child!", [](AspectFrame& instance, void* widget){
         instance.set_child(*((Widget*) widget));
     });
 
