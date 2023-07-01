@@ -18,6 +18,14 @@ void implement_scale(jlcxx::Module& module)
     .add_type_method(Scale, set_upper, !)
     .add_type_method(Scale, set_value, !)
     .add_type_method(Scale, set_increment, !)
+    .add_type_method(Scale, set_should_draw_value, !)
+    .add_type_method(Scale, get_should_draw_value)
+    .add_type_method(Scale, set_has_origin, !)
+    .add_type_method(Scale, get_has_origin)
+    .add_type_method(Scale, add_mark, !)
+    .add_type_method(Scale, clear_marks, !)
+    .add_type_method(Scale, set_orientation, !)
+    .add_type_method(Scale, get_orientation)
     ;
 
     add_widget_signals<Scale>(scale, "Scale");
