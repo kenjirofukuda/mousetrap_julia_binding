@@ -28,6 +28,7 @@ void implement_image(jlcxx::Module& module)
     })
     .add_type_method(Image, as_scaled)
     .add_type_method(Image, as_cropped)
+    .add_type_method(Image, as_flipped)
     .method("set_pixel_rgba!", [](Image& image, size_t x, size_t y, jl_value_t* rgba){
         image.set_pixel(x, y, unbox_rgba(rgba));
     })

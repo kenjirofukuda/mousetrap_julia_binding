@@ -34,7 +34,7 @@ void implement_stylus_event_controller(jlcxx::Module& module)
     auto stylus = module.add_type(StylusEventController)
     .add_constructor()
     .add_type_method(StylusEventController, get_hardware_id)
-    .add_type_method(StylusEventController, get_device_type)
+    .add_type_method(StylusEventController, get_tool_type)
     .add_type_method(StylusEventController, has_axis)
     .add_type_method(StylusEventController, get_axis_value)
     ;
