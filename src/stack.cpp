@@ -45,6 +45,7 @@ void implement_stack(jlcxx::Module& module)
     .method("get_visible_child!", [](Stack& stack) -> std::string {
         return stack.get_visible_child();
     })
+    .add_type_method(Stack, get_child_at)
     .add_type_method(Stack, set_transition_type)
     .add_type_method(Stack, get_transition_type)
     .method("set_transition_duration!", [](Stack& stack, float duration_mys){

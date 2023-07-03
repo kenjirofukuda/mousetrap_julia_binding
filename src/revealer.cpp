@@ -26,10 +26,10 @@ void implement_revealer(jlcxx::Module& module)
     .add_type_method(Revealer, get_revealed)
     .add_type_method(Revealer, set_transition_type, !)
     .add_type_method(Revealer, get_transition_type)
-    .method("set_transition_duration!", [](Revealer& self, float mys){
+    .method("set_transition_duration!", [](Revealer& self, double mys){
         self.set_transition_duration(microseconds(mys));
     })
-    .method("get_transition_duration", [](Revealer& self) -> float {
+    .method("get_transition_duration", [](Revealer& self) -> double {
         return self.get_transition_duration().as_microseconds();
     })
     ;
