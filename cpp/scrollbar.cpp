@@ -5,7 +5,7 @@
 void implement_scrollbar(jlcxx::Module& module)
 {
     auto scrollbar = module.add_type(Scrollbar)
-    .add_constructor(Orientation)
+    .add_constructor(Orientation, const Adjustment&)
     .method("get_adjustment", [](Scrollbar& self) -> void* {
         return self.get_adjustment().get_internal();
     })
