@@ -7,8 +7,8 @@ version = v"0.1.0"
 
 # Collection of sources required to complete build
 sources = [
-    GitSource("https://github.com/Clemapfel/mousetrap.git", "2b038554858035f6263a241327c6881c7f77712d"),
-    GitSource("https://github.com/Clemapfel/mousetrap_julia_binding.git", "c57662fae9a7f7c86cbd38dbea91995d27b4dce6")
+    GitSource("https://github.com/Clemapfel/mousetrap.git", "35c4aafec5471a0279d033d6640717ca53b014f8"),
+    GitSource("https://github.com/Clemapfel/mousetrap_julia_binding.git", "bdcf6442410fe30a68a2b074bc42ca4352481614")
 ]
 
 # Bash recipe for building across all platforms
@@ -17,8 +17,8 @@ cd $WORKSPACE/srcdir
 cd mousetrap
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DGTK_INCLUDE_DIRS="$prefix/include/gtk-4.0;$prefix/include/glib-2.0;$prefix/include/glib-2.0/glib;$prefix/lib/glib-2.0/include;$prefix/include/cairo;$prefix/include/pango-1.0;$prefix/include/harfbuzz;$prefix/include/gdk-pixbuf-2.0;$prefix/include/graphene-1.0;$prefix/lib/graphene-1.0/include"
-make install -j${nproc}
+cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DGTK_INCLUDE_DIRS="$prefix/include/gtk-4.0;$prefix/include/glib-2.0;$prefix/include/glib-2.0/glib;$prefix/lib/glib-2.0/include;$prefix/include/cairo;$prefix/include/pango-1.0;$prefix/include/harfbuzz;$prefix/include/gdk-pixbuf-2.0;$prefix/include/graphene-1.0;$prefix/lib/graphene-1.0/include"
+make install -j 8
 cd ..
 mkdir ${prefix}/share/licenses/mousetrap_linux
 cp LICENSE ${prefix}/share/licenses/mousetrap_linux/LICENSE
@@ -26,20 +26,21 @@ cd ..
 cd mousetrap_julia_binding/
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DJulia_INCLUDE_DIRS=$prefix/include/julia
-make install -j${nproc}
+cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DJulia_INCLUDE_DIRS=$prefix/include/julia
+make install -j 8
 exit
 """
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
-	Platform("x86_64", "linux"; libc = "glibc"),
-	Platform("aarch64", "linux"; libc = "glibc"),
-	Platform("armv6l", "linux"; call_abi = "eabihf", libc = "glibc"),
-	Platform("armv7l", "linux"; call_abi = "eabihf", libc = "glibc"),
-	Platform("powerpc64le", "linux"; libc = "glibc"),
-	Platform("x86_64", "freebsd")
+    Platform("i686", "linux"; libc = "glibc"),
+    Platform("x86_64", "linux"; libc = "glibc"),
+    Platform("aarch64", "linux"; libc = "glibc"),
+    Platform("powerpc64le", "linux"; libc = "glibc"),
+    Platform("x86_64", "linux"; libc = "musl"),
+    Platform("aarch64", "linux"; libc = "musl"),
+    Platform("x86_64", "freebsd"; ),
 ]
 
 # The products that we will ensure are always built
@@ -59,4 +60,4 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; julia_compat="1.6", preferred_gcc_version = v"12.1.0")
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; julia_compat="1.7", preferred_gcc_version = v"12.1.0")

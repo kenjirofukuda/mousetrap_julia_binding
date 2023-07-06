@@ -7,32 +7,32 @@ version = v"0.1.0"
 
 # Collection of sources required to complete build
 sources = [
-    GitSource("https://github.com/Clemapfel/mousetrap.git", "2b038554858035f6263a241327c6881c7f77712d"),
-    GitSource("https://github.com/Clemapfel/mousetrap_julia_binding.git", "c57662fae9a7f7c86cbd38dbea91995d27b4dce6"),
+    GitSource("https://github.com/Clemapfel/mousetrap.git", "9f8a41bc3e420e23baa3a482121a0c143fb79487"),
+    GitSource("https://github.com/Clemapfel/mousetrap_julia_binding.git", "bdcf6442410fe30a68a2b074bc42ca4352481614"),
     FileSource("https://dllfile.net/download/18762", "b8df8a508817b5f4d8cac6365e3fbf0e8952d50aa58ed9b5032ec5767e530aaa")
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
-unzip 18762
+unzip 18762 
 mv opengl32.dll $prefix/bin
 
 cd mousetrap
-
-mkdir ${prefix}/share/licenses/mousetrap_windows
-cp LICENSE ${prefix}/share/licenses/mousetrap_windows/LICENSE
-
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DCMAKE_BUILD_TYPE=Release
-make install -j${nproc}
-cd ../..
+cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DOpenGL=$prefix/bin/opengl32.dll -DGLEW=$prefix/bin/glew32.dll 
+make install -j 8
+cd ..
+mkdir ${prefix}/share/licenses/mousetrap_windows
+cp LICENSE ${prefix}/share/licenses/mousetrap_windows/LICENSE
+cd ..
 cd mousetrap_julia_binding/
 mkdir build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DJulia_INCLUDE_DIRS=$prefix/include/julia -DJulia_LIBRARY=$prefix/bin/libjulia.dll
-make install -j${nproc}
+make install -j 8
+cd ..
 
 mv $prefix/lib/libmousetrap.dll $prefix/bin/libmousetrap.dll
 exit
@@ -43,6 +43,7 @@ exit
 platforms = [
     Platform("x86_64", "windows"; )
 ]
+
 
 # The products that we will ensure are always built
 products = [
@@ -57,6 +58,7 @@ dependencies = [
     Dependency(PackageSpec(name="OpenGLMathematics_jll", uuid="cc7be9be-d298-5888-8f50-b85d5f9d6d73"))
     Dependency(PackageSpec(name="libcxxwrap_julia_jll", uuid="3eaa8342-bff7-56a5-9981-c04077f7cee7"))
     Dependency(PackageSpec(name="libjulia_jll", uuid="5ad3ddd2-0711-543a-b040-befd59781bbf"))
+    Dependency(PackageSpec(name="X11_jll", uuid="546b0b6d-9ca3-5ba2-8705-1bc1841d8479"))
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
