@@ -7,8 +7,8 @@ version = v"0.1.0"
 
 # Collection of sources required to complete build
 sources = [
-    GitSource("https://github.com/Clemapfel/mousetrap.git", "9f8a41bc3e420e23baa3a482121a0c143fb79487"),
-    GitSource("https://github.com/Clemapfel/mousetrap_julia_binding.git", "bdcf6442410fe30a68a2b074bc42ca4352481614"),
+    GitSource("https://github.com/Clemapfel/mousetrap.git", "@MOUSETRAP_COMMIT@"),
+    GitSource("https://github.com/Clemapfel/mousetrap_julia_binding.git", "@MOUSETRAP_JULIA_BINDING_COMMIT@"),
     FileSource("https://dllfile.net/download/18762", "b8df8a508817b5f4d8cac6365e3fbf0e8952d50aa58ed9b5032ec5767e530aaa")
 ]
 
