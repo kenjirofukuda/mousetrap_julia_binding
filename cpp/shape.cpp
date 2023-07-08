@@ -38,11 +38,9 @@ void implement_shape(jlcxx::Module& module)
     static auto unbox_vector_of_vec2 = [](jl_value_t* in) -> std::vector<Vector2f> {
 
         std::vector<Vector2f> out;
-        out.resize(jl_array_len(in));
 
         for (size_t i = 0; i < jl_array_len(in); ++i)
             out.push_back(unbox_vector2f(jl_arrayref((jl_array_t*) in, i)));
-
         return out;
     };
 
