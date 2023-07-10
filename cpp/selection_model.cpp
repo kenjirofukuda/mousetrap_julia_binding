@@ -22,6 +22,7 @@ void implement_selection_model(jlcxx::Module& module)
     .add_type_method(SelectionModel, select, !)
     .add_type_method(SelectionModel, unselect, !)
     .add_type_method(SelectionModel, get_selection_mode)
+    .add_type_method(SelectionModel, get_n_items)
     ;
 
     add_signal_selection_changed<SelectionModel>(selection, "SelectionModel");

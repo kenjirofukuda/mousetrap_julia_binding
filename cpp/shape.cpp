@@ -85,8 +85,8 @@ void implement_shape(jlcxx::Module& module)
 
             auto* tuple = jl_arrayref((jl_array_t*) vec_of_tuple, i);
             vec.emplace_back(
-            unbox_vector2f(jl_calln(getindex, tuple, jl_box_int64(0))),
-            unbox_vector2f(jl_calln(getindex, tuple, jl_box_int64(1)))
+            unbox_vector2f(jl_calln(getindex, tuple, jl_box_int64(1))),
+            unbox_vector2f(jl_calln(getindex, tuple, jl_box_int64(2)))
             );
         }
 
@@ -130,7 +130,7 @@ void implement_shape(jlcxx::Module& module)
         shape.set_vertex_texture_coordinate(index, unbox_vector2f(vec2));
     })
     .method("get_vertex_position", [](Shape& shape, size_t index) -> jl_value_t* {
-        return box_vector2f(shape.get_vertex_position(index));
+        return box_vector3f(shape.get_vertex_position(index));
     })
     .method("set_vertex_position!", [](Shape& shape, size_t index, jl_value_t* vec){
         shape.set_vertex_position(index, unbox_vector3f(vec));
