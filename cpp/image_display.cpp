@@ -9,7 +9,7 @@ void implement_image_display(jlcxx::Module& module)
     .add_constructor(const Image&)
     .add_constructor(const Icon&)
     .method("get_size", [](ImageDisplay& x) -> jl_value_t* {
-        return box_vector2f(x.get_size());
+        return box_vector2i(x.get_size());
     })
     .add_type_method(ImageDisplay, create_from_file, !)
     .add_type_method(ImageDisplay, create_from_image, !)
@@ -17,6 +17,7 @@ void implement_image_display(jlcxx::Module& module)
     .add_type_method(ImageDisplay, create_as_file_preview, !)
     .add_type_method(ImageDisplay, clear, !)
     .add_type_method(ImageDisplay, set_scale, !)
+    .add_type_method(ImageDisplay, get_scale)
     ;
 
     add_widget_signals<ImageDisplay>(image_display, "ImageDisplay");

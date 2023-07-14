@@ -22,8 +22,8 @@ void implement_revealer(jlcxx::Module& module)
         self.set_child(*((Widget*) child));
     })
     .add_type_method(Revealer, remove_child, !)
-    .add_type_method(Revealer, set_revealed, !)
-    .add_type_method(Revealer, get_revealed)
+    .add_type_method(Revealer, set_is_revealed, !)
+    .add_type_method(Revealer, get_is_revealed)
     .add_type_method(Revealer, set_transition_type, !)
     .add_type_method(Revealer, get_transition_type)
     .method("set_transition_duration!", [](Revealer& self, double mys){

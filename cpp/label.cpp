@@ -35,8 +35,8 @@ void implement_label(jlcxx::Module& module)
     .add_type_method(Label, get_x_alignment)
     .add_type_method(Label, set_y_alignment, !)
     .add_type_method(Label, get_y_alignment)
-    .add_type_method(Label, set_selectable, !)
-    .add_type_method(Label, get_selectable)
+    .add_type_method(Label, set_is_selectable, !)
+    .add_type_method(Label, get_is_selectable)
     ;
 
     add_widget_signals<Label>(label, "Label");

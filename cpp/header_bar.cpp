@@ -14,7 +14,7 @@ void implement_header_bar(jlcxx::Module& module)
     .method("set_title_widget!", [](HeaderBar& bar, void* widget){
         bar.set_title_widget(*((Widget*) widget));
     })
-    .add_type_method(HeaderBar, remove_title_widget)
+    .add_type_method(HeaderBar, remove_title_widget, !)
     .method("push_front!", [](HeaderBar& bar, void* widget){
         bar.push_front(*((Widget*) widget));
     })
