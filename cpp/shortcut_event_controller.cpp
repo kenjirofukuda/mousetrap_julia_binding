@@ -12,6 +12,7 @@ void implement_shortcut_event_controller(jlcxx::Module& module)
     module.add_type(ShortcutEventController)
     .add_constructor()
     .add_type_method(ShortcutEventController, add_action, !)
+    .add_type_method(ShortcutEventController, remove_action, !)
     .add_type_method(ShortcutEventController, set_scope, !)
     .add_type_method(ShortcutEventController, get_scope)
     ;

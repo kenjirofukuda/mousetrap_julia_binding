@@ -20,7 +20,7 @@ void implement_check_button(jlcxx::Module& module)
     check_button.method("set_child!", [](CheckButton& check_button, void* widget) {
             check_button.set_child(*((Widget*) widget));
         })
-        .add_type_method(CheckButton, remove_child);
+        .add_type_method(CheckButton, remove_child, !);
     #endif
 
     add_widget_signals<CheckButton>(check_button, "CheckButton");

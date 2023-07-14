@@ -11,7 +11,7 @@ void implement_clipboard(jlcxx::Module& module)
     .add_type_method(Clipboard, contains_string)
     .add_type_method(Clipboard, contains_image)
     .add_type_method(Clipboard, contains_file)
-    .add_type_method(Clipboard, is_local)
+    .add_type_method(Clipboard, get_is_local)
     .method("set_string", [](Clipboard& self, const std::string& string){
         self.set_string(string);
     })
