@@ -12,7 +12,7 @@ void implement_clipboard(jlcxx::Module& module)
     .add_type_method(Clipboard, contains_image)
     .add_type_method(Clipboard, contains_file)
     .add_type_method(Clipboard, get_is_local)
-    .method("set_string", [](Clipboard& self, const std::string& string){
+    .method("set_string!", [](Clipboard& self, const std::string& string){
         self.set_string(string);
     })
     .method("get_string", [](Clipboard& self, jl_value_t* task){
@@ -20,7 +20,7 @@ void implement_clipboard(jlcxx::Module& module)
             jl_safe_call("Clipboard::get_string", task, jlcxx::box<const Clipboard&>(self), jlcxx::box<const std::string&>(result));
         }, task);
     })
-    .method("set_image", [](Clipboard& self, Image& image){
+    .method("set_image!", [](Clipboard& self, Image& image){
         self.set_image(image);
     })
     .method("get_image", [](Clipboard& self, jl_value_t* task){
@@ -28,7 +28,7 @@ void implement_clipboard(jlcxx::Module& module)
             jl_safe_call("Clipboard::get_image", task, jlcxx::box<const Clipboard&>(self), jlcxx::box<const Image&>(result));
         }, task);
     })
-    .method("set_file", [](Clipboard& self, FileDescriptor& file){
+    .method("set_file!", [](Clipboard& self, FileDescriptor& file){
         self.set_file(file);
     })
     ;

@@ -15,9 +15,9 @@ void implement_entry(jlcxx::Module& module)
         .add_type_method(Entry, set_text_visible, !)
         .add_type_method(Entry, get_text_visible)
         .add_type_method(Entry, set_primary_icon, !)
-        .add_type_method(Entry, remove_primary_icon)
+        .add_type_method(Entry, remove_primary_icon, !)
         .add_type_method(Entry, set_secondary_icon, !)
-        .add_type_method(Entry, remove_secondary_icon)
+        .add_type_method(Entry, remove_secondary_icon, !)
     ;
 
     add_widget_signals<Entry>(entry, "Entry");
