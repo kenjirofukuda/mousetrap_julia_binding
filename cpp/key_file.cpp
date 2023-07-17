@@ -65,6 +65,22 @@ void implement_key_file(jlcxx::Module& module)
     define_set_value_as(Image, "image");
     define_get_value_as(Image, "image");
 
+    key_file.method("get_value_as_rgba", [](KeyFile& file, KeyFile::GroupID group, KeyFile::KeyID key) -> jl_value_t*{
+       return box_rgba(file.get_value_as<RGBA>(group, key));
+    });
+
+    key_file.method("set_value_as_rgba!", [](KeyFile& file, KeyFile::GroupID group, KeyFile::KeyID key, jl_value_t* rgba){
+        file.set_value_as<RGBA>(group, key, unbox_rgba(rgba));
+    });
+
+    key_file.method("get_value_as_hsva", [](KeyFile& file, KeyFile::GroupID group, KeyFile::KeyID key) -> jl_value_t*{
+        return box_hsva(file.get_value_as<HSVA>(group, key));
+    });
+
+    key_file.method("set_value_as_hsva!", [](KeyFile& file, KeyFile::GroupID group, KeyFile::KeyID key, jl_value_t* hsva){
+        file.set_value_as<HSVA>(group, key, unbox_hsva(hsva));
+    });
+
     define_get_value_as_list(std::string, "string");
 
     key_file.method("set_value_as_string_list!", [](KeyFile& file, KeyFile::GroupID group, KeyFile::KeyID key, jl_value_t* list){
