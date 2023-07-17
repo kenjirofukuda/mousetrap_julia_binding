@@ -13,14 +13,14 @@ void implement_grid(jlcxx::Module& module)
         grid.remove(*((Widget*) widget));
     })
     .method("get_position", [](Grid& grid, void* widget) -> jl_value_t* {
-        static auto* vector2i_ctor = jl_eval_string("return mousetrap.Vector2i");
+        static auto* vector2i_ctor = (jl_function_t*) jl_eval_string("return mousetrap.Vector2i");
         auto position = grid.get_position(*((Widget*) widget));
-        return jl_calln(vector2i_ctor, jl_box_int64(position.x), jl_box_int64(position.y));
+        return jl_safe_call("Grid::get_position",vector2i_ctor, jl_box_int64(position.x), jl_box_int64(position.y));
     })
     .method("get_size", [](Grid& grid, void* widget) -> jl_value_t* {
-        static auto* vector2i_ctor = jl_eval_string("return mousetrap.Vector2i");
-        auto position = grid.get_size(*((Widget*) widget));
-        return jl_calln(vector2i_ctor, jl_box_int64(position.x), jl_box_int64(position.y));
+        static auto* vector2i_ctor = (jl_function_t*) jl_eval_string("return mousetrap.Vector2i");
+        auto size = grid.get_size(*((Widget*) widget));
+        return jl_safe_call("Grid::get_size",vector2i_ctor, jl_box_int64(size.x), jl_box_int64(size.y));
     })
     .add_type_method(Grid, insert_row_at, !)
     .add_type_method(Grid, remove_row_at, !)

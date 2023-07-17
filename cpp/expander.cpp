@@ -14,7 +14,7 @@ void implement_expander(jlcxx::Module& module)
     })
     .add_type_method(Expander, remove_label_widget, !)
     .add_type_method(Expander, get_is_expanded)
-    .add_type_method(Expander, set_is_expanded)
+    .add_type_method(Expander, set_is_expanded, !)
     ;
 
     add_widget_signals<Expander>(expander, "Expander");

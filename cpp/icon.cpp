@@ -27,7 +27,7 @@ void implement_icon(jlcxx::Module& module)
     .method("has_icon_icon", [](const IconTheme& theme, const Icon& icon) -> bool {
         return theme.has_icon(icon);
     })
-    .method("has_icon_icon_id", [](const IconTheme& theme, const IconID& id) -> bool {
+    .method("has_icon_id", [](const IconTheme& theme, const IconID& id) -> bool {
         return theme.has_icon(id);
     })
     .add_type_method(IconTheme, add_resource_path, !)

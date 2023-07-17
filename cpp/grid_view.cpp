@@ -15,11 +15,14 @@ void implement_grid_view(jlcxx::Module& module)
     .method("insert!", [](GridView& view, size_t index, void* widget) -> void {
         view.insert(*((Widget*) widget), index);
     })
-    .method("remove!", [](GridView& view, void* widget) -> void {
-        view.remove(*((Widget*) widget));
+    .method("remove!", [](GridView& view, size_t index) -> void {
+        view.remove(index);
     })
     .method("clear!", [](GridView& view) -> void {
         view.clear();
+    })
+    .method("find", [](GridView& view, void* widget) -> int {
+        return view.find(*((Widget*) widget));
     })
     .add_type_method(GridView, get_n_items)
     .add_type_method(GridView, set_enable_rubberband_selection, !)
@@ -38,5 +41,5 @@ void implement_grid_view(jlcxx::Module& module)
     ;
 
     add_widget_signals<GridView>(grid, "GridView");
-    add_signal_activate<GridView>(grid, "GridView");
+    add_signal_activate_item<GridView>(grid, "GridView");
 }

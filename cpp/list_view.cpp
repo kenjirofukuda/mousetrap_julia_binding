@@ -27,6 +27,9 @@ void implement_list_view(jlcxx::Module& module)
     .method("get_selection_model", [](ListView& view) -> void* {
         return view.get_selection_model()->get_internal();
     })
+    .method("find", [](ListView& view, void* widget, void* iterator) -> int {
+        return view.find(*((Widget*) widget), (ListView::Iterator) iterator);
+    })
     .add_type_method(ListView, set_enable_rubberband_selection)
     .add_type_method(ListView, get_enable_rubberband_selection)
     .add_type_method(ListView, set_show_separators)
@@ -39,5 +42,5 @@ void implement_list_view(jlcxx::Module& module)
     ;
 
     add_widget_signals<ListView>(list_view, "ListView");
-    add_signal_activate<ListView>(list_view, "ListView");
+    add_signal_activate_item<ListView>(list_view, "ListView");
 }

@@ -354,7 +354,7 @@ DEFINE_ADD_SIGNAL_ARG0_VOID(stop)
 DEFINE_ADD_SIGNAL_ARG3_VOID(items_changed, gint, position, gint, n_removed, gint, n_added)
 DEFINE_ADD_SIGNAL_ARG1_VOID(revealed, void*, _)
 DEFINE_ADD_SIGNAL_ARG1_VOID(activated, void*, _)
-
+DEFINE_ADD_SIGNAL_ARG1_VOID(activate_item, guint, index)
 
 template<typename T, typename Arg_t>
 void add_signal_render(Arg_t type, const std::string& name)
