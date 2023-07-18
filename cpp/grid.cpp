@@ -9,6 +9,9 @@ void implement_grid(jlcxx::Module& module)
     .method("insert!", [](Grid& grid, void* widget, size_t row_i, size_t col_i, size_t n_horizontal_cells, size_t n_vertical_cells){
         grid.insert(*((Widget*) widget), Vector2i(row_i, col_i), n_horizontal_cells, n_vertical_cells);
     })
+    .method("insert_next_to!", [](Grid& grid, void* to_insert, void* already_in_grid, RelativePosition position, size_t n_horizontal_cells, size_t n_vertical_cells){
+        grid.insert_next_to(*((Widget*)to_insert), *((Widget*) already_in_grid), position, n_horizontal_cells, n_vertical_cells);
+    })
     .method("remove!", [](Grid& grid, void* widget) {
         grid.remove(*((Widget*) widget));
     })

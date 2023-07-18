@@ -12,7 +12,7 @@ void implement_list_view(jlcxx::Module& module)
     .method("push_front!", [](ListView& view, void* widget, void* iterator) -> void* {
         return (void*) view.push_front(*((Widget*) widget), (ListView::Iterator) iterator);
     })
-    .method("insert!", [](ListView& view, void* widget, size_t i, void* iterator) -> void* {
+    .method("insert!", [](ListView& view, size_t i, void* widget, void* iterator) -> void* {
         return (void*) view.insert(*((Widget*) widget), i, (ListView::Iterator) iterator);
     })
     .method("remove!", [](ListView& view, size_t index, void* iterator) -> void {
@@ -30,15 +30,15 @@ void implement_list_view(jlcxx::Module& module)
     .method("find", [](ListView& view, void* widget, void* iterator) -> int {
         return view.find(*((Widget*) widget), (ListView::Iterator) iterator);
     })
-    .add_type_method(ListView, set_enable_rubberband_selection)
+    .add_type_method(ListView, set_enable_rubberband_selection, !)
     .add_type_method(ListView, get_enable_rubberband_selection)
-    .add_type_method(ListView, set_show_separators)
+    .add_type_method(ListView, set_show_separators, !)
     .add_type_method(ListView, get_show_separators)
-    .add_type_method(ListView, set_single_click_activate)
+    .add_type_method(ListView, set_single_click_activate, !)
     .add_type_method(ListView, get_single_click_activate)
     .add_type_method(ListView, get_n_items)
     .add_type_method(ListView, get_orientation)
-    .add_type_method(ListView, set_orientation)
+    .add_type_method(ListView, set_orientation, !)
     ;
 
     add_widget_signals<ListView>(list_view, "ListView");

@@ -12,8 +12,8 @@ void implement_grid_view(jlcxx::Module& module)
     .method("push_front!", [](GridView& view, void* widget) -> void {
         view.push_front(*((Widget*) widget));
     })
-    .method("insert!", [](GridView& view, size_t index, void* widget) -> void {
-        view.insert(*((Widget*) widget), index);
+    .method("insert!", [](GridView& view, size_t i, void* widget) -> void {
+        view.insert(*((Widget*) widget), i);
     })
     .method("remove!", [](GridView& view, size_t index) -> void {
         view.remove(index);
