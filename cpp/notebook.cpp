@@ -18,6 +18,7 @@ void implement_notebook(jlcxx::Module& module)
     .method("insert!", [](Notebook& self, size_t new_position, void* child_widget, void* label_widget) {
         return self.insert(new_position, *((Widget*) child_widget), *((Widget*) label_widget));
     })
+    .add_type_method(Notebook, move_page_to, !)
     .add_type_method(Notebook, remove, !)
     .add_type_method(Notebook, next_page, !)
     .add_type_method(Notebook, previous_page, !)

@@ -3,7 +3,8 @@
 void implement_popover_button(jlcxx::Module& module)
 {
     auto popover_button = module.add_type(PopoverButton)
-    .add_constructor()
+    .add_constructor(const Popover&)
+    .add_constructor(const PopoverMenu&)
     .method("set_child!", [](PopoverButton& x, void* widget){
         x.set_child(*((Widget*) widget));
     })

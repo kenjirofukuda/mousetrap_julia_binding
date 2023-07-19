@@ -54,8 +54,8 @@ void implement_log(jlcxx::Module& module)
         return log::get_surpress_info(domain);
     });
 
-    module.method("log_set_file", [](const std::string& path){
-        log::set_file(path);
+    module.method("log_set_file", [](const std::string& path) -> bool {
+        return log::set_file(path);
     });
 
     /*
