@@ -26,7 +26,7 @@ void implement_time(jlcxx::Module& module)
         return milliseconds(x).as_nanoseconds();
     });
     module.method("microseconds_to_ns", [](double x) -> int64_t {
-        return milliseconds(x).as_nanoseconds();
+        return microseconds(x).as_nanoseconds();
     });
 
     auto clock = module.add_type(Clock)
