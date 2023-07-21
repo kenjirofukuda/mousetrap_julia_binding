@@ -68,13 +68,13 @@ void implement_widget(jlcxx::Module& module)
     module.method("set_horizontal_alignment!", [](void* widget, Alignment x) {
         ((Widget*) widget)->set_horizontal_alignment(x);
     });
-    module.method("get_horizontal_alignment!", [](void* widget) -> Alignment {
+    module.method("get_horizontal_alignment", [](void* widget) -> Alignment {
         return ((Widget*) widget)->get_horizontal_alignment();
     });
     module.method("set_vertical_alignment!", [](void* widget, Alignment x) {
         ((Widget*) widget)->set_vertical_alignment(x);
     });
-    module.method("get_vertical_alignment!", [](void* widget) -> Alignment {
+    module.method("get_vertical_alignment", [](void* widget) -> Alignment {
         return ((Widget*) widget)->get_vertical_alignment();
     });
     module.method("set_alignment!", [](void* widget, Alignment x) {

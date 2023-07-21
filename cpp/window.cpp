@@ -12,10 +12,13 @@ void implement_window(jlcxx::Module& module)
     .add_constructor(Application&)
     .add_type_method(Window, set_application, !)
     .add_type_method(Window, set_maximized, !)
+    .add_type_method(Window, set_minimized, !)
     .add_type_method(Window, set_fullscreen, !)
     .add_type_method(Window, present, !)
     .add_type_method(Window, set_hide_on_close, !)
+    .add_type_method(Window, get_hide_on_close)
     .add_type_method(Window, close, !)
+    .add_type_method(Window, destroy, !)
     .method("set_child!", [](Window& window, void* widget){
         window.set_child(*((Widget*) widget));
     })

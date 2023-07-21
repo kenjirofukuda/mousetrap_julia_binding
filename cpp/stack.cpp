@@ -46,7 +46,7 @@ void implement_stack(jlcxx::Module& module)
         return stack.get_visible_child();
     })
     .add_type_method(Stack, get_child_at)
-    .add_type_method(Stack, set_transition_type)
+    .add_type_method(Stack, set_transition_type, !)
     .add_type_method(Stack, get_transition_type)
     .method("set_transition_duration!", [](Stack& stack, float duration_mys){
         stack.set_transition_duration(microseconds(duration_mys));
@@ -54,11 +54,11 @@ void implement_stack(jlcxx::Module& module)
     .method("get_transition_duration", [](Stack& stack) -> float {
         return stack.get_transition_duration().as_microseconds();
     })
-    .add_type_method(Stack, set_is_horizontally_homogeneous)
-    .add_type_method(Stack, get_is_horizontally_homogenous)
-    .add_type_method(Stack, set_is_vertically_homogeneous)
+    .add_type_method(Stack, set_is_horizontally_homogeneous, !)
+    .add_type_method(Stack, get_is_horizontally_homogeneous)
+    .add_type_method(Stack, set_is_vertically_homogeneous, !)
     .add_type_method(Stack, get_is_vertically_homogeneous)
-    .add_type_method(Stack, set_should_interpolate_size)
+    .add_type_method(Stack, set_should_interpolate_size, !)
     .add_type_method(Stack, get_should_interpolate_size)
     ;
 
