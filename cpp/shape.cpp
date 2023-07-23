@@ -142,7 +142,7 @@ void implement_shape(jlcxx::Module& module)
     .add_type_method(Shape, set_is_visible, !)
     .add_type_method(Shape, get_is_visible)
     .method("get_bounding_box", [](Shape& shape) -> jl_value_t* {
-        static auto* rectangle_ctor = jl_eval_string("mousetrap.Rectangle");
+        static auto* rectangle_ctor = jl_eval_string("mousetrap.AxisAlignedRectangle");
         auto bounds = shape.get_bounding_box();
         return jl_calln(rectangle_ctor, box_vector2f(bounds.top_left), box_vector2f(bounds.size));
     })
@@ -153,7 +153,7 @@ void implement_shape(jlcxx::Module& module)
         shape.set_centroid(unbox_vector2f(vec));
     })
     .method("get_centroid", [](Shape& shape) -> jl_value_t* {
-        return box_vector2f(shape.get_size());
+        return box_vector2f(shape.get_centroid());
     })
     .method("set_top_left!", [](Shape& shape, jl_value_t* pos){
         shape.set_top_left(unbox_vector2f(pos));

@@ -161,9 +161,6 @@ void implement_widget(jlcxx::Module& module)
     module.method("get_can_respond_to_input", [](void* widget) -> bool {
         return ((Widget*) widget)->get_can_respond_to_input();
     });
-    module.method("get_frame_clock", [](void* widget) -> void* {
-        return ((Widget*) widget)->get_frame_clock().get_internal();
-    });
     module.method("get_clipboard", [](void* widget) -> void* {
         auto clipboard = ((Widget*) widget)->get_clipboard();
         g_object_ref(clipboard.get_internal());

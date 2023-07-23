@@ -50,7 +50,7 @@ jl_value_t* box_vector4f(Vector4f in)
                     jl_box_float32(in.x),
                     jl_box_float32(in.y),
                     jl_box_float32(in.z),
-                    jl_box_float32(in.z)
+                    jl_box_float32(in.w)
     );
 }
 
