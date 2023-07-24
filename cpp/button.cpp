@@ -19,6 +19,5 @@ void implement_button(jlcxx::Module& module)
     ;
 
     add_widget_signals<Button>(button, "Button");
-    add_signal_activate<Button>(button, "Button");
     add_signal_clicked<Button>(button, "Button");
 }
