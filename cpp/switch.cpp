@@ -11,5 +11,5 @@ void implement_switch(jlcxx::Module& module)
     ;
 
     add_widget_signals<Switch>(widget, "Switch");
-    add_signal_activate<Switch>(widget, "Switch");
+    add_signal_switched<Switch>(widget, "Switch");
 }

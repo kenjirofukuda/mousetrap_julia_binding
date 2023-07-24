@@ -22,6 +22,5 @@ void implement_toggle_button(jlcxx::Module& module)
     ;
 
     add_signal_toggled<ToggleButton>(toggle, "ToggleButton");
-    add_signal_activate<ToggleButton>(toggle, "ToggleButton");
     add_signal_clicked<ToggleButton>(toggle, "ToggleButton");
 }
