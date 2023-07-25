@@ -6,6 +6,8 @@
 #include <mousetrap.hpp>
 #include <jlcxx/jlcxx.hpp>
 
+#include <string>
+
 using namespace mousetrap;
 
 static inline jl_value_t* jl_box_string(const std::string& in)
@@ -197,11 +199,13 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
     type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
     { \
         instance.connect_signal_##snake_case([name](T& instance, jl_function_t* task) -> void { \
-            jl_safe_call( \
-                (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
-                task,                                   \
-                jl_wrap(jlcxx::box<T&>(instance))\
-            ); \
+            /*return jlcxx::unbox<return_t>( */\
+                jl_safe_call( \
+                    (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
+                    task,                                   \
+                    jl_wrap(jlcxx::box<T&>(instance))\
+                ) \
+            /*)*/; \
         }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance) -> void { \
@@ -217,11 +221,13 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
     type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
     { \
         instance.connect_signal_##snake_case([name](T& instance, arg1_t arg1_name, jl_function_t* task) -> void { \
-            jl_safe_call( \
-                (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
-                task, \
-                jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name)) \
-            ); \
+            /*return jlcxx::unbox<return_t>(*/ \
+                jl_safe_call( \
+                    (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
+                    task, \
+                    jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name)) \
+                ) \
+            /*)*/; \
         }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name) -> void { \
@@ -237,11 +243,13 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
     type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
     { \
         instance.connect_signal_##snake_case([name](T& instance, arg1_t arg1_name, arg2_t arg2_name, jl_function_t* task) -> void { \
-            jl_safe_call( \
-                (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
-                task, \
-                jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name)) \
-            ); \
+            /*return jlcxx::unbox<return_t>(*/ \
+                jl_safe_call( \
+                    (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
+                    task, \
+                    jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name)) \
+                ) \
+            /*)*/; \
         }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name, arg2_t arg2_name) -> void { \
@@ -257,11 +265,13 @@ void add_signal_##snake_case(Arg_t type, const std::string& name) \
     type.method("connect_signal_" + std::string(#snake_case) + "!", [name](T& instance, jl_function_t* task) \
     { \
         instance.connect_signal_##snake_case([name](T& instance, arg1_t arg1_name, arg2_t arg2_name, arg3_t arg3_name, jl_function_t* task) -> void { \
-            jl_safe_call( \
-                (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
-                task, \
-                jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name), jlcxx::box<arg3_t>(arg3_name)) \
-            ); \
+            /*return jlcxx::unbox<return_t>(*/ \
+                jl_safe_call( \
+                    (name + "::emit_signal_" + std::string(#snake_case)).c_str(), \
+                    task, \
+                    jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<arg1_t>(arg1_name), jlcxx::box<arg2_t>(arg2_name), jlcxx::box<arg3_t>(arg3_name)) \
+                ) \
+            /*)*/; \
         }, gc_protect(instance, task)); \
     }) \
     .method("emit_signal_" + std::string(#snake_case), [](T& instance, arg1_t arg1_name, arg2_t arg2_name, arg3_t arg3_name) -> void { \
@@ -364,7 +374,7 @@ void add_signal_render(Arg_t type, const std::string& name)
             );
         }, gc_protect(instance, task));
     })
-    .method("emit_signal_render", [](T& instance) {
+    .method("emit_signal_render", [](T& instance) -> void {
         instance.emit_signal_render((GdkGLContext*) nullptr);
     });
     type._DEFINE_ADD_SIGNAL_INVARIANT(render)

@@ -182,4 +182,6 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     ```
     You have most likely attempted to construct an OpenGL-related object outside of `main` while using mousetrap interactively.
     )";
+
+    module.method("test_call", mousetrap::Application::test);
 }

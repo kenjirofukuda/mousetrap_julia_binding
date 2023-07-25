@@ -5,7 +5,9 @@
 void implement_scroll_event_controller(jlcxx::Module& module)
 {
     auto scroll = module.add_type(ScrollEventController)
-    .add_constructor(bool, bool)
+    .add_constructor(bool)
+    .add_type_method(ScrollEventController, get_kinetic_scrolling_enabled)
+    .add_type_method(ScrollEventController, set_kinetic_scrolling_enabled, !)
     ;
 
     add_signal_kinetic_scroll_decelerate<ScrollEventController>(scroll, "ScrollEventController");
