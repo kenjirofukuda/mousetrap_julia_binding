@@ -391,6 +391,7 @@ void implement_box(jlcxx::Module& module);
 void implement_button(jlcxx::Module& module);
 void implement_center_box(jlcxx::Module& module);
 void implement_check_button(jlcxx::Module& module);
+void implement_clamp_frame(jlcxx::Module& module);
 void implement_click_event_controller(jlcxx::Module& module);
 void implement_clipboard(jlcxx::Module& module);
 void implement_color(jlcxx::Module& module);

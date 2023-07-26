@@ -157,6 +157,10 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
         g_object_unref(G_OBJECT(ptr));
     });
 
+    module.method("init", [](){
+       gtk_init();
+    });
+
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
     Attempting to construct a widget, but the GTK4 backend has not yet been initialized.
 
@@ -182,6 +186,4 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     ```
     You have most likely attempted to construct an OpenGL-related object outside of `main` while using mousetrap interactively.
     )";
-
-    module.method("test_call", mousetrap::Application::test);
 }
