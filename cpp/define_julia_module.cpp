@@ -83,6 +83,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_progress_bar(module);
 
     implement_aspect_frame(module);
+    implement_clamp_frame(module);
     implement_blend_mode(module);
     implement_box(module);
     implement_button(module);

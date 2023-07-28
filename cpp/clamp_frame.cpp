@@ -7,7 +7,7 @@
 void implement_clamp_frame(jlcxx::Module& module)
 {
     auto frame = module.add_type(ClampFrame)
-        .constructor(Orientation)
+        .add_constructor(Orientation)
         .add_type_method(ClampFrame, set_orientation, !)
         .add_type_method(ClampFrame, get_orientation)
         .add_type_method(ClampFrame, set_maximum_size, !)
@@ -17,5 +17,5 @@ void implement_clamp_frame(jlcxx::Module& module)
             instance.set_child(*((Widget*) widget));
         });
 
-    add_widget_signals<AspectFrame>(clamp_frame, "AspectFrame");
+    add_widget_signals<ClampFrame>(frame, "ClampFrame");
 }

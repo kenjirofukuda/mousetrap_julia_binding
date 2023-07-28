@@ -1,10 +1,6 @@
-#
-# julia deploy.jl [--deploy=$platforms] [--build=$platforms]
-#
-
 const VERSION = "0.1.1"
-const mousetrap_commit = "df09eb3b41eeb70ec67c969674ed775d2c0239cd"
-const mousetrap_julia_binding_commit = "0fdc8c77bacd842a3f75a14b78e671e0a9515978"
+const mousetrap_commit = "90eb7de30e76a55f73b3a80dcf3691268d8bad0d"
+const mousetrap_julia_binding_commit = "14ceea46611cac67f9afdd668f0ef7a3568a0287"
 
 deploy_linux = true
 deploy_windows = false
@@ -14,6 +10,7 @@ const deploy_local = true
 
 println("deploy linux   : $deploy_linux")
 println("deploy windows : $deploy_windows")
+println("local : $deploy_local")
 
 ## Configure
 
@@ -33,12 +30,12 @@ function configure_file(path_in::String, path_out::String)
     close(file_out)
 end
 
-if build_linux || deploy_linux
+if deploy_linux
     @info "Configuring `linux/build_tarballs.jl`"
     configure_file("./linux/build_tarballs.jl.in", "./linux/build_tarballs.jl")
 end
 
-if build_windows || deploy_windows
+if deploy_windows
     @info "Configuring `windows/build_tarballs.jl`"
     configure_file("./windows/build_tarballs.jl.in", "./windows/build_tarballs.jl")
 end
@@ -47,13 +44,8 @@ end
 
 cd("./linux")
 
-if build_linux
-    @info "Building `mousetrap_linux_jll`"
-    run(`julia build_tarballs.jl`)
-end
-
 if deploy_linux
-    @info "Deploying `mousetrap_linux_jll`"
+    run(`julia build_tarballs.jl`)
     if deploy_local
         run(`julia build_tarballs.jl --deploy=local`)
     else
@@ -64,13 +56,8 @@ end
 cd("..")
 cd("./windows")
 
-if build_windows
-    @info "Building `mousetrap_windows_jll`"
-    run(`julia build_tarballs.jl`)
-end
-
 if deploy_windows
-    @info "Deploying `mousetrap_windows_jll`"
+    run(`julia build_tarballs.jl`)
     if deploy_local
         run(`julia build_tarballs.jl --deploy=local`)
     else
