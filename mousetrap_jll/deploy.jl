@@ -7,9 +7,9 @@ const mousetrap_commit = "df09eb3b41eeb70ec67c969674ed775d2c0239cd"
 const mousetrap_julia_binding_commit = "0fdc8c77bacd842a3f75a14b78e671e0a9515978"
 
 deploy_linux = true
-deploy_windows = true
+deploy_windows = false
 
-const deploy_local = false
+const deploy_local = true
 # if local, files will be written to ~/.julia/dev/mousetrap_[linux,windows]_jll 
 
 println("deploy linux   : $deploy_linux")

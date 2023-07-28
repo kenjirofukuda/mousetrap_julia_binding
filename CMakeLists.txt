@@ -112,9 +112,8 @@ add_library(${LIBRARY_NAME} SHARED
     cpp/gc_sentinel.cpp
     cpp/color_chooser.cpp
     cpp/alert_dialog.cpp
-        cpp/clamp_frame.cpp)
-
-set(MOUSETRAP_LIBRARIES "/usr/local/lib64/libmousetrap.so;/usr/lib64/libGLEW.so;gtk-4;pangocairo-1.0;pango-1.0;harfbuzz;gdk_pixbuf-2.0;cairo-gobject;cairo;graphene-1.0;gio-2.0;gobject-2.0;glib-2.0")
+    cpp/clamp_frame.cpp
+)
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
     ${OpenGL}

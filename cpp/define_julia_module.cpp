@@ -157,8 +157,8 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
         g_object_unref(G_OBJECT(ptr));
     });
 
-    module.method("init", [](){
-       gtk_init();
+    module.method("initialize", [](){
+       adw_init();
     });
 
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
