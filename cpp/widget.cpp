@@ -188,4 +188,13 @@ void implement_widget(jlcxx::Module& module)
     module.method("set_listens_for_shortcut_action!", [](void* widget, Action& action){
         ((Widget*) widget)->set_listens_for_shortcut_actions(action);
     });
+    module.method("add_css_class!", [](void* widget, const std::string& str){
+        ((Widget*) widget)->add_css_class(str);
+    });
+    module.method("remove_css_class!", [](void* widget, const std::string& str){
+        ((Widget*) widget)->remove_css_class(str);
+    });
+    module.method("get_css_classes", [](void* widget) -> auto {
+        ((Widget*) widget)->get_css_classes();
+    });
 }

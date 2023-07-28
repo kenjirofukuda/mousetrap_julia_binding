@@ -463,6 +463,7 @@ void implement_stylus_event_controller(jlcxx::Module& module);
 void implement_swipe_event_controller(jlcxx::Module& module);
 void implement_switch(jlcxx::Module& module);
 void implement_text_view(jlcxx::Module& module);
+void implement_theme(jlcxx::Module& module);
 void implement_time(jlcxx::Module& module);
 void implement_texture(jlcxx::Module& module);
 void implement_toggle_button(jlcxx::Module& module);

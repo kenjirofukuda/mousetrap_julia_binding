@@ -113,6 +113,7 @@ add_library(${LIBRARY_NAME} SHARED
     cpp/color_chooser.cpp
     cpp/alert_dialog.cpp
     cpp/clamp_frame.cpp
+    cpp/theme.cpp
 )
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC

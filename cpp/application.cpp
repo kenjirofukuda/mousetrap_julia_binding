@@ -19,6 +19,8 @@ void implement_application(jlcxx::Module& module)
     .add_type_method(Application, remove_action, !)
     .add_type_method(Application, has_action)
     .add_type_method(Application, get_action)
+    .add_type_method(Application, get_current_theme)
+    .add_type_method(Application, set_current_theme, !)
     ;
 
     add_signal_activate<Application>(application, "Application");

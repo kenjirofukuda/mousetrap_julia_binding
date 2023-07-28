@@ -43,6 +43,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 
     implement_orientation(module);
     implement_time(module);
+    implement_theme(module);
 
     implement_adjustment(module);
     implement_action(module);
