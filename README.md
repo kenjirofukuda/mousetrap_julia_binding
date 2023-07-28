@@ -78,8 +78,3 @@ Which will deposit the shared library in `mousetrap_julia_binding/windows/produc
 
 ---
 
-## Dormouse Executable Bundler
-
-> **Note**: This feature is not yet implemented.
-
-
