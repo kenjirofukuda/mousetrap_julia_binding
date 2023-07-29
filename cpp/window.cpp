@@ -27,10 +27,9 @@ void implement_window(jlcxx::Module& module)
     .add_type_method(Window, get_destroy_with_parent)
     .add_type_method(Window, set_title, !)
     .add_type_method(Window, get_title)
-    .method("set_titlebar_widget!", [](Window& window, void* widget){
-        window.set_titlebar_widget(*((Widget*) widget));
+    .method("get_header_bar", [](Window& window) -> void* {
+        return window.get_header_bar().get_internal();
     })
-    .add_type_method(Window, remove_titlebar_widget, !)
     .add_type_method(Window, set_is_modal, !)
     .add_type_method(Window, get_is_modal)
     .add_type_method(Window, set_transient_for, !)

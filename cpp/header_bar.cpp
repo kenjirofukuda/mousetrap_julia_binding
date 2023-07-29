@@ -7,6 +7,9 @@ void implement_header_bar(jlcxx::Module& module)
     auto bar = module.add_type(HeaderBar)
     .add_constructor()
     .add_constructor(const std::string&)
+    .constructor([](void* internal){
+        return new HeaderBar((detail::HeaderBarInternal*) internal);
+    })
     .add_type_method(HeaderBar, set_layout, !)
     .add_type_method(HeaderBar, get_layout)
     .add_type_method(HeaderBar, set_show_title_buttons, !)
