@@ -27,7 +27,7 @@ cd ..
 cd mousetrap_julia_binding/
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DMOUSETRAP_ENABLE_OPENGL_COMPONENT=OFF
+cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DJulia_INCLUDE_DIRS=$prefix/include/julia -DMOUSETRAP_ENABLE_OPENGL_COMPONENT=OFF
 make install -j 8
 cd ..
 
@@ -44,8 +44,8 @@ platforms = [
 
 # The products that we will ensure are always built
 products = [
-    LibraryProduct("libmousetrap", :mousetrap_apple),
-    LibraryProduct("libmousetrap_julia_binding", :mousetrap_julia_binding_apple)
+    LibraryProduct("libmousetrap", :mousetrap),
+    LibraryProduct("libmousetrap_julia_binding", :mousetrap_julia_binding)
 ]
 
 # Dependencies that must be installed before this package can be built

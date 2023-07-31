@@ -47,8 +47,8 @@ platforms = [
 
 # The products that we will ensure are always built
 products = [
-    LibraryProduct("libmousetrap", :mousetrap_windows),
-    LibraryProduct("libmousetrap_julia_binding", :mousetrap_julia_binding_windows)
+    LibraryProduct("libmousetrap", :mousetrap),
+    LibraryProduct("libmousetrap_julia_binding", :mousetrap_julia_binding)
 ]
 
 # Dependencies that must be installed before this package can be built
