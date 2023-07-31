@@ -17,20 +17,17 @@ cd $WORKSPACE/srcdir
 
 cd mousetrap
 mkdir build
+mkdir ${prefix}/share/licenses/mousetrap_apple
+cp LICENSE ${prefix}/share/licenses/mousetrap_apple/LICENSE
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DMOUSETRAP_ENABLE_OPENGL_COMPONENT=OFF
 make install -j 8
-cd ..
-mkdir ${prefix}/share/licenses/mousetrap_apple
-cp LICENSE ${prefix}/share/licenses/mousetrap_apple/LICENSE
-cd ..
+cd ../..
 cd mousetrap_julia_binding/
 mkdir build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DJulia_INCLUDE_DIRS=$prefix/include/julia -DMOUSETRAP_ENABLE_OPENGL_COMPONENT=OFF
 make install -j 8
-cd ..
-
 exit
 """
 
