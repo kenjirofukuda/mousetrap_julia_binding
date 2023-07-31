@@ -23,7 +23,6 @@ find_package(mousetrap REQUIRED)
 add_library(${LIBRARY_NAME} SHARED
 
     mousetrap_julia_binding.hpp
-
     cpp/action.cpp
     cpp/adjustment.cpp
     cpp/alignment.cpp
@@ -130,6 +129,13 @@ target_include_directories(${LIBRARY_NAME} PUBLIC
 target_compile_features(${LIBRARY_NAME} PUBLIC
     cxx_std_17
 )
+
+message("[mousetrap_julia_binding] OpenGL Component enabled: ${MOUSETRAP_ENABLE_OPENGL_COMPONENT}")
+if(${MOUSETRAP_ENABLE_OPENGL_COMPONENT})
+    target_compile_definitions(mousetrap PUBLIC MOUSETRAP_ENABLE_OPENGL_COMPONENT=1)
+else()
+    target_compile_definitions(mousetrap PUBLIC MOUSETRAP_ENABLE_OPENGL_COMPONENT=0)
+endif()
 
 set_target_properties(${LIBRARY_NAME} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}
