@@ -1,15 +1,17 @@
 const VERSION = "0.1.1"
-const mousetrap_commit = "0e67215e7abdbf111ed46ff3f8df310c6e2147ba"
-const mousetrap_julia_binding_commit = "73ad67bbd6a2582b0b534e2ea684dc36843ce0ef"
+const mousetrap_commit = "91f44e8ea25406778768210928eea4c59e6865e9"
+const mousetrap_julia_binding_commit = "99be3f2d6224fd44ff39818f8707b1d813a950d1"
 
-deploy_linux = true
-deploy_windows = true
+deploy_linux = false
+deploy_windows = false
+deploy_apple = true
 
 const deploy_local = true
 # if local, files will be written to ~/.julia/dev/mousetrap_[linux,windows]_jll 
 
 println("deploy linux   : $deploy_linux")
 println("deploy windows : $deploy_windows")
+println("deploy apple : $deploy_apple")
 println("local : $deploy_local")
 
 ## Configure
@@ -40,6 +42,11 @@ if deploy_windows
     configure_file("./windows/build_tarballs.jl.in", "./windows/build_tarballs.jl")
 end
 
+if deploy_apple
+    @info "Configuring `apple/build_tarballs.jl`"
+    configure_file("./apple/build_tarballs.jl.in", "./apple/build_tarballs.jl")
+end
+
 ## Build
 
 cd("./linux")
@@ -62,6 +69,19 @@ if deploy_windows
         run(`julia build_tarballs.jl --deploy=local`)
     else
         run(`julia build_tarballs.jl --deploy=Clemapfel/mousetrap_windows_jll`)
+    end
+end
+
+cd("..")
+cd("./apple")
+
+if deploy_apple
+    run(`julia build_tarballs.jl`)
+        if deploy_local
+            run(`julia build_tarballs.jl --deploy=local`)
+        else
+            run(`julia build_tarballs.jl --deploy=Clemapfel/mousetrap_apple_jll`)
+        end
     end
 end
 
