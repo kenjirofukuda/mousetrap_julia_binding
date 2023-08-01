@@ -194,7 +194,7 @@ void implement_widget(jlcxx::Module& module)
     module.method("remove_css_class!", [](void* widget, const std::string& str){
         ((Widget*) widget)->remove_css_class(str);
     });
-    module.method("get_css_classes", [](void* widget) -> auto {
-        ((Widget*) widget)->get_css_classes();
+    module.method("get_css_classes", [](void* widget) -> std::vector<std::string> {
+        return ((Widget*) widget)->get_css_classes();
     });
 }

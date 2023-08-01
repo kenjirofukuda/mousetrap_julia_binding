@@ -8,6 +8,7 @@ void implement_popover_button(jlcxx::Module& module)
     .method("set_child!", [](PopoverButton& x, void* widget){
         x.set_child(*((Widget*) widget));
     })
+    .add_type_method(PopoverButton, set_icon, !)
     .add_type_method(PopoverButton, remove_child, !)
     .add_type_method(PopoverButton, set_popover, !)
     .add_type_method(PopoverButton, set_popover_menu, !)
