@@ -21,7 +21,8 @@ mv opengl32.dll $prefix/bin
 cd mousetrap
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DOpenGL=$prefix/bin/opengl32.dll -DGLEW=$prefix/bin/glew32.dll 
+
+cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DMOUSETRAP_ENABLE_OPENGL_COMPONENT=ON -DOpenGL=$prefix/bin/opengl32.dll -DGLEW=$prefix/bin/glew32.dll
 make install -j 8
 cd ..
 mkdir ${prefix}/share/licenses/mousetrap_windows

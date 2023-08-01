@@ -17,7 +17,7 @@ cd $WORKSPACE/srcdir
 cd mousetrap
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DAdwaita_INCLUDE_DIRS="$prefix/include/libadwaita-1;$prefix/include/gtk-4.0;$prefix/include/glib-2.0;$prefix/include/glib-2.0/glib;$prefix/lib/glib-2.0/include;$prefix/include/cairo;$prefix/include/pango-1.0;$prefix/include/harfbuzz;$prefix/include/gdk-pixbuf-2.0;$prefix/include/graphene-1.0;$prefix/lib/graphene-1.0/include"
+cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DMOUSETRAP_ENABLE_OPENGL_COMPONENT=ON -DAdwaita_INCLUDE_DIRS="$prefix/include/libadwaita-1;$prefix/include/gtk-4.0;$prefix/include/glib-2.0;$prefix/include/glib-2.0/glib;$prefix/lib/glib-2.0/include;$prefix/include/cairo;$prefix/include/pango-1.0;$prefix/include/harfbuzz;$prefix/include/gdk-pixbuf-2.0;$prefix/include/graphene-1.0;$prefix/lib/graphene-1.0/include"
 make install -j 8
 cd ..
 mkdir ${prefix}/share/licenses/mousetrap_linux
