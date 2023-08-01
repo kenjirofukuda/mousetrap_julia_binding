@@ -1,6 +1,9 @@
-/mousetrap_jll/windows/products/
-/mousetrap_jll/linux/build/
-/mousetrap_jll/windows/build/
-/mousetrap_jll/linux/products/
 /mousetrap_jll/windows/build_tarballs.jl
+/mousetrap_jll/windows/build
+/mousetrap_jll/windows/products
 /mousetrap_jll/linux/build_tarballs.jl
+/mousetrap_jll/linux/build
+/mousetrap_jll/linux/products
+/mousetrap_jll/apple/build_tarballs.jl
+/mousetrap_jll/apple/build
+/mousetrap_jll/apple/products
