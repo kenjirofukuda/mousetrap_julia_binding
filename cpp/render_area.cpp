@@ -6,8 +6,15 @@ void implement_render_area(jlcxx::Module& module)
 {
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
+    define_enum_in(module, AntiAliasingQuality);
+    module.add_enum_value(AntiAliasingQuality, ANTI_ALIASING_QUALITY, OFF);
+    module.add_enum_value(AntiAliasingQuality, ANTI_ALIASING_QUALITY, MINIMAL);
+    module.add_enum_value(AntiAliasingQuality, ANTI_ALIASING_QUALITY, GOOD);
+    module.add_enum_value(AntiAliasingQuality, ANTI_ALIASING_QUALITY, BETTER);
+    module.add_enum_value(AntiAliasingQuality, ANTI_ALIASING_QUALITY, BEST);
+
     auto render_area = module.add_type(RenderArea)
-    .add_constructor()
+    .add_constructor(AntiAliasingQuality)
     .method("add_render_task!", [](RenderArea& area, RenderTask& task){
         area.add_render_task(task);
     })

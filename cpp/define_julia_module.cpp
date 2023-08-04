@@ -162,6 +162,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     module.method("initialize", [](){
        adw_init();
        detail::mark_gtk_initialized();
+       detail::initialize_opengl();
     });
 
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
