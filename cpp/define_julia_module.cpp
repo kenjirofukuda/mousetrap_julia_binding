@@ -1,4 +1,5 @@
 #include "../mousetrap_julia_binding.hpp"
+#include <thread>
 
 namespace mousetrap::detail
 {
@@ -125,6 +126,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_paned(module);
 
     implement_revealer(module);
+    implement_action_bar(module);
     implement_scale(module);
     implement_scrollbar(module);
     implement_separator(module);
@@ -163,6 +165,24 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
        adw_init();
        detail::mark_gtk_initialized();
        detail::initialize_opengl();
+    });
+
+    static std::thread* interactive_thread = nullptr;
+
+    module.method("start_interactive", [&](const std::string& id){
+        auto* app = new Application(id);
+        app->connect_signal_activate([](Application& app){
+            adw_init();
+            detail::mark_gtk_initialized();
+            detail::initialize_opengl();
+        });
+        app->connect_signal_shutdown([](Application& app){
+           delete interactive_thread;
+        });
+        interactive_thread = new std::thread([&](){
+            app->run();
+        });
+        return app;
     });
 
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(

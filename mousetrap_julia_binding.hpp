@@ -384,6 +384,7 @@ void add_signal_render(Arg_t type, const std::string& name)
 
 void implement_adjustment(jlcxx::Module& module);
 void implement_action(jlcxx::Module& module);
+void implement_action_bar(jlcxx::Module& module);
 void implement_alignment(jlcxx::Module& module);
 void implement_alert_dialog(jlcxx::Module& module);
 void implement_application(jlcxx::Module& module);

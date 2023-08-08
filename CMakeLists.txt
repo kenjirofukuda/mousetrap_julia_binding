@@ -113,6 +113,7 @@ add_library(${LIBRARY_NAME} SHARED
     cpp/alert_dialog.cpp
     cpp/clamp_frame.cpp
     cpp/theme.cpp
+    cpp/action_bar.cpp
 )
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
