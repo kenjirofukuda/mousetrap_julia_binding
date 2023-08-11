@@ -161,29 +161,15 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
         g_object_unref(G_OBJECT(ptr));
     });
 
+    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+
     module.method("initialize", [](){
        adw_init();
        detail::mark_gtk_initialized();
        detail::initialize_opengl();
     });
 
-    static std::thread* interactive_thread = nullptr;
-
-    module.method("start_interactive", [&](const std::string& id){
-        auto* app = new Application(id);
-        app->connect_signal_activate([](Application& app){
-            adw_init();
-            detail::mark_gtk_initialized();
-            detail::initialize_opengl();
-        });
-        app->connect_signal_shutdown([](Application& app){
-           delete interactive_thread;
-        });
-        interactive_thread = new std::thread([&](){
-            app->run();
-        });
-        return app;
-    });
+    #endif
 
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
     Attempting to construct a widget, but the GTK4 backend has not yet been initialized.
