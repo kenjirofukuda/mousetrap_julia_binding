@@ -131,10 +131,6 @@ target_compile_features(${LIBRARY_NAME} PUBLIC
     cxx_std_17
 )
 
-set_target_properties(${LIBRARY_NAME} PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}
-)
-
 ### INSTALL ###
 
 install(TARGETS ${LIBRARY_NAME} DESTINATION "${CMAKE_INSTALL_LIBDIR}")
