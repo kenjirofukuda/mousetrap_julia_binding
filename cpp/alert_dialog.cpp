@@ -7,21 +7,16 @@
 void implement_alert_dialog(jlcxx::Module& module)
 {
     auto dialog = module.add_type(AlertDialog)
-        .constructor([](jl_value_t* buttons, const std::string& message, const std::string& detailed_message){
-            auto vec = std::vector<std::string>();
-            for (size_t i = 0; i < jl_array_len(buttons); ++i)
-            {
-                auto* ptr = jl_string_ptr(jl_arrayref((jl_array_t*) buttons, i));
-                if (ptr != nullptr)
-                    vec.emplace_back(ptr);
-            }
-            return new AlertDialog(vec, message, detailed_message);
-        }, USE_FINALIZERS)
+        .add_constructor(const std::string&, const std::string&)
         .add_type_method(AlertDialog, add_button, !)
-        .add_type_method(AlertDialog, remove_button, !)
+        .add_type_method(AlertDialog, set_default_button, !)
         .add_type_method(AlertDialog, set_button_label, !)
         .add_type_method(AlertDialog, get_button_label)
         .add_type_method(AlertDialog, get_n_buttons)
+        .method("set_extra_widget!", [](AlertDialog& self, void* widget){
+            self.set_extra_widget(*((Widget*) widget));
+        })
+        .add_type_method(AlertDialog, remove_extra_widget, !)
         .add_type_method(AlertDialog, get_message)
         .add_type_method(AlertDialog, set_message, !)
         .add_type_method(AlertDialog, get_detailed_description)
@@ -29,6 +24,7 @@ void implement_alert_dialog(jlcxx::Module& module)
         .add_type_method(AlertDialog, set_is_modal, !)
         .add_type_method(AlertDialog, get_is_modal)
         .add_type_method(AlertDialog, present, !)
+        .add_type_method(AlertDialog, close, !)
     ;
 
     dialog.method("on_selection!", [](AlertDialog& self, jl_value_t* task) {
