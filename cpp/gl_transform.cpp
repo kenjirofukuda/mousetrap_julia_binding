@@ -28,10 +28,10 @@ void implement_gl_transform(jlcxx::Module& module)
     .method("reset!", [](GLTransform& self){
         self.reset();
     })
-    .method("setindex!", [](GLTransform& self, size_t x, size_t y, float value){
+    .method("setindex!", [](GLTransform& self, uint64_t x, uint64_t y, float value){
         self.transform[x][y] = value;
     })
-    .method("getindex", [](GLTransform& self, size_t x, size_t y){
+    .method("getindex", [](GLTransform& self, uint64_t x, uint64_t y){
         return self.transform[x][y];
     })
     ;

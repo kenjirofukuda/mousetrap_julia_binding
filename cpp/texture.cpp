@@ -36,7 +36,7 @@ void implement_texture(jlcxx::Module& module)
     module.method("texture_unbind", [](void* texture) -> void {
         ((Texture*) texture)->unbind();
     });
-    module.method("texture_create!", [](void* texture, size_t width, size_t height) {
+    module.method("texture_create!", [](void* texture, uint64_t width, uint64_t height) {
         ((Texture*) texture)->create(width, height);
     });
     module.method("texture_create_from_image!", [](void* texture, const Image& image) {

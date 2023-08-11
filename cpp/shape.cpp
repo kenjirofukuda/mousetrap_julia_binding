@@ -39,7 +39,7 @@ void implement_shape(jlcxx::Module& module)
 
         std::vector<Vector2f> out;
 
-        for (size_t i = 0; i < jl_array_len(in); ++i)
+        for (uint64_t i = 0; i < jl_array_len(in); ++i)
             out.push_back(unbox_vector2f(jl_arrayref((jl_array_t*) in, i)));
         return out;
     };
@@ -66,10 +66,10 @@ void implement_shape(jlcxx::Module& module)
         unbox_vector2f(size)
         );
     })
-    .method("as_circle!", [](Shape& shape, jl_value_t* center, float radius, size_t n_outer_vertices){
+    .method("as_circle!", [](Shape& shape, jl_value_t* center, float radius, uint64_t n_outer_vertices){
         shape.as_circle(unbox_vector2f(center), radius, n_outer_vertices);
     })
-    .method("as_ellipse!", [](Shape& shape, jl_value_t* center, float x_radius, float y_radius, size_t n_outer_vertices){
+    .method("as_ellipse!", [](Shape& shape, jl_value_t* center, float x_radius, float y_radius, uint64_t n_outer_vertices){
         shape.as_ellipse(unbox_vector2f(center), x_radius, y_radius, n_outer_vertices);
     })
     .method("as_line!", [](Shape& shape, jl_value_t* a, jl_value_t* b){
@@ -79,7 +79,7 @@ void implement_shape(jlcxx::Module& module)
         std::vector<std::pair<Vector2f, Vector2f>> vec;
         vec.resize(jl_array_len(vec_of_tuple));
 
-        for (size_t i = 0; i < jl_array_len(vec_of_tuple); ++i)
+        for (uint64_t i = 0; i < jl_array_len(vec_of_tuple); ++i)
         {
             static auto* getindex = jl_get_function(jl_base_module, "getindex");
 
@@ -102,10 +102,10 @@ void implement_shape(jlcxx::Module& module)
     .method("as_rectangular_frame!", [](Shape& shape, jl_value_t* top_left, jl_value_t* outer_size, float x_width, float y_width){
         shape.as_rectangular_frame(unbox_vector2f(top_left), unbox_vector2f(outer_size), x_width, y_width);
     })
-    .method("as_circular_ring!", [](Shape& shape, jl_value_t* center, float outer_radius, float thickness, size_t n_outer_vertices){
+    .method("as_circular_ring!", [](Shape& shape, jl_value_t* center, float outer_radius, float thickness, uint64_t n_outer_vertices){
         shape.as_circular_ring(unbox_vector2f(center), outer_radius, thickness, n_outer_vertices);
     })
-    .method("as_elliptical_ring!", [](Shape& shape, jl_value_t* center, float x_radius, float y_radius, float x_thickness, float y_thickness, size_t n_outer_vertices){
+    .method("as_elliptical_ring!", [](Shape& shape, jl_value_t* center, float x_radius, float y_radius, float x_thickness, float y_thickness, uint64_t n_outer_vertices){
         shape.as_elliptical_ring(unbox_vector2f(center), x_radius, y_radius, x_thickness, y_thickness, n_outer_vertices);
     })
     .method("as_wireframe!", [](Shape& shape, jl_value_t* vector_of_vec2_in){
@@ -117,22 +117,22 @@ void implement_shape(jlcxx::Module& module)
     .method("render", [](Shape& shape, const Shader& shader, GLTransform& transform){
         shape.render(shader, transform);
     })
-    .method("get_vertex_color", [](Shape& shape, size_t index) -> jl_value_t* {
+    .method("get_vertex_color", [](Shape& shape, uint64_t index) -> jl_value_t* {
         return box_rgba(shape.get_vertex_color(index));
     })
-    .method("set_vertex_color!", [](Shape& shape, size_t index, jl_value_t* rgba){
+    .method("set_vertex_color!", [](Shape& shape, uint64_t index, jl_value_t* rgba){
         shape.set_vertex_color(index, unbox_rgba(rgba));
     })
-    .method("get_vertex_texture_coordinate", [](Shape& shape, size_t index) -> jl_value_t* {
+    .method("get_vertex_texture_coordinate", [](Shape& shape, uint64_t index) -> jl_value_t* {
         return box_vector2f(shape.get_vertex_texture_coordinate(index));
     })
-    .method("set_vertex_texture_coordinate!", [](Shape& shape, size_t index, jl_value_t* vec2){
+    .method("set_vertex_texture_coordinate!", [](Shape& shape, uint64_t index, jl_value_t* vec2){
         shape.set_vertex_texture_coordinate(index, unbox_vector2f(vec2));
     })
-    .method("get_vertex_position", [](Shape& shape, size_t index) -> jl_value_t* {
+    .method("get_vertex_position", [](Shape& shape, uint64_t index) -> jl_value_t* {
         return box_vector3f(shape.get_vertex_position(index));
     })
-    .method("set_vertex_position!", [](Shape& shape, size_t index, jl_value_t* vec){
+    .method("set_vertex_position!", [](Shape& shape, uint64_t index, jl_value_t* vec){
         shape.set_vertex_position(index, unbox_vector3f(vec));
     })
     .add_type_method(Shape, get_n_vertices)

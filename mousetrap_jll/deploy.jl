@@ -1,6 +1,6 @@
 const VERSION = "0.1.0"
 const mousetrap_commit = "dc5a4faf9f916ba67d298e36d6d1eb8ea30d408c"
-const mousetrap_julia_binding_commit = "0d1d48fb1f30c2c1f20f79e7bec980b65862e7c9"
+const mousetrap_julia_binding_commit = "17ed1ffcd90eb78a42373bc594eef2d9d0c1d112"
 
 deploy_linux = false
 deploy_windows = true

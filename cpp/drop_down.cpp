@@ -28,7 +28,7 @@ void implement_drop_down(jlcxx::Module& module)
         }, gc_protect(drop_down, task));
     });
 
-    drop_down.method("insert!", [](DropDown& drop_down, size_t i, void* list_widget, void* label_widget, jl_value_t* task){
+    drop_down.method("insert!", [](DropDown& drop_down, uint64_t i, void* list_widget, void* label_widget, jl_value_t* task){
         return drop_down.insert(i, *((Widget*) list_widget), *((Widget*) label_widget), [](DropDown& self, jl_value_t* task) {
             jl_safe_call("DropDown::item_selection_changed", task, jlcxx::box<DropDown&>(self));
         }, gc_protect(drop_down, task));

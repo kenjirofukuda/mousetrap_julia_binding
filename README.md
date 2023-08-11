@@ -2,24 +2,14 @@
 
 > **If you are looking to run mousetrap using Julia, you are in the wrong place. Please visit [mousetrap.jl](https://github.com/Clemapfel/mousetrap.jl) instead.**
 
- Julia-interface for the [mousetrap C++ module](https://github.com/Clemapfel/mousetrap). This repo is only relevant for developers of mousetrap themself, not users of the `mousetrap.jl` Julia package.
+ Julia-interface for the [mousetrap C++ component](https://github.com/Clemapfel/mousetrap). Imports most C++ classes such 
+that they can be wrapped by the macros defined in [`src/mousetrap.jl`](https://github.com/Clemapfel/mousetrap.jl/blob/main/src/mousetrap.jl).
+
+This project contains the code for the Julia interface, as well as all relevant files to cross-compile both the Julia interface and the stand-alone C++ component.
 
 ---
 
-## Table of Content
-
-1. [`mousetrap_julia_binding` shared library](#mousetrapjuliabinding-shared-library)
-2. [Mousetrap BinaryBuilder package](#mousetrapjll-binarybuilder-package)<br>
-2.1 [Compiling for Linux](#compiling-for-linux)<br>
-2.2 [Compiling for Windows](#compiling-for-windows)<br>
-3. [Dormouse Executable Bundler](#dormouse-executable-bundler)<br>
-3.1 [Installing the Bundler](#dormouse-installation)<br>
-3.1 [Bundling for Linux](#bundling-for-linux)<br>
-3.2 [Bundling for Windows](#bundling-for-windows)<br>
-
----
-
-## `mousetrap_julia_binding` shared library
+## Installation
 
 ### Dependencies
 
@@ -35,46 +25,38 @@ git clone https://github.com/Clemapfel/mousetrap_julia_binding.git
 cd mousetrap_julia_binding
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=<path>
+cmake .. -DMOUSETRAP_ENABLE_OPENGL_COMPONENT=ON
 make install -j 8
 ```
+Where `make install` may require `sudo` depending on your default install location.
 
-Where `<path>` is the intended install directory for the shared library. Only `libmousetrap_julia_binding.so` will be desposited.
+On MacOS, it may be necessary to set `-DMOUSETRAP_ENABLE_OPENGL_COMPONENT=OFF` instead.
 
 ---
 
 ## `mousetrap_jll` BinaryBuilder package
 
-`mousetrap` and `mousetrap_julia_binding` can be compiled using Julias `BinaryBuilder`. This requires a 64-bit Linux 
-operating system, though the compiled libraries work for both linux and windows. 
+`mousetrap` and `mousetrap_julia_binding` can be compiled using Julias `BinaryBuilder`. To be able to cross-compile, a 64-bit Linux operating system is required, though the compiled library product work for both linux, windows, and mac. 
 
 ### Dependencies
+
 + Linux operating system
 + [BinaryBuilder](https://github.com/JuliaPackaging/BinaryBuilder.jl)
 
 ### Compiling for Linux
 
-To compile `mousetrap_jll` for linux:
+For linux, enter `mousetrap_julia_binding/mousetrap_jll`, then enter `/linux`, `/windows`, or `/apple`, depending on which OS you want to cross-compile for, not your actual operating system (which has to linux anyway).
+
+Then, execute (in one of the above listed directories):
 
 ```
-git clone https://github.com/Clemapfel/mousetrap_julia_binding.git
-cd mousetrap_julia_binding/mousetrap_jll/linux
+# in mousetrap_julia_binding/mousetrap_jll/linux (or /windows, /apple)
 julia build_tarballs.jl
 ```
 
-Which will deposit the shared libraries in `mousetrap_julia_binding/linux/products`.
+Which will deposit the shared libraries in `mousetrap_julia_binding/mousetrap_jll/*/products`, where `*` is one of `linux`, `windows`, or `apple`.
 
-### Compiling for Windows
-
-To cross-compile `mousetrap` for window:
-
-```
-git clone https://github.com/Clemapfel/mousetrap_julia_binding.git
-cd mousetrap_julia_binding/mousetrap_jll/windows
-julia build_tarballs.jl
-```
-
-Which will deposit the shared library in `mousetrap_julia_binding/windows/products`.
+If you want to instead install a `_jll` package locally, run `julia build_tarballs.jl --deploy=local` instead, which will create a package `mousetrap_*_jll` in your `.julia/dev`, where `*` is one of `linux`, `windows`, or `apple`.
 
 ---
 

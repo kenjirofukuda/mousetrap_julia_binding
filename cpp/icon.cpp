@@ -7,7 +7,7 @@ void implement_icon(jlcxx::Module& module)
     module.add_type(Icon)
     .add_constructor()
     .add_type_method(Icon, create_from_file, !)
-    .method("create_from_theme!", [](Icon& icon, void* theme, IconID id, size_t square_resolution, size_t scale){
+    .method("create_from_theme!", [](Icon& icon, void* theme, IconID id, uint64_t square_resolution, uint64_t scale){
         return icon.create_from_theme(*((IconTheme*) theme), id, square_resolution, scale);
     })
     .add_type_method(Icon, get_name)

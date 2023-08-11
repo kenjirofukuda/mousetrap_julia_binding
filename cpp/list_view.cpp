@@ -12,16 +12,16 @@ void implement_list_view(jlcxx::Module& module)
     .method("push_front!", [](ListView& view, void* widget, void* iterator) -> void* {
         return (void*) view.push_front(*((Widget*) widget), (ListView::Iterator) iterator);
     })
-    .method("insert!", [](ListView& view, size_t i, void* widget, void* iterator) -> void* {
+    .method("insert!", [](ListView& view, uint64_t i, void* widget, void* iterator) -> void* {
         return (void*) view.insert(*((Widget*) widget), i, (ListView::Iterator) iterator);
     })
-    .method("remove!", [](ListView& view, size_t index, void* iterator) -> void {
+    .method("remove!", [](ListView& view, uint64_t index, void* iterator) -> void {
         view.remove(index, (ListView::Iterator) iterator);
     })
     .method("clear!", [](ListView& view, void* iterator) -> void {
         view.clear((ListView::Iterator) iterator);
     })
-    .method("set_widget_at!", [](ListView& view, size_t index, void* widget, void* iterator) -> void {
+    .method("set_widget_at!", [](ListView& view, uint64_t index, void* widget, void* iterator) -> void {
         view.set_widget_at(index, *((Widget*) widget), (ListView::Iterator) iterator);
     })
     .method("get_selection_model", [](ListView& view) -> void* {

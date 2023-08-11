@@ -39,7 +39,7 @@ void implement_key_file(jlcxx::Module& module)
     #define define_set_value_as_list(type, name)\
         key_file.method("set_value_as_" + std::string(name) + "_list!", [](KeyFile& file, KeyFile::GroupID group_id, KeyFile::KeyID key_id, jl_value_t* in) { \
             std::vector<type> vec; \
-            for (size_t i = 0; i < jl_array_len(in); ++i) \
+            for (uint64_t i = 0; i < jl_array_len(in); ++i) \
                 vec.push_back(jlcxx::unbox<type>(jl_arrayref((jl_array_t*) in, i))); \
             file.set_value_as<std::vector<type>>(group_id, key_id, vec); \
         });
@@ -53,8 +53,8 @@ void implement_key_file(jlcxx::Module& module)
     define_get_value_as(int, "int");
     define_set_value_as(int, "int");
 
-    define_get_value_as(size_t, "uint");
-    define_set_value_as(size_t, "uint");
+    define_get_value_as(uint64_t, "uint");
+    define_set_value_as(uint64_t, "uint");
 
     define_get_value_as(float, "float");
     define_set_value_as(float, "float");
@@ -86,7 +86,7 @@ void implement_key_file(jlcxx::Module& module)
     key_file.method("set_value_as_string_list!", [](KeyFile& file, KeyFile::GroupID group, KeyFile::KeyID key, jl_value_t* list){
 
         auto vec = std::vector<std::string>();
-        for (size_t i = 0; i < jl_array_len(list); ++i)
+        for (uint64_t i = 0; i < jl_array_len(list); ++i)
         {
             auto* ptr = jl_string_ptr(jl_arrayref((jl_array_t*) list, i));
             if (ptr != nullptr)
@@ -102,8 +102,8 @@ void implement_key_file(jlcxx::Module& module)
     define_get_value_as_list(int, "int");
     define_set_value_as_list(int, "int");
 
-    define_get_value_as_list(size_t, "uint");
-    define_set_value_as_list(size_t, "uint");
+    define_get_value_as_list(uint64_t, "uint");
+    define_set_value_as_list(uint64_t, "uint");
 
     define_get_value_as_list(float, "float");
     define_set_value_as_list(float, "float");
