@@ -16,6 +16,8 @@ void implement_color_chooser(jlcxx::Module& module)
         })
         .add_type_method(ColorChooser, set_is_modal,!)
         .add_type_method(ColorChooser, get_is_modal)
+        .add_type_method(ColorChooser, set_title, !)
+        .add_type_method(ColorChooser, get_title)
     ;
 
     chooser.method("on_accept!", [](ColorChooser& self, jl_value_t* task) {
