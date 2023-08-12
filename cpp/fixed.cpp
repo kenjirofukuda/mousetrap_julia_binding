@@ -15,11 +15,6 @@ void implement_fixed(jlcxx::Module& module)
     .method("set_child_position!", [](Fixed& x, void* widget, jl_value_t* vector2f){
         x.set_child_position(*((Widget*) widget), unbox_vector2f(vector2f));
     })
-    /*
-    .method("get_child_position", [](Fixed& x, void* widget) -> jl_value_t* {
-        return box_vector2f(x.get_child_position(*((Widget*) widget)));
-    })
-     */
     ;
 
     add_widget_signals<Fixed>(fixed, "Fixed");
