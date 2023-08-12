@@ -1,10 +1,14 @@
 const VERSION = "0.1.0"
-const mousetrap_commit = "dc5a4faf9f916ba67d298e36d6d1eb8ea30d408c"
-const mousetrap_julia_binding_commit = "17ed1ffcd90eb78a42373bc594eef2d9d0c1d112"
+const mousetrap_commit = "db1fd2ebb020023fb2dfe0db3818635f73136d36"
+const mousetrap_julia_binding_commit = "3e2d1badaaf340376b09c8fb10b7ca7672d8cc61"
 
-deploy_linux = false
-deploy_windows = true
-deploy_apple = false
+const linux_repo = "mousetrap_linux_jll"
+const windows_repo = "mousetrap_windows_jll"
+const apple_repo = "mousetrap_apple_jll"
+
+const deploy_linux = false
+const deploy_windows = false
+const deploy_apple = true
 
 const deploy_local = false
 # if local, files will be written to ~/.julia/dev/mousetrap_[linux,windows,apple]_jll
@@ -35,28 +39,46 @@ end
 if deploy_linux
     @info "Configuring `linux/build_tarballs.jl`"
     configure_file("./linux/build_tarballs.jl.in", "./linux/build_tarballs.jl")
+    
+    path = "/home/clem/.julia/dev/$linux_repo"
+    if isfile(path)
+        run(`rm -r $path`)
+    end
 end
 
 if deploy_windows
     @info "Configuring `windows/build_tarballs.jl`"
     configure_file("./windows/build_tarballs.jl.in", "./windows/build_tarballs.jl")
+
+    path = "/home/clem/.julia/dev/$windows_repo"
+    if isfile(path)
+        run(`rm -r $path`)
+    end
 end
 
 if deploy_apple
     @info "Configuring `apple/build_tarballs.jl`"
     configure_file("./apple/build_tarballs.jl.in", "./apple/build_tarballs.jl")
+
+    path = "/home/clem/.julia/dev/$apple_repo"
+    if isfile(path)
+        run(`rm -r $path`)
+    end
 end
 
 ## Build
 
+function run_deploy(repo::String)
+    run(`julia -t 8 build_tarballs.jl --debug --verbose --deploy=$repo`)
+end
+
 cd("./linux")
 
 if deploy_linux
-    run(`julia build_tarballs.jl`)
     if deploy_local
-        run(`julia build_tarballs.jl --deploy=local`)
+        run_deploy("local")
     else
-        run(`julia build_tarballs.jl --deploy=Clemapfel/mousetrap_linux_jll`)
+        run_deploy("Clemapfel/$linux_repo")
     end
 end
 
@@ -64,11 +86,10 @@ cd("..")
 cd("./windows")
 
 if deploy_windows
-    run(`julia build_tarballs.jl`)
     if deploy_local
-        run(`julia build_tarballs.jl --deploy=local`)
+        run_deploy("local")
     else
-        run(`julia build_tarballs.jl --deploy=Clemapfel/mousetrap_windows_jll`)
+        run_deploy("Clemapfel/$windows_repo")
     end
 end
 
@@ -76,12 +97,10 @@ cd("..")
 cd("./apple")
 
 if deploy_apple
-    run(`julia build_tarballs.jl`)
-        if deploy_local
-            run(`julia build_tarballs.jl --deploy=local`)
-        else
-            run(`julia build_tarballs.jl --deploy=Clemapfel/mousetrap_apple_jll`)
-        end
+    if deploy_local
+        run_deploy("local")
+    else
+        run_deploy("Clemapfel/$apple_repo")
     end
 end
 
