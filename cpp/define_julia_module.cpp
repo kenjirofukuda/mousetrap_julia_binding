@@ -186,18 +186,11 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
-    mousetrap::detail::notify_if_gl_uninitialized::message = R"(
-    Attempting to interact with the global OpenGL context, but it has not yet been initialized.
+    module.method("set_force_gl_disabled", [](bool b){
+       if (mousetrap::GL_INITIALIZED)
+           log::critical("In set_force_gl_disabled: Already attempted to initialize OpenGL backed, setting `FORCE_GL_DISABLED` will only have an effect if called before initialization.", MOUSETRAP_DOMAIN);
 
-    A typical `.jl` file using mousetrap should look like this:
-    ```julia
-    using mousetrap
-    main() do app::Application
-        # all OpenGL-related activity should happen here
-    end
-    ```
-    You have most likely attempted to construct an OpenGL-related object outside of `main` while using mousetrap interactively.
-    )";
-
+       mousetrap::FORCE_GL_DISABLED = b;
+    });
     #endif
 }
