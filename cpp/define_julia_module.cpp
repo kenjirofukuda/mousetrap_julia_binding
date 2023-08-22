@@ -3,36 +3,17 @@
 
 namespace mousetrap::detail
 {
-    struct _GCSentinel
+    void task_cb(GObject* self, GAsyncResult*, void* data)
     {
-        GObject parent;
-        jl_value_t* target;
-    };
-    using GCSentinel = _GCSentinel;
+        std::cout << "task called" << std::endl;
 
-    DECLARE_NEW_TYPE(GCSentinel, gc_sentinel, GC_SENTINEL)
-    DEFINE_NEW_TYPE_TRIVIAL_INIT(GCSentinel, gc_sentinel, GC_SENTINEL)
-
-    static void gc_sentinel_finalize(GObject* object)
-    {
-        auto* self = MOUSETRAP_GC_SENTINEL(object);
-        G_OBJECT_CLASS(gc_sentinel_parent_class)->finalize(object);
-
-        std::cout << "gc unprotected: " << self->target << std::endl;
-        jlcxx::unprotect_from_gc(self->target);
+        using namespace mousetrap::detail;
+        g_application_run(G_APPLICATION(self), 0, nullptr);
     }
 
-    DEFINE_NEW_TYPE_TRIVIAL_CLASS_INIT(GCSentinel, gc_sentinel, GC_SENTINEL)
-
-    static GCSentinel* gc_sentinel_new(jl_value_t* native)
+    void task_thread_cb(GTask* task, GObject* self, gpointer data, GCancellable*)
     {
-        auto* self = (GCSentinel*) g_object_new(gc_sentinel_get_type(), nullptr);
-        gc_sentinel_init(self);
-
-        self->target = native;
-        std::cout << "gc protecting: " << self->target << std::endl;
-        jlcxx::protect_from_gc(self->target);
-        return self;
+        std::cout << "thread called" << std::endl;
     }
 }
 
@@ -167,6 +148,13 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
        adw_init();
        detail::mark_gtk_initialized();
        detail::initialize_opengl();
+    });
+
+    #else
+
+    module.method("initialize", [](){
+       adw_init();
+       detail::mark_gtk_initialized();
     });
 
     #endif
