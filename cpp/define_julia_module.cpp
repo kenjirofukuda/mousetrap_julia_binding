@@ -186,7 +186,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
-    module.method("set_force_gl_disabled", [](bool b){
+    module.method("SET_FORCE_GL_DISABLED", [](bool b){
        if (mousetrap::GL_INITIALIZED)
            log::critical("In set_force_gl_disabled: Already attempted to initialize OpenGL backed, setting `FORCE_GL_DISABLED` will only have an effect if called before initialization.", MOUSETRAP_DOMAIN);
 
