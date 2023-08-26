@@ -16,6 +16,14 @@ namespace mousetrap
             .add_type_method(PopupMessage, get_button_label)
             .add_type_method(PopupMessage, set_button_action, !)
             .add_type_method(PopupMessage, get_button_action_id)
+            .add_type_method(PopupMessage, set_is_high_priority, !)
+            .add_type_method(PopupMessage, get_is_high_priority)
+            .method("set_timeout!", [](PopupMessage& self, float time_mys){
+                self.set_timeout(microseconds(time_mys));
+            })
+            .method("get_timeout", [](PopupMessage& self) -> float {
+                return self.get_timeout().as_microseconds();
+            })
             ;
 
         add_signal_dismissed<PopupMessage>(message, "PopupMessage");
