@@ -69,6 +69,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_clamp_frame(module);
     implement_blend_mode(module);
     implement_box(module);
+    implement_flow_box(module);
     implement_button(module);
     implement_center_box(module);
     implement_check_button(module);
@@ -116,10 +117,6 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_switch(module);
     implement_toggle_button(module);
 
-    //implement_sound(module);
-    //implement_sound_buffer(module);
-    //implement_music(module);
-
     implement_stack(module);
     implement_viewport(module);
 
@@ -133,6 +130,10 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_render_area(module);
 
     implement_key_codes(module);
+
+    implement_animation(module);
+    implement_popup_message(module);
+
 
     module.method("_ref", [](void* ptr){
         return (void*) g_object_ref(G_OBJECT(ptr));
@@ -174,11 +175,18 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
-    module.method("SET_FORCE_GL_DISABLED", [](bool b){
+    module.method("set_force_gl_disabled", [](bool b){
        if (mousetrap::GL_INITIALIZED)
-           log::critical("In set_force_gl_disabled: Already attempted to initialize OpenGL backed, setting `FORCE_GL_DISABLED` will only have an effect if called before initialization.", MOUSETRAP_DOMAIN);
+           log::critical("In set_force_gl_disabled: This function call will have no effect, because the OpenGL backend is already initialized. Setting `FORCE_GL_DISABLED` will only have an effect if called *before* initialization.", MOUSETRAP_DOMAIN);
 
        mousetrap::FORCE_GL_DISABLED = b;
     });
+    #endif
+
+    adw_init();
+    detail::mark_gtk_initialized();
+
+    # if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+        detail::initialize_opengl();
     #endif
 }
