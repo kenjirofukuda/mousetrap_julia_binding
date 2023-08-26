@@ -475,6 +475,7 @@ void implement_theme(jlcxx::Module& module);
 void implement_time(jlcxx::Module& module);
 void implement_texture(jlcxx::Module& module);
 void implement_toggle_button(jlcxx::Module& module);
+void implement_transform_bin(jlcxx::Module& module);
 void implement_viewport(jlcxx::Module& module);
 void implement_widget(jlcxx::Module& module);
 void implement_window(jlcxx::Module& module);
