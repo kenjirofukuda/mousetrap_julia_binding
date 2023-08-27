@@ -114,7 +114,7 @@ add_library(${LIBRARY_NAME} SHARED
     cpp/clamp_frame.cpp
     cpp/theme.cpp
     cpp/action_bar.cpp
-        cpp/flow_box.cpp cpp/popup_message.cpp cpp/animation.cpp cpp/transform_bin.cpp)
+        cpp/flow_box.cpp cpp/popup_message.cpp cpp/animation.cpp cpp/transform_bin.cpp cpp/style_class.cpp)
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
     ${OpenGL}

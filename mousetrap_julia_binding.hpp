@@ -467,6 +467,7 @@ void implement_shortcut_event_controller(jlcxx::Module& module);
 void implement_spin_button(jlcxx::Module& module);
 void implement_spinner(jlcxx::Module& module);
 void implement_stack(jlcxx::Module& module);
+void implement_style_class(jlcxx::Module& module);
 void implement_stylus_event_controller(jlcxx::Module& module);
 void implement_swipe_event_controller(jlcxx::Module& module);
 void implement_switch(jlcxx::Module& module);

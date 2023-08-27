@@ -120,6 +120,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_stack(module);
     implement_viewport(module);
     implement_transform_bin(module);
+    implement_style_class(module);
 
     implement_widget(module);
 
