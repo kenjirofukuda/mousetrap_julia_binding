@@ -11,8 +11,8 @@ void implement_log(jlcxx::Module& module)
     module.add_enum_value(LogLevel, LOG_LEVEL, CRITICAL);
     module.add_enum_value(LogLevel, LOG_LEVEL, FATAL);
 
-    module.set_const("MOUSETRAP_DOMAIN", std::string(MOUSETRAP_DOMAIN));
-    module.set_const("MOUSETRAP_JULIA_DOMAIN", std::string("mousetrap_jl"));
+    module.set_const("MOUSETRAP_DOMAIN", jl_box_string(MOUSETRAP_DOMAIN));
+    module.set_const("MOUSETRAP_JULIA_DOMAIN", jl_box_string("mousetrap_jl"));
 
     module.method("log_debug", [](const std::string& message, LogDomain domain){
         log::debug(message, domain);
