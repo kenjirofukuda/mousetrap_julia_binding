@@ -122,7 +122,7 @@ namespace mousetrap
         EXPORT_PRE_MADE_STYLE_CLASS_NAME(BACKGROUND);
         EXPORT_PRE_MADE_STYLE_CLASS_NAME(VIEW);
 
-        #define EXPORT_STYLE_TARGET(NAME) module.set_const(jl_box_string(std::string("STYLE_TARGET_") + #NAME, STYLE_TARGET_##NAME));
+        #define EXPORT_STYLE_TARGET(NAME) module.set_const(std::string("STYLE_TARGET_") + #NAME, jl_box_string(STYLE_TARGET_##NAME));
         EXPORT_STYLE_TARGET(SELF)
 
         // ActionBar
