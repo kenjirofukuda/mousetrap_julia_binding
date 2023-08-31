@@ -19,9 +19,13 @@ namespace mousetrap::detail
 
 JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 {
-    module.set_const("GTK_MAJOR_VERSION", (int) GTK_MAJOR_VERSION);
-    module.set_const("GTK_MINOR_VERSION", (int) GTK_MINOR_VERSION);
-    module.set_const("MOUSETRAP_ENABLE_OPENGL_COMPONENT", (bool) MOUSETRAP_ENABLE_OPENGL_COMPONENT);
+    module.set_const("GTK_MAJOR_VERSION", jl_box_int32(GTK_MAJOR_VERSION));
+    module.set_const("GTK_MINOR_VERSION", jl_box_int32(GTK_MINOR_VERSION));
+    module.set_const("GLIB_MAJOR_VERSION", jl_box_int32(GLIB_MAJOR_VERSION));
+    module.set_const("GLIB_MINOR_VERSION", jl_box_int32(GLIB_MINOR_VERSION));
+    module.set_const("ADW_MAJOR_VERSION", jl_box_int32(ADW_MAJOR_VERSION));
+    module.set_const("ADW_MINOR_VERSION", jl_box_int32(ADW_MINOR_VERSION));
+    module.set_const("MOUSETRAP_ENABLE_OPENGL_COMPONENT", jl_box_uint8(MOUSETRAP_ENABLE_OPENGL_COMPONENT));
 
     implement_orientation(module);
     implement_time(module);
