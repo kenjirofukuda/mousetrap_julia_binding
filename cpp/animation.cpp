@@ -4,7 +4,7 @@
 
 #include "../mousetrap_julia_binding.hpp"
 
-void implement_alignment(jlcxx::Module& module)
+void implement_animation(jlcxx::Module& module)
 {
     define_enum_in(module, Animation::State);
     module.add_enum_value(Animation::State, ANIMATION_STATE, IDLE);
