@@ -19,6 +19,7 @@ namespace mousetrap::detail
 
 JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 {
+
     module.set_const("GTK_MAJOR_VERSION", jl_box_int32(GTK_MAJOR_VERSION));
     module.set_const("GTK_MINOR_VERSION", jl_box_int32(GTK_MINOR_VERSION));
     module.set_const("GLIB_MAJOR_VERSION", jl_box_int32(GLIB_MAJOR_VERSION));
@@ -139,7 +140,6 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 
     implement_animation(module);
     implement_popup_message(module);
-
 
     module.method("_ref", [](void* ptr){
         return (void*) g_object_ref(G_OBJECT(ptr));

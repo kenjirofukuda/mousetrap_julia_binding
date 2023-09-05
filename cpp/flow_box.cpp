@@ -4,7 +4,7 @@
 
 #include "../mousetrap_julia_binding.hpp"
 
-void implement_flowbox(jlcxx::Module& module)
+void implement_flow_box(jlcxx::Module& module)
 {
     auto box = module.add_type(FlowBox)
         .add_constructor(Orientation)
