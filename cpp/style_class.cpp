@@ -13,8 +13,8 @@ void implement_style_class(jlcxx::Module& module)
         .method("set_property!", [](StyleClass& self, const std::string& target, const std::string& property, const std::string& value){
             self.set_property(target, property, value);
         })
-        .method("get_property", [](const StyleClass& self, const std::string& property) -> std::string {
-            return self.get_property(property);
+        .method("get_property", [](const StyleClass& self, const std::string& target, const std::string& property) -> std::string {
+            return self.get_property(target, property);
         })
     ;
 
