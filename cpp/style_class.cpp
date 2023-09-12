@@ -6,6 +6,7 @@
 
 void implement_style_class(jlcxx::Module& module)
 {
+    /*
     auto style = module.add_type(StyleClass)
         .add_constructor(const std::string&)
         .add_type_method(StyleClass, get_name)
@@ -387,4 +388,5 @@ void implement_style_class(jlcxx::Module& module)
     // General
     EXPORT_STYLE_CLASS_TARGET(TEXT_ENTRY);
     EXPORT_STYLE_CLASS_TARGET(TEXT_SELECTION);
+    */
 }
