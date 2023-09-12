@@ -15,23 +15,23 @@ enum class AnimationState
 enum class AnimationTimingFunction
 {
     LINEAR = Animation::TimingFunction::LINEAR,
-    EXPONENTIAL = Animation::TimingFunction::EXPONENTIAL,
-    EXPONENTIAL_REVERSE = Animation::TimingFunction::EXPONENTIAL_REVERSE,
+    EXPONENTIAL_EASE_IN = Animation::TimingFunction::EXPONENTIAL_EASE_IN,
+    EXPONENTIAL_EASE_OUT = Animation::TimingFunction::EXPONENTIAL_EASE_OUT,
     EXPONENTIAL_SIGMOID = Animation::TimingFunction::EXPONENTIAL_SIGMOID,
-    SINE = Animation::TimingFunction::SINE,
-    SINE_REVERSE = Animation::TimingFunction::SINE_REVERSE,
+    SINE_EASE_IN = Animation::TimingFunction::SINE_EASE_IN,
+    SINE_EASE_OUT = Animation::TimingFunction::SINE_EASE_OUT,
     SINE_SIGMOID = Animation::TimingFunction::SINE_SIGMOID,
-    CIRCULAR = Animation::TimingFunction::CIRCULAR,
-    CIRCULAR_REVERSE = Animation::TimingFunction::CIRCULAR_REVERSE,
+    CIRCULAR_EASE_IN = Animation::TimingFunction::CIRCULAR_EASE_IN,
+    CIRCULAR_EASE_OUT = Animation::TimingFunction::CIRCULAR_EASE_OUT,
     CIRCULAR_SIGMOID = Animation::TimingFunction::CIRCULAR_SIGMOID,
-    OVERSHOOT = Animation::TimingFunction::OVERSHOOT,
-    OVERSHOOT_REVERSE = Animation::TimingFunction::OVERSHOOT_REVERSE,
+    OVERSHOOT_EASE_IN = Animation::TimingFunction::OVERSHOOT_EASE_IN,
+    OVERSHOOT_EASE_OUT = Animation::TimingFunction::OVERSHOOT_EASE_OUT,
     OVERSHOOT_SIGMOID = Animation::TimingFunction::OVERSHOOT_SIGMOID,
-    ELASTIC = Animation::TimingFunction::ELASTIC,
-    ELASTIC_REVERSE = Animation::TimingFunction::ELASTIC_REVERSE,
+    ELASTIC_EASE_IN = Animation::TimingFunction::ELASTIC_EASE_IN,
+    ELASTIC_EASE_OUT = Animation::TimingFunction::ELASTIC_EASE_OUT,
     ELASTIC_SIGMOID = Animation::TimingFunction::ELASTIC_SIGMOID,
-    BOUNCE = Animation::TimingFunction::BOUNCE,
-    BOUNCE_REVERSE = Animation::TimingFunction::BOUNCE_REVERSE,
+    BOUNCE_EASE_IN = Animation::TimingFunction::BOUNCE_EASE_IN,
+    BOUNCE_EASE_OUT = Animation::TimingFunction::BOUNCE_EASE_OUT,
     BOUNCE_SIGMOID = Animation::TimingFunction::BOUNCE_SIGMOID
 };
 
@@ -45,23 +45,23 @@ void implement_animation(jlcxx::Module& module)
 
     define_enum_in(module, AnimationTimingFunction);
     module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, LINEAR);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, EXPONENTIAL);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, EXPONENTIAL_REVERSE);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, EXPONENTIAL_EASE_IN);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, EXPONENTIAL_EASE_OUT);
     module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, EXPONENTIAL_SIGMOID);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, SINE);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, SINE_REVERSE);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, SINE_EASE_IN);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, SINE_EASE_OUT);
     module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, SINE_SIGMOID);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, CIRCULAR);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, CIRCULAR_REVERSE);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, CIRCULAR_EASE_IN);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, CIRCULAR_EASE_OUT);
     module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, CIRCULAR_SIGMOID);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, OVERSHOOT);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, OVERSHOOT_REVERSE);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, OVERSHOOT_EASE_IN);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, OVERSHOOT_EASE_OUT);
     module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, OVERSHOOT_SIGMOID);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, ELASTIC);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, ELASTIC_REVERSE);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, ELASTIC_EASE_IN);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, ELASTIC_EASE_OUT);
     module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, ELASTIC_SIGMOID);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, BOUNCE);
-    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, BOUNCE_REVERSE);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, BOUNCE_EASE_IN);
+    module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, BOUNCE_EASE_OUT);
     module.add_enum_value(AnimationTimingFunction, ANIMATION_TIMING_FUNCTION, BOUNCE_SIGMOID);
 
     auto animation = module.add_type(Animation)
