@@ -1,16 +1,16 @@
-const VERSION = "0.1.0"
-const mousetrap_commit = "2f98a10c36c927b303df2e4cc331a20dda5d177f"
-const mousetrap_julia_binding_commit = "c920de9e8eb1cf8aa6ddff50745f823e951fa816"
+const VERSION = "0.2.0"
+const mousetrap_commit = "78407a5fe61671c8f72ea2e5addf8390082d11f8"
+const mousetrap_julia_binding_commit = "ffa43243730480ba283c4924dc41fb0abb15e966"
 
 const linux_repo = "mousetrap_linux_jll"
 const windows_repo = "mousetrap_windows_jll"
 const apple_repo = "mousetrap_apple_jll"
 
-const deploy_linux = true
+const deploy_linux = false
 const deploy_windows = false
-const deploy_apple = false
+const deploy_apple = true
 
-const deploy_local = false
+const deploy_local = true
 # if local, files will be written to ~/.julia/dev/mousetrap_[linux,windows,apple]_jll
 
 println("deploy linux   : $deploy_linux")
@@ -23,7 +23,7 @@ println("local : $deploy_local")
 function configure_file(path_in::String, path_out::String)
     file_in = open(path_in, "r")
     file_out = open(path_out, "w+")
-    
+
     for line in eachline(file_in)
         write(file_out, replace(line,
             "@MOUSETRAP_COMMIT@" => mousetrap_commit,
@@ -31,7 +31,7 @@ function configure_file(path_in::String, path_out::String)
             "@VERSION@" => VERSION
         ) * "\n")
     end
-    
+
     close(file_in)
     close(file_out)
 end
@@ -39,7 +39,7 @@ end
 if deploy_linux
     @info "Configuring `linux/build_tarballs.jl`"
     configure_file("./linux/build_tarballs.jl.in", "./linux/build_tarballs.jl")
-    
+
     path = "/home/clem/.julia/dev/$linux_repo"
     if isfile(path)
         run(`rm -r $path`)

@@ -1,46 +1,15 @@
 #include "../mousetrap_julia_binding.hpp"
 #include <thread>
 
-namespace mousetrap::detail
-{
-    struct _GCSentinel
-    {
-        GObject parent;
-        jl_value_t* target;
-    };
-    using GCSentinel = _GCSentinel;
-
-    DECLARE_NEW_TYPE(GCSentinel, gc_sentinel, GC_SENTINEL)
-    DEFINE_NEW_TYPE_TRIVIAL_INIT(GCSentinel, gc_sentinel, GC_SENTINEL)
-
-    static void gc_sentinel_finalize(GObject* object)
-    {
-        auto* self = MOUSETRAP_GC_SENTINEL(object);
-        G_OBJECT_CLASS(gc_sentinel_parent_class)->finalize(object);
-
-        std::cout << "gc unprotected: " << self->target << std::endl;
-        jlcxx::unprotect_from_gc(self->target);
-    }
-
-    DEFINE_NEW_TYPE_TRIVIAL_CLASS_INIT(GCSentinel, gc_sentinel, GC_SENTINEL)
-
-    static GCSentinel* gc_sentinel_new(jl_value_t* native)
-    {
-        auto* self = (GCSentinel*) g_object_new(gc_sentinel_get_type(), nullptr);
-        gc_sentinel_init(self);
-
-        self->target = native;
-        std::cout << "gc protecting: " << self->target << std::endl;
-        jlcxx::protect_from_gc(self->target);
-        return self;
-    }
-}
-
 JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 {
-    module.set_const("GTK_MAJOR_VERSION", (int) GTK_MAJOR_VERSION);
-    module.set_const("GTK_MINOR_VERSION", (int) GTK_MINOR_VERSION);
-    module.set_const("MOUSETRAP_ENABLE_OPENGL_COMPONENT", (bool) MOUSETRAP_ENABLE_OPENGL_COMPONENT);
+    module.set_const("GTK_MAJOR_VERSION", jl_box_int32(GTK_MAJOR_VERSION));
+    module.set_const("GTK_MINOR_VERSION", jl_box_int32(GTK_MINOR_VERSION));
+    module.set_const("GLIB_MAJOR_VERSION", jl_box_int32(GLIB_MAJOR_VERSION));
+    module.set_const("GLIB_MINOR_VERSION", jl_box_int32(GLIB_MINOR_VERSION));
+    module.set_const("ADW_MAJOR_VERSION", jl_box_int32(ADW_MAJOR_VERSION));
+    module.set_const("ADW_MINOR_VERSION", jl_box_int32(ADW_MINOR_VERSION));
+    module.set_const("MOUSETRAP_ENABLE_OPENGL_COMPONENT", jl_box_uint8(MOUSETRAP_ENABLE_OPENGL_COMPONENT));
 
     implement_orientation(module);
     implement_time(module);
@@ -88,6 +57,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_clamp_frame(module);
     implement_blend_mode(module);
     implement_box(module);
+    implement_flow_box(module);
     implement_button(module);
     implement_center_box(module);
     implement_check_button(module);
@@ -135,12 +105,10 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_switch(module);
     implement_toggle_button(module);
 
-    //implement_sound(module);
-    //implement_sound_buffer(module);
-    //implement_music(module);
-
     implement_stack(module);
     implement_viewport(module);
+    implement_transform_bin(module);
+    implement_style_class(module);
 
     implement_widget(module);
 
@@ -152,6 +120,9 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_render_area(module);
 
     implement_key_codes(module);
+
+    implement_animation(module);
+    implement_popup_message(module);
 
     module.method("_ref", [](void* ptr){
         return (void*) g_object_ref(G_OBJECT(ptr));
@@ -169,6 +140,11 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
        detail::initialize_opengl();
     });
 
+    #else
+    module.method("initialize", [](){
+       adw_init();
+       detail::mark_gtk_initialized();
+    });
     #endif
 
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
@@ -185,19 +161,18 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     )";
 
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+    module.method("set_force_gl_disabled", [](bool b){
+       if (mousetrap::GL_INITIALIZED)
+           log::critical("In set_force_gl_disabled: This function call will have no effect, because the OpenGL backend is already initialized. Setting `FORCE_GL_DISABLED` will only have an effect if called *before* initialization.", MOUSETRAP_DOMAIN);
 
-    mousetrap::detail::notify_if_gl_uninitialized::message = R"(
-    Attempting to interact with the global OpenGL context, but it has not yet been initialized.
+       mousetrap::FORCE_GL_DISABLED = b;
+    });
+    #endif
 
-    A typical `.jl` file using mousetrap should look like this:
-    ```julia
-    using mousetrap
-    main() do app::Application
-        # all OpenGL-related activity should happen here
-    end
-    ```
-    You have most likely attempted to construct an OpenGL-related object outside of `main` while using mousetrap interactively.
-    )";
+    adw_init();
+    detail::mark_gtk_initialized();
 
+    # if MOUSETRAP_ENABLE_OPENGL_COMPONENT
+        detail::initialize_opengl();
     #endif
 }

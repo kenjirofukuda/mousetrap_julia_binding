@@ -34,7 +34,7 @@ static inline jl_value_t* jl_calln(jl_function_t* function, T... args)
 template<typename... T>
 static inline jl_value_t* jl_safe_call(const char* scope, jl_function_t* function, T... args)
 {
-    static auto* safe_call = jl_eval_string("return mousetrap.safe_call");
+    static auto* safe_call = jl_eval_string("return Mousetrap.safe_call");
     std::array<jl_value_t*, sizeof...(T)+2> wrapped = {jl_box_string(scope), function, args...};
     return jl_call(safe_call, wrapped.data(), wrapped.size());
 }
@@ -307,6 +307,8 @@ DEFINE_ADD_SIGNAL_ARG0_VOID(startup)
 DEFINE_ADD_SIGNAL_ARG0_VOID(shutdown)
 DEFINE_ADD_SIGNAL_ARG0_VOID(update)
 DEFINE_ADD_SIGNAL_ARG0_VOID(paint)
+DEFINE_ADD_SIGNAL_ARG0_VOID(dismissed)
+DEFINE_ADD_SIGNAL_ARG0_VOID(button_clicked)
 DEFINE_ADD_SIGNAL_ARG0(close_request, WindowCloseRequestResult)
 DEFINE_ADD_SIGNAL_ARG0_VOID(activate_default_widget)
 DEFINE_ADD_SIGNAL_ARG0_VOID(activate_focused_widget)
@@ -388,6 +390,7 @@ void implement_action_bar(jlcxx::Module& module);
 void implement_alignment(jlcxx::Module& module);
 void implement_alert_dialog(jlcxx::Module& module);
 void implement_application(jlcxx::Module& module);
+void implement_animation(jlcxx::Module& module);
 void implement_aspect_frame(jlcxx::Module& module);
 void implement_blend_mode(jlcxx::Module& module);
 void implement_box(jlcxx::Module& module);
@@ -411,6 +414,7 @@ void implement_file_descriptor(jlcxx::Module& module);
 void implement_file_system(jlcxx::Module& module);
 void implement_file_chooser(jlcxx::Module& module);
 void implement_fixed(jlcxx::Module& module);
+void implement_flow_box(jlcxx::Module& module);
 void implement_focus_event_controller(jlcxx::Module& module);
 void implement_frame(jlcxx::Module& module);
 void implement_frame_clock(jlcxx::Module& module);
@@ -443,6 +447,7 @@ void implement_pinch_zoom_event_controller(jlcxx::Module& module);
 void implement_popover(jlcxx::Module& module);
 void implement_popover_button(jlcxx::Module& module);
 void implement_popover_menu(jlcxx::Module& module);
+void implement_popup_message(jlcxx::Module& module);
 void implement_progress_bar(jlcxx::Module& module);
 void implement_relative_position(jlcxx::Module& module);
 void implement_render_area(jlcxx::Module& module);
@@ -462,6 +467,7 @@ void implement_shortcut_event_controller(jlcxx::Module& module);
 void implement_spin_button(jlcxx::Module& module);
 void implement_spinner(jlcxx::Module& module);
 void implement_stack(jlcxx::Module& module);
+void implement_style_class(jlcxx::Module& module);
 void implement_stylus_event_controller(jlcxx::Module& module);
 void implement_swipe_event_controller(jlcxx::Module& module);
 void implement_switch(jlcxx::Module& module);
@@ -470,6 +476,7 @@ void implement_theme(jlcxx::Module& module);
 void implement_time(jlcxx::Module& module);
 void implement_texture(jlcxx::Module& module);
 void implement_toggle_button(jlcxx::Module& module);
+void implement_transform_bin(jlcxx::Module& module);
 void implement_viewport(jlcxx::Module& module);
 void implement_widget(jlcxx::Module& module);
 void implement_window(jlcxx::Module& module);

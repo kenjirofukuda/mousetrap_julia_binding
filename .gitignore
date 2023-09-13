@@ -8,3 +8,5 @@
 /mousetrap_jll/apple/build
 /mousetrap_jll/apple/products
 /cmake-build-debug/
+/build/
+/.idea

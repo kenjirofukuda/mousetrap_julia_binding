@@ -2,7 +2,7 @@
 
 jl_value_t* box_vector2f(Vector2f in)
 {
-    static auto* ctor = jl_eval_string("mousetrap.Vector2f");
+    static auto* ctor = jl_eval_string("Mousetrap.Vector2f");
     return jl_safe_call("box_vector2f", ctor, jl_box_float32(in.x), jl_box_float32(in.y));
 }
 
@@ -16,7 +16,7 @@ Vector2f unbox_vector2f(jl_value_t* in)
 
 jl_value_t* box_vector2i(Vector2i in)
 {
-    static auto* ctor = jl_eval_string("mousetrap.Vector2i");
+    static auto* ctor = jl_eval_string("Mousetrap.Vector2i");
     return jl_safe_call("box_vector2i",ctor, jl_box_int64(in.x), jl_box_int64(in.y));
 }
 
@@ -30,7 +30,7 @@ Vector2f unbox_vector2i(jl_value_t* in)
 
 jl_value_t* box_vector3f(Vector3f in)
 {
-    static auto* ctor = jl_eval_string("mousetrap.Vector3f");
+    static auto* ctor = jl_eval_string("Mousetrap.Vector3f");
     return jl_safe_call("box_vector3f",ctor, jl_box_float32(in.x), jl_box_float32(in.y), jl_box_float32(in.z));
 }
 
@@ -45,7 +45,7 @@ Vector3f unbox_vector3f(jl_value_t* in)
 
 jl_value_t* box_vector4f(Vector4f in)
 {
-    static auto* ctor = jl_eval_string("mousetrap.Vector4f");
+    static auto* ctor = jl_eval_string("Mousetrap.Vector4f");
     return jl_safe_call("box_vector4f",ctor,
                     jl_box_float32(in.x),
                     jl_box_float32(in.y),
@@ -66,7 +66,7 @@ Vector4f unbox_vector4f(jl_value_t* in)
 
 jl_value_t* box_rgba(RGBA in)
 {
-    static auto* ctor = jl_eval_string("return mousetrap.RGBA");
+    static auto* ctor = jl_eval_string("return Mousetrap.RGBA");
     return jl_safe_call("box_rgba",
     ctor,
     jl_box_float32(in.r),
@@ -88,7 +88,7 @@ RGBA unbox_rgba(jl_value_t* in)
 
 jl_value_t* box_hsva(HSVA in)
 {
-    static auto* ctor = jl_eval_string("return mousetrap.HSVA");
+    static auto* ctor = jl_eval_string("return Mousetrap.HSVA");
     return jl_safe_call("box_hsva",
     ctor,
     jl_box_float32(in.h),
