@@ -197,7 +197,9 @@ void implement_widget(jlcxx::Module& module)
     module.method("get_css_classes", [](void* widget) -> std::vector<std::string> {
         return ((Widget*) widget)->get_css_classes();
     });
+    /*
     module.method("apply_style_class!", [](void* widget, const StyleClass& style) {
         ((Widget*) widget)->apply_style_class(style);
     });
+     */
 }
