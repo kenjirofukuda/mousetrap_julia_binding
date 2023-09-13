@@ -12,7 +12,7 @@ void implement_color_chooser(jlcxx::Module& module)
         .add_constructor(const std::string&)
         .add_type_method(ColorChooser, present, !)
         .method("get_color", [](ColorChooser& self){
-            return box_rgba(RGBA(0, 0, 0, 0)); //self.get_color());
+            return box_rgba(self.get_color());
         })
         .add_type_method(ColorChooser, set_is_modal,!)
         .add_type_method(ColorChooser, get_is_modal)
