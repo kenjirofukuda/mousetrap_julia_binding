@@ -1,25 +1,8 @@
 #include "../mousetrap_julia_binding.hpp"
 #include <thread>
 
-namespace mousetrap::detail
-{
-    void task_cb(GObject* self, GAsyncResult*, void* data)
-    {
-        std::cout << "task called" << std::endl;
-
-        using namespace mousetrap::detail;
-        g_application_run(G_APPLICATION(self), 0, nullptr);
-    }
-
-    void task_thread_cb(GTask* task, GObject* self, gpointer data, GCancellable*)
-    {
-        std::cout << "thread called" << std::endl;
-    }
-}
-
 JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 {
-
     module.set_const("GTK_MAJOR_VERSION", jl_box_int32(GTK_MAJOR_VERSION));
     module.set_const("GTK_MINOR_VERSION", jl_box_int32(GTK_MINOR_VERSION));
     module.set_const("GLIB_MAJOR_VERSION", jl_box_int32(GLIB_MAJOR_VERSION));
@@ -158,12 +141,10 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     });
 
     #else
-
     module.method("initialize", [](){
        adw_init();
        detail::mark_gtk_initialized();
     });
-
     #endif
 
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
@@ -180,7 +161,6 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     )";
 
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
-
     module.method("set_force_gl_disabled", [](bool b){
        if (mousetrap::GL_INITIALIZED)
            log::critical("In set_force_gl_disabled: This function call will have no effect, because the OpenGL backend is already initialized. Setting `FORCE_GL_DISABLED` will only have an effect if called *before* initialization.", MOUSETRAP_DOMAIN);
