@@ -169,6 +169,10 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     });
     #endif
 
+    module.method("is_opengl_disabled", []() -> bool {
+        return mousetrap::detail::is_opengl_disabled();
+    });
+
     adw_init();
     detail::mark_gtk_initialized();
 
