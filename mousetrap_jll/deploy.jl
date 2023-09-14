@@ -1,16 +1,16 @@
 const VERSION = "0.2.0"
-const mousetrap_commit = "78407a5fe61671c8f72ea2e5addf8390082d11f8"
-const mousetrap_julia_binding_commit = "a4492f1317f249604db0ae1a35134953f8c03148"
+const mousetrap_commit = "ce80b9ac063170419ffd989921b7d975b74fda72"
+const mousetrap_julia_binding_commit = "b842c91aee0447f8d5cb4ed5f445d7252c39030d"
 
 const linux_repo = "mousetrap_linux_jll"
 const windows_repo = "mousetrap_windows_jll"
 const apple_repo = "mousetrap_apple_jll"
 
 const deploy_linux = false
-const deploy_windows = false
+const deploy_windows = true
 const deploy_apple = true
 
-const deploy_local = true
+const deploy_local = false
 # if local, files will be written to ~/.julia/dev/mousetrap_[linux,windows,apple]_jll
 
 println("deploy linux   : $deploy_linux")
