@@ -173,7 +173,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
         #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
             return mousetrap::detail::is_opengl_disabled();
         #else
-            return false
+            return true;
         #endif
     });
 

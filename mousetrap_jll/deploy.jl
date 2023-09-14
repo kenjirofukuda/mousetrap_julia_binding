@@ -1,13 +1,13 @@
 const VERSION = "0.2.0"
 const mousetrap_commit = "ce80b9ac063170419ffd989921b7d975b74fda72"
-const mousetrap_julia_binding_commit = "b842c91aee0447f8d5cb4ed5f445d7252c39030d"
+const mousetrap_julia_binding_commit = "bf63f397effce06eb37999abae4f6aae4aee634b"
 
 const linux_repo = "mousetrap_linux_jll"
 const windows_repo = "mousetrap_windows_jll"
 const apple_repo = "mousetrap_apple_jll"
 
 const deploy_linux = false
-const deploy_windows = true
+const deploy_windows = false
 const deploy_apple = true
 
 const deploy_local = false
