@@ -1,8 +1,22 @@
-project('mousetrap_julia_binding', 'cpp')
+project('mousetrap_julia_binding', 'cpp', version: '0.2.0')
 
-[constants]
 LIBRARY_NAME = 'mousetrap_julia_binding'
-sources = [
+add_project_arguments('-Wno-unused', language: 'cpp')
+
+### DEPENDENCIES ###
+
+cxxwrap = dependency('JlCxx',
+    required: true,
+    modules: ['JlCxx::cxxwrap_julia']
+)
+
+mousetrap = dependency('mousetrap',
+    required : true
+)
+
+### SOURCES ###
+
+MOUSETRAP_JULIA_BINDING_SOURCES = [
     'mousetrap_julia_binding.hpp',
     'cpp/action.cpp',
     'cpp/action_bar.cpp',
@@ -102,7 +116,14 @@ sources = [
     'cpp/window.cpp'
 ]
 
+### PRODUCTS ###
+
 library(LIBRARY_NAME,
-    sources,
-    version : 0.2.0
+    sources: MOUSETRAP_JULIA_BINDING_SOURCES,
+    dependencies: [mousetrap, cxxwrap],
+    cpp_args: '-DMOUSETRAP_ENABLE_OPENGL_COMPONENT=ON',
+    version: '0.2.0',
+    include_directories: ['cpp'],
+    install: true,
+    install_dir: meson.source_root()
 )
