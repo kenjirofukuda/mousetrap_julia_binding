@@ -123,7 +123,7 @@ add_library(${LIBRARY_NAME} SHARED
     cpp/viewport.cpp
     cpp/widget.cpp
     cpp/window.cpp
-    cpp/makie_canvas.cpp
+        cpp/gl_canvas.cpp
 )
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
