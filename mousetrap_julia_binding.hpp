@@ -434,6 +434,7 @@ void implement_level_bar(jlcxx::Module& module);
 void implement_list_view(jlcxx::Module& module);
 void implement_log(jlcxx::Module& module);
 void implement_long_press_event_controller(jlcxx::Module& module);
+void implement_makie_canvas(jlcxx::Module& module);
 void implement_menu_model(jlcxx::Module& module);
 void implement_menu_bar(jlcxx::Module& module);
 void implement_motion_event_controller(jlcxx::Module& module);
