@@ -1,4 +1,4 @@
-project('mousetrap_julia_binding', 'cpp', version: '0.3.0')
+project('mousetrap_julia_binding', 'c', 'cpp', version: '0.3.0')
 add_project_arguments([
     '-Wno-unused-variable',
     '-Wno-unused-function',
@@ -7,19 +7,30 @@ add_project_arguments([
 
 ### DEPENDENCIES ###
 
-CXXWRAP = dependency('JlCxx',
-    required: true,
-    modules: ['JlCxx::cxxwrap_julia']
-)
-
 ADWAITA = dependency('libadwaita-1',
     required: true,
     version: '>=1.2'
 )
 
-MOUSETRAP = dependency(['mousetrap', 'libmousetrap'],
+MOUSETRAP = dependency('mousetrap',
     required : true
 )
+
+CXXWRAP = dependency('JlCxx',
+    required: true,
+    modules: ['JlCxx::cxxwrap_julia'],
+    version: '>=0.11'
+)
+assert(CXXWRAP.get_variable('Julia_FOUND') == 'TRUE')
+
+# convert cmake style list to array
+JULIA_INCLUDE_DIRS = CXXWRAP.get_variable('Julia_INCLUDE_DIRS').split(';')
+foreach path : JULIA_INCLUDE_DIRS
+    if not (path == '')
+        include_directories(path)
+    endif
+endforeach
+JULIA_LIBRARY_PATH = CXXWRAP.get_variable('Julia_LIBRARY')
 
 ### MOUSETRAP JULIA BINDING ###
 
@@ -130,6 +141,6 @@ MOUSETRAP_JULIA_BINDING_LIBRARY = library('mousetrap_julia_binding',
     sources: MOUSETRAP_JULIA_BINDING_SOURCES,
     dependencies: [MOUSETRAP, CXXWRAP, ADWAITA],
     version: '0.3.0',
-    include_directories: ['cpp'],
+    include_directories: ['cpp', JULIA_INCLUDE_DIRS],
     install: true
 )
