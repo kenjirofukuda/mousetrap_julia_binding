@@ -142,5 +142,6 @@ MOUSETRAP_JULIA_BINDING_LIBRARY = library('mousetrap_julia_binding',
     dependencies: [MOUSETRAP, CXXWRAP, ADWAITA],
     version: '0.3.0',
     include_directories: ['cpp', JULIA_INCLUDE_DIRS],
-    install: true
+    install: true,
+    install_dir: meson.source_root()
 )
