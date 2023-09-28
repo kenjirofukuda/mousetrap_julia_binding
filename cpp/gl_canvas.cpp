@@ -118,7 +118,7 @@ namespace mousetrap
     };
 }
 
-void implement_makie_canvas(jlcxx::Module& module)
+void implement_gl_canvas(jlcxx::Module& module)
 {
     auto canvas = module.add_type(GLCanvas)
         .add_constructor()

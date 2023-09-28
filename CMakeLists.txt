@@ -71,7 +71,7 @@ add_library(${LIBRARY_NAME} SHARED
     cpp/icon.cpp
     cpp/image.cpp
     cpp/image_display.cpp
-    cpp/implement_orientation.cpp
+        cpp/orientation.cpp
     cpp/justify_mode.cpp
     cpp/key_codes.cpp
     cpp/key_event_controller.cpp

@@ -124,7 +124,7 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     implement_animation(module);
     implement_popup_message(module);
 
-    implement_makie_canvas(module);
+    implement_gl_canvas(module);
 
     module.method("_ref", [](void* ptr){
         return (void*) g_object_ref(G_OBJECT(ptr));

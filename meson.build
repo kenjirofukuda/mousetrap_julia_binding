@@ -1,20 +1,27 @@
-project('mousetrap_julia_binding', 'cpp', version: '0.2.0')
-
-LIBRARY_NAME = 'mousetrap_julia_binding'
-add_project_arguments('-Wno-unused', language: 'cpp')
+project('mousetrap_julia_binding', 'cpp', version: '0.3.0')
+add_project_arguments([
+    '-Wno-unused-variable',
+    '-Wno-unused-function',
+    '-Wunused-but-set-variable'
+], language: 'cpp')
 
 ### DEPENDENCIES ###
 
-cxxwrap = dependency('JlCxx',
+CXXWRAP = dependency('JlCxx',
     required: true,
     modules: ['JlCxx::cxxwrap_julia']
 )
 
-mousetrap = dependency('mousetrap',
+ADWAITA = dependency('libadwaita-1',
+    required: true,
+    version: '>=1.2'
+)
+
+MOUSETRAP = dependency(['mousetrap', 'libmousetrap'],
     required : true
 )
 
-### SOURCES ###
+### MOUSETRAP JULIA BINDING ###
 
 MOUSETRAP_JULIA_BINDING_SOURCES = [
     'mousetrap_julia_binding.hpp',
@@ -55,6 +62,7 @@ MOUSETRAP_JULIA_BINDING_SOURCES = [
     'cpp/frame.cpp',
     'cpp/frame_clock.cpp',
     'cpp/gc_sentinel.cpp',
+    'cpp/gl_canvas.cpp',
     'cpp/gl_transform.cpp',
     'cpp/grid.cpp',
     'cpp/grid_view.cpp',
@@ -62,7 +70,7 @@ MOUSETRAP_JULIA_BINDING_SOURCES = [
     'cpp/icon.cpp',
     'cpp/image.cpp',
     'cpp/image_display.cpp',
-    'cpp/implement_orientation.cpp',
+    'cpp/orientation.cpp',
     'cpp/justify_mode.cpp',
     'cpp/key_codes.cpp',
     'cpp/key_event_controller.cpp',
@@ -118,12 +126,10 @@ MOUSETRAP_JULIA_BINDING_SOURCES = [
 
 ### PRODUCTS ###
 
-library(LIBRARY_NAME,
+MOUSETRAP_JULIA_BINDING_LIBRARY = library('mousetrap_julia_binding',
     sources: MOUSETRAP_JULIA_BINDING_SOURCES,
-    dependencies: [mousetrap, cxxwrap],
-    cpp_args: '-DMOUSETRAP_ENABLE_OPENGL_COMPONENT=ON',
-    version: '0.2.0',
+    dependencies: [MOUSETRAP, CXXWRAP, ADWAITA],
+    version: '0.3.0',
     include_directories: ['cpp'],
-    install: true,
-    install_dir: meson.source_root()
+    install: true
 )
