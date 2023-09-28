@@ -2,7 +2,7 @@ project('mousetrap_julia_binding', 'cpp', version: '0.3.0')
 add_project_arguments([
     '-Wno-unused-variable',
     '-Wno-unused-function',
-    '-Wunused-but-set-variable'
+    '-Wno-unused-but-set-variable'
 ], language: 'cpp')
 
 ### DEPENDENCIES ###
