@@ -27,16 +27,31 @@ CXXWRAP = dependency('JlCxx',
     modules: ['JlCxx::cxxwrap_julia'],
     version: '>=0.11'
 )
-assert(CXXWRAP.get_variable('Julia_FOUND') == 'TRUE')
 
-# convert cmake style list to array
-JULIA_INCLUDE_DIRS = CXXWRAP.get_variable('Julia_INCLUDE_DIRS').split(';')
+if CXXWRAP.get_variable('Julia_FOUND', default_value: 'FALSE') == 'TRUE'
+    # if possible, use auto detected variables from jlcxx
+    JULIA_LIBRARY = CXXWRAP.get_variable('Julia_LIBRARY')
+    JULIA_INCLUDE_DIRS = CXXWRAP.get_variable('Julia_INCLUDE_DIRS')
+else
+    # otherwise, use manual overrides from options
+    warning('Unable to detect Julia_LIBRARY and Julia_INCLUDE_DIRS through JlCxx. Using manual overrides...')
+    JULIA_LIBRARY = get_option('Julia_LIBRARY')
+    if JULIA_LIBRARY == ''
+        warning('Unable to detect Julia_LIBRARY, and fallback option was not specified. Rerun meson with -DJulia_LIBRARY_PATH=/path/to/libjulia.so')
+        # sic, non-fatal
+    endif
+    JULIA_INCLUDE_DIRS = get_option('Julia_INCLUDE_DIRS')
+    if JULIA_INCLUDE_DIRS == ''
+        error('Unable to detect Julia_INCLUDE_DIRS, and fallback option was not specified. Rerun meson with -DJulia_INCLUDE_DIRS=/path/to/include/julia')
+    endif
+endif
+
+JULIA_INCLUDE_DIRS = JULIA_INCLUDE_DIRS.split(';')
 foreach path : JULIA_INCLUDE_DIRS
     if not (path == '')
         include_directories(path)
     endif
 endforeach
-JULIA_LIBRARY_PATH = CXXWRAP.get_variable('Julia_LIBRARY')
 
 ### MOUSETRAP JULIA BINDING ###
 
@@ -148,6 +163,5 @@ MOUSETRAP_JULIA_BINDING_LIBRARY = library('mousetrap_julia_binding',
     dependencies: [MOUSETRAP, CXXWRAP, ADWAITA],
     version: '0.3.0',
     include_directories: ['cpp', JULIA_INCLUDE_DIRS],
-    install: true,
-    install_dir: meson.source_root()
+    install: true
 )

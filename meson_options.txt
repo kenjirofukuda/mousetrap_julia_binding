@@ -1,0 +1,2 @@
+option('Julia_LIBRARY', type: 'string', value: '', description: 'Path to libjulia.so, usually detected automatically')
+option('Julia_INCLUDE_DIRS', type: 'string', value: '', description: 'Path to julia.h, usually detected automatically')
