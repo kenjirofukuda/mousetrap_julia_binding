@@ -13,8 +13,14 @@ ADWAITA = dependency('libadwaita-1',
 )
 
 MOUSETRAP = dependency('mousetrap',
-    required : true
+    required : false
 )
+if not MOUSETRAP.found()
+    MOUSETRAP = meson.get_compiler('cpp').find_library('mousetrap')
+    if not MOUSETRAP.found()
+        error('Unable to locate mousetrap shared library')
+    endif
+endif
 
 CXXWRAP = dependency('JlCxx',
     required: true,

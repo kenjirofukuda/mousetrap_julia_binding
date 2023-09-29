@@ -162,15 +162,6 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     You have most likely attempted to construct a widget outside of `main` while using mousetrap interactively.
     )";
 
-    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
-    module.method("set_force_gl_disabled", [](bool b){
-       if (mousetrap::GL_INITIALIZED)
-           log::critical("In set_force_gl_disabled: This function call will have no effect, because the OpenGL backend is already initialized. Setting `FORCE_GL_DISABLED` will only have an effect if called *before* initialization.", MOUSETRAP_DOMAIN);
-
-       mousetrap::FORCE_GL_DISABLED = b;
-    });
-    #endif
-
     module.method("is_opengl_disabled", []() -> bool {
         #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
             return mousetrap::detail::is_opengl_disabled();
