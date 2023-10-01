@@ -7,6 +7,11 @@ add_project_arguments([
 
 ### DEPENDENCIES ###
 
+GTK4 = dependency(['gtk4', 'gtk-4.0'],
+    required: true,
+    version: '>=4.8'
+)
+
 ADWAITA = dependency('libadwaita-1',
     required: true,
     version: '>=1.2'
@@ -166,4 +171,16 @@ MOUSETRAP_JULIA_BINDING_LIBRARY = library('mousetrap_julia_binding',
     version: '0.3.0',
     include_directories: ['cpp', JULIA_INCLUDE_DIRS],
     install: true
+)
+
+pkgconfig = import('pkgconfig')
+pkgconfig.generate(
+    libraries: MOUSETRAP_JULIA_BINDING_LIBRARY,
+    subdirs: [],
+    version: meson.project_version(),
+    name: 'libmousetrap_julia_binding',
+    filebase: 'mousetrap_julia_binding',
+    description: 'C++-to-Julia interface of Mousetrap.jl',
+    url: 'https://github.com/clemapfel/mousetrap_julia_binding',
+    requires: [MOUSETRAP, CXXWRAP.name(), GTK4, ADWAITA]
 )
