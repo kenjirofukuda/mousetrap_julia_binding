@@ -7,7 +7,9 @@ void implement_widget(jlcxx::Module& module)
     define_enum_in(module, TickCallbackResult);
     module.add_enum_value(TickCallbackResult, TICK_CALLBACK_RESULT, CONTINUE);
     module.add_enum_value(TickCallbackResult, TICK_CALLBACK_RESULT, DISCONTINUE);
-
+    module.method("as_native_widget", [](void* widget) -> void*{
+        return ((Widget*) widget)->operator GtkWidget*();
+    });
     module.method("activate!", [](void* widget) {
         ((Widget*) widget)->activate();
     });
