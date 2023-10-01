@@ -181,6 +181,6 @@ pkgconfig.generate(
     name: 'libmousetrap_julia_binding',
     filebase: 'mousetrap_julia_binding',
     description: 'C++-to-Julia interface of Mousetrap.jl',
-    url: 'https://github.com/clemapfel/mousetrap_julia_binding',
-    requires: [MOUSETRAP.name(), CXXWRAP.name(), GTK4.name(), ADWAITA.name()]
+    url: 'https://github.com/clemapfel/mousetrap_julia_binding'#,
+    #requires: [MOUSETRAP.name(), CXXWRAP.name(), GTK4.name(), ADWAITA.name()]
 )
