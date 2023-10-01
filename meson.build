@@ -1,4 +1,7 @@
-project('mousetrap_julia_binding', 'c', 'cpp', version: '0.3.0')
+project('mousetrap_julia_binding', 'cpp',
+    version: '0.3.0',
+    default_options : ['cpp_std=c++17']
+)
 add_project_arguments([
     '-Wno-unused-variable',
     '-Wno-unused-function',
@@ -18,23 +21,16 @@ ADWAITA = dependency('libadwaita-1',
 )
 
 MOUSETRAP = dependency('mousetrap',
-    required : false
+    required : true,
+    version: '>=0.3.0'
 )
-if not MOUSETRAP.found()
-    MOUSETRAP = meson.get_compiler('cpp').find_library('mousetrap', required: true)
-endif
 
 CXXWRAP = dependency('JlCxx',
     required: false,
     modules: ['JlCxx::cxxwrap_julia'],
-    version: '>=0.11'
+    version: '>=0.11',
+    method: 'cmake'
 )
-if not CXXWRAP.found()
-    CXXWRAP = meson.get_compiler('cpp').find_library('libcxxwrap_julia', required: false)
-    if not CXXWRAP.found()
-        CXXWRAP = meson.get_compiler('cpp').find_library('libcxxwrap', required: true)
-    endif
-endif
 
 if CXXWRAP.get_variable('Julia_FOUND', default_value: 'FALSE') == 'TRUE'
     # if possible, use auto detected variables from jlcxx
