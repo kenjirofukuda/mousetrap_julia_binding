@@ -17,16 +17,19 @@ MOUSETRAP = dependency('mousetrap',
 )
 if not MOUSETRAP.found()
     MOUSETRAP = meson.get_compiler('cpp').find_library('mousetrap', required: true)
-    if not MOUSETRAP.found()
-        error('Unable to locate mousetrap shared library')
-    endif
 endif
 
 CXXWRAP = dependency('JlCxx',
-    required: true,
+    required: false,
     modules: ['JlCxx::cxxwrap_julia'],
     version: '>=0.11'
 )
+if not CXXWRAP.found()
+    CXXWRAP = meson.get_compiler('cpp').find_library('libcxxwrap_julia', required: false)
+    if not CXXWRAP.found()
+        CXXWRAP = meson.get_compiler('cpp').find_library('libcxxwrap', required: true)
+    endif
+endif
 
 if CXXWRAP.get_variable('Julia_FOUND', default_value: 'FALSE') == 'TRUE'
     # if possible, use auto detected variables from jlcxx
@@ -38,7 +41,6 @@ else
     JULIA_LIBRARY = get_option('Julia_LIBRARY')
     if JULIA_LIBRARY == ''
         warning('Unable to detect Julia_LIBRARY, and fallback option was not specified. Rerun meson with -DJulia_LIBRARY_PATH=/path/to/libjulia.so')
-        # sic, non-fatal
     endif
     JULIA_INCLUDE_DIRS = get_option('Julia_INCLUDE_DIRS')
     if JULIA_INCLUDE_DIRS == ''
