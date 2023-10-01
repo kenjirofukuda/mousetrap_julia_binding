@@ -16,7 +16,7 @@ MOUSETRAP = dependency('mousetrap',
     required : false
 )
 if not MOUSETRAP.found()
-    MOUSETRAP = meson.get_compiler('cpp').find_library('mousetrap')
+    MOUSETRAP = meson.get_compiler('cpp').find_library('mousetrap', required: true)
     if not MOUSETRAP.found()
         error('Unable to locate mousetrap shared library')
     endif
