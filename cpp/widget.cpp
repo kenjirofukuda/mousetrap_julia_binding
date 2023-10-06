@@ -199,9 +199,18 @@ void implement_widget(jlcxx::Module& module)
     module.method("get_css_classes", [](void* widget) -> std::vector<std::string> {
         return ((Widget*) widget)->get_css_classes();
     });
-    /*
-    module.method("apply_style_class!", [](void* widget, const StyleClass& style) {
-        ((Widget*) widget)->apply_style_class(style);
+    module.method("calculate_monitor_dpi", [](void* widget){
+        auto* display = gtk_widget_get_display(((Widget*) widget)->operator NativeWidget());
+        auto* monitors = gdk_display_get_monitors(display);
+        GdkMonitor* monitor = GDK_MONITOR(g_list_model_get_item(monitors, 0));
+        auto* geometry = new GdkRectangle();
+        gdk_monitor_get_geometry(monitor, geometry);
+        float wdpi = geometry->width / (gdk_monitor_get_width_mm(monitor) / 25.4);
+        float hdpi = geometry->height / (gdk_monitor_get_height_mm(monitor) / 25.4);
+        delete geometry;
+        return std::min(wdpi, hdpi);
     });
-     */
+    module.method("calculate_scale_factor", [](void* widget){
+       return ((Widget*) widget)->get_scale_factor();
+    });
 }

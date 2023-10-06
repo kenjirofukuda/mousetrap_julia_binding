@@ -25,7 +25,6 @@ endif()
 ### LIBRARY ###
 
 add_library(${LIBRARY_NAME} SHARED
-
     mousetrap_julia_binding.hpp
     cpp/action.cpp
     cpp/action_bar.cpp

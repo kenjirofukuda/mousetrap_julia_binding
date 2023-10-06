@@ -40,6 +40,7 @@ void implement_window(jlcxx::Module& module)
     .add_type_method(Window, set_startup_notification_identifier, !)
     .add_type_method(Window, set_focus_visible, !)
     .add_type_method(Window, get_focus_visible)
+    .add_type_method(Window, get_is_closed)
     .method("set_default_widget!", [](Window& window, void* widget) {
         window.set_default_widget(*((Widget*) widget));
     })

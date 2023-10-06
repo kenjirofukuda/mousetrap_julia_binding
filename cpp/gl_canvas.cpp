@@ -2,18 +2,18 @@
 
 namespace mousetrap
 {
-    class GLCanvas;
+    class GLArea;
     namespace detail {
-        struct _GLCanvasInternal
+        struct _GLAreaInternal
         {
             GObject parent;
             GtkGLArea* area;
         };
 
-        using GLCanvasInternal = _GLCanvasInternal;
-        DEFINE_INTERNAL_MAPPING(GLCanvas);
+        using GLAreaInternal = _GLAreaInternal;
+        DEFINE_INTERNAL_MAPPING(GLArea);
 
-        DECLARE_NEW_TYPE(GLCanvasInternal, makie_canvas_internal, MAKIE_CANVAS_INTERNAL)
+        DECLARE_NEW_TYPE(GLAreaInternal, makie_canvas_internal, MAKIE_CANVAS_INTERNAL)
 
         static void makie_canvas_internal_finalize(GObject* object)
         {
@@ -22,13 +22,13 @@ namespace mousetrap
             g_object_unref(self->area);
         }
 
-        DEFINE_NEW_TYPE_TRIVIAL_INIT(GLCanvasInternal, makie_canvas_internal, MAKIE_CANVAS_INTERNAL)
+        DEFINE_NEW_TYPE_TRIVIAL_INIT(GLAreaInternal, makie_canvas_internal, MAKIE_CANVAS_INTERNAL)
 
-        DEFINE_NEW_TYPE_TRIVIAL_CLASS_INIT(GLCanvasInternal, makie_canvas_internal, MAKIE_CANVAS_INTERNAL)
+        DEFINE_NEW_TYPE_TRIVIAL_CLASS_INIT(GLAreaInternal, makie_canvas_internal, MAKIE_CANVAS_INTERNAL)
 
-        static GLCanvasInternal* makie_canvas_internal_new(GtkGLArea* area)
+        static GLAreaInternal* makie_canvas_internal_new(GtkGLArea* area)
         {
-            auto* self = (GLCanvasInternal*) g_object_new(makie_canvas_internal_get_type(), nullptr);
+            auto* self = (GLAreaInternal*) g_object_new(makie_canvas_internal_get_type(), nullptr);
             makie_canvas_internal_init(self);
 
             self->area = area;
@@ -38,55 +38,55 @@ namespace mousetrap
         }
     }
 
-    class GLCanvas :
+    class GLArea :
         public detail::notify_if_gtk_uninitialized,
         public Widget,
-        HAS_SIGNAL(GLCanvas, realize),
-        HAS_SIGNAL(GLCanvas, unrealize),
-        HAS_SIGNAL(GLCanvas, destroy),
-        HAS_SIGNAL(GLCanvas, hide),
-        HAS_SIGNAL(GLCanvas, show),
-        HAS_SIGNAL(GLCanvas, map),
-        HAS_SIGNAL(GLCanvas, unmap),
-        HAS_SIGNAL(GLCanvas, resize),
-        HAS_SIGNAL(GLCanvas, render)
+        HAS_SIGNAL(GLArea, realize),
+        HAS_SIGNAL(GLArea, unrealize),
+        HAS_SIGNAL(GLArea, destroy),
+        HAS_SIGNAL(GLArea, hide),
+        HAS_SIGNAL(GLArea, show),
+        HAS_SIGNAL(GLArea, map),
+        HAS_SIGNAL(GLArea, unmap),
+        HAS_SIGNAL(GLArea, resize),
+        HAS_SIGNAL(GLArea, render)
     {
         private:
-            detail::GLCanvasInternal* _internal = nullptr;
+            detail::GLAreaInternal* _internal = nullptr;
 
         public:
-            GLCanvas()
+            GLArea()
             : Widget(gtk_gl_area_new()),
-              CTOR_SIGNAL(GLCanvas, realize),
-              CTOR_SIGNAL(GLCanvas, unrealize),
-              CTOR_SIGNAL(GLCanvas, destroy),
-              CTOR_SIGNAL(GLCanvas, hide),
-              CTOR_SIGNAL(GLCanvas, show),
-              CTOR_SIGNAL(GLCanvas, map),
-              CTOR_SIGNAL(GLCanvas, unmap),
-              CTOR_SIGNAL(GLCanvas, resize),
-              CTOR_SIGNAL(GLCanvas, render)
+              CTOR_SIGNAL(GLArea, realize),
+              CTOR_SIGNAL(GLArea, unrealize),
+              CTOR_SIGNAL(GLArea, destroy),
+              CTOR_SIGNAL(GLArea, hide),
+              CTOR_SIGNAL(GLArea, show),
+              CTOR_SIGNAL(GLArea, map),
+              CTOR_SIGNAL(GLArea, unmap),
+              CTOR_SIGNAL(GLArea, resize),
+              CTOR_SIGNAL(GLArea, render)
             {
                 _internal = detail::makie_canvas_internal_new(GTK_GL_AREA(operator NativeWidget()));
                 g_object_ref_sink(_internal);
             }
 
-            GLCanvas(detail::GLCanvasInternal* internal)
+            GLArea(detail::GLAreaInternal* internal)
             : Widget(GTK_WIDGET(internal->area)),
-              CTOR_SIGNAL(GLCanvas, realize),
-              CTOR_SIGNAL(GLCanvas, unrealize),
-              CTOR_SIGNAL(GLCanvas, destroy),
-              CTOR_SIGNAL(GLCanvas, hide),
-              CTOR_SIGNAL(GLCanvas, show),
-              CTOR_SIGNAL(GLCanvas, map),
-              CTOR_SIGNAL(GLCanvas, unmap),
-              CTOR_SIGNAL(GLCanvas, resize),
-              CTOR_SIGNAL(GLCanvas, render)
+              CTOR_SIGNAL(GLArea, realize),
+              CTOR_SIGNAL(GLArea, unrealize),
+              CTOR_SIGNAL(GLArea, destroy),
+              CTOR_SIGNAL(GLArea, hide),
+              CTOR_SIGNAL(GLArea, show),
+              CTOR_SIGNAL(GLArea, map),
+              CTOR_SIGNAL(GLArea, unmap),
+              CTOR_SIGNAL(GLArea, resize),
+              CTOR_SIGNAL(GLArea, render)
             {
                 _internal = g_object_ref(internal);
             }
 
-            ~GLCanvas()
+            ~GLArea()
             {
                 g_object_unref(_internal);
             }
@@ -120,17 +120,17 @@ namespace mousetrap
 
 void implement_gl_canvas(jlcxx::Module& module)
 {
-    auto canvas = module.add_type(GLCanvas)
+    auto canvas = module.add_type(GLArea)
         .add_constructor()
-        .add_type_method(GLCanvas, make_current)
-        .add_type_method(GLCanvas, queue_render)
-        .add_type_method(GLCanvas, get_auto_render)
-        .add_type_method(GLCanvas, set_auto_render)
-        .method("get_context", [](GLCanvas& self) -> void* {
+        .add_type_method(GLArea, make_current)
+        .add_type_method(GLArea, queue_render)
+        .add_type_method(GLArea, get_auto_render)
+        .add_type_method(GLArea, set_auto_render, !)
+        .method("get_context", [](GLArea& self) -> void* {
             return reinterpret_cast<void*>(self.get_context());
         })
     ;
-    add_widget_signals<GLCanvas>(canvas, "GLCanvas");
-    add_signal_resize<GLCanvas>(canvas, "GLCanvas");
-    add_signal_render<GLCanvas>(canvas, "GLCanvas");
+    add_widget_signals<GLArea>(canvas, "GLArea");
+    add_signal_resize<GLArea>(canvas, "GLArea");
+    add_signal_render<GLArea>(canvas, "GLArea");
 }
