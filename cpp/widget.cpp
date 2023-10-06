@@ -210,7 +210,7 @@ void implement_widget(jlcxx::Module& module)
         delete geometry;
         return std::min(wdpi, hdpi);
     });
-    module.method("calculate_scale_factor", [](void* widget){
+    module.method("get_scale_factor", [](void* widget){
        return ((Widget*) widget)->get_scale_factor();
     });
 }
