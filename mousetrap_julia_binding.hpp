@@ -369,17 +369,15 @@ void add_signal_render(Arg_t type, const std::string& name)
     type.method("connect_signal_render!", [name](T& instance, jl_function_t* task)
     {
         instance.connect_signal_render([name](T& instance, GdkGLContext* context, jl_function_t* task) -> bool {
-            return jlcxx::unbox<bool>(
-            jl_safe_call(
-            (name + "::emit_signal_render").c_str(),
-            task,
-            jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<void*>((void*) context))
-            )
-            );
+            return jlcxx::unbox<bool>(jl_safe_call(
+                (name + "::emit_signal_render").c_str(),
+                task,
+                jl_wrap(jlcxx::box<T&>(instance), jlcxx::box<void*>((void*) context))
+            ));
         }, gc_protect(instance, task));
     })
-    .method("emit_signal_render", [](T& instance) -> void {
-        instance.emit_signal_render((GdkGLContext*) nullptr);
+    .method("emit_signal_render", [](T& instance, void* ptr) -> void {
+        instance.emit_signal_render((GdkGLContext*) ptr);
     });
     type._DEFINE_ADD_SIGNAL_INVARIANT(render)
 }
@@ -438,7 +436,6 @@ void implement_gl_canvas(jlcxx::Module& module);
 void implement_menu_model(jlcxx::Module& module);
 void implement_menu_bar(jlcxx::Module& module);
 void implement_motion_event_controller(jlcxx::Module& module);
-//void implement_music(jlcxx::Module& module);
 void implement_notebook(jlcxx::Module& module);
 void implement_orientation(jlcxx::Module& module);
 void implement_overlay(jlcxx::Module& module);
@@ -463,8 +460,6 @@ void implement_separator(jlcxx::Module& module);
 void implement_shader(jlcxx::Module& module);
 void implement_shape(jlcxx::Module& module);
 void implement_shortcut_event_controller(jlcxx::Module& module);
-//void implement_sound(jlcxx::Module& module);
-//void implement_sound_buffer(jlcxx::Module& module);
 void implement_spin_button(jlcxx::Module& module);
 void implement_spinner(jlcxx::Module& module);
 void implement_stack(jlcxx::Module& module);
