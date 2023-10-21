@@ -12,7 +12,7 @@ void implement_log(jlcxx::Module& module)
     module.add_enum_value(LogLevel, LOG_LEVEL, FATAL);
 
     module.set_const("MOUSETRAP_DOMAIN", jl_box_string("Mousetrap"));
-    module.set_const("MOUSETRAP_JULIA_DOMAIN", jl_box_string("Mousetrap.jl"));
+    module.set_const("MOUSETRAP_JULIA_DOMAIN", jl_box_string("@__MODULE__().Mousetrap.jl"));
 
     module.method("log_debug", [](const std::string& message, LogDomain domain){
         log::debug(message, domain);
