@@ -136,6 +136,14 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
         g_object_unref(G_OBJECT(ptr));
     });
 
+    module.method("as_internal", [](void* ptr) -> void* {
+        return ((SignalEmitter*) ptr)->get_internal();
+    });
+
+    module.method("as_gobject", [](void* ptr) -> void* {
+       return ((SignalEmitter*) ptr)->operator GObject*();
+    });
+
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
     module.method("initialize", [](){
