@@ -35,5 +35,9 @@ void implement_menu_model(jlcxx::Module& module)
     .add_type_method(MenuModel, add_icon, !)
     ;
 
+    module.method("set_menubar", [](Application& app, MenuModel& model){
+        gtk_application_set_menubar(GTK_APPLICATION(app.operator GtkApplication*()), G_MENU_MODEL(model.operator GMenuModel*()));
+    });
+
     add_signal_items_changed<MenuModel>(menu_model, "MenuModel");
 }

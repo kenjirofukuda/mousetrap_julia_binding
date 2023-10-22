@@ -23,10 +23,6 @@ void implement_application(jlcxx::Module& module)
     .add_type_method(Application, set_current_theme, !)
     ;
 
-    module.method("set_menubar", [](Application& app, MenuModel& model){
-        gtk_application_set_menubar(GTK_APPLICATION(app.operator GObject*()), G_MENU_MODEL(model.operator GObject*()));
-    });
-
     add_signal_activate<Application>(application, "Application");
     add_signal_shutdown<Application>(application, "Application");
 }
