@@ -186,4 +186,6 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     # if MOUSETRAP_ENABLE_OPENGL_COMPONENT
         detail::initialize_opengl();
     #endif
+
+    std::cout << "[WARNING] Using mousetrap_dev." << std::endl;
 }
