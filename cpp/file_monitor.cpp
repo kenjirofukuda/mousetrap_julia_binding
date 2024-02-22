@@ -17,7 +17,7 @@ void implement_file_monitor(jlcxx::Module& module)
     auto monitor = module.add_type(FileMonitor)
     .constructor([](void* internal){
         return new FileMonitor((detail::FileMonitorInternal*) internal);
-    })
+    }, USE_FINALIZERS)
     .add_type_method(FileMonitor, cancel, !)
     .add_type_method(FileMonitor, is_cancelled)
     .method("on_file_changed!", [](FileMonitor& self, jl_value_t* task){
