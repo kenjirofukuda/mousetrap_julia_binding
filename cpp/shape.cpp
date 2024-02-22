@@ -45,7 +45,7 @@ void implement_shape(jlcxx::Module& module)
     };
 
     auto shape = module.add_type(Shape)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(Shape, get_native_handle)
     .method("as_point!", [](Shape& shape, jl_value_t* vec2){
         shape.as_point(unbox_vector2f(vec2));

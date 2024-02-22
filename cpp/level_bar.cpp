@@ -9,7 +9,7 @@ void implement_level_bar(jlcxx::Module& module)
     module.add_enum_value(LevelBarMode, LEVEL_BAR_MODE, DISCRETE);
 
     auto level_bar = module.add_type(LevelBar)
-    .add_constructor(float, float)
+    .constructor<float, float>(USE_FINALIZERS)
     .add_type_method(LevelBar, add_marker, !)
     .add_type_method(LevelBar, remove_marker, !)
     .add_type_method(LevelBar, set_inverted, !)

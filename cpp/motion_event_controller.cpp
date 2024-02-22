@@ -3,7 +3,7 @@
 void implement_motion_event_controller(jlcxx::Module& module)
 {
     auto motion = module.add_type(MotionEventController)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     ;
 
     add_signal_motion_enter<MotionEventController>(motion, "MotionEventController");

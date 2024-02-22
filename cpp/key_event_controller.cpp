@@ -7,7 +7,7 @@ void implement_key_event_controller(jlcxx::Module& module)
     module.add_bits<ModifierState>("_ModifierState");
 
     auto key = module.add_type(KeyEventController)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(KeyEventController, should_shortcut_trigger_trigger)
     ;
 

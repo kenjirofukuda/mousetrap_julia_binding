@@ -5,7 +5,7 @@
 void implement_text_view(jlcxx::Module& module)
 {
     auto text_view = module.add_type(TextView)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(TextView, get_text)
     .add_type_method(TextView, set_text, !)
     .add_type_method(TextView, set_cursor_visible, !)

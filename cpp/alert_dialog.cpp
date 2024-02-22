@@ -8,7 +8,7 @@ void implement_alert_dialog(jlcxx::Module& module)
 {
     #if ADW_MINOR_VERSION >= 2
     auto dialog = module.add_type(AlertDialog)
-        .add_constructor(const std::string&, const std::string&)
+        .constructor<const std::string&, const std::string&>(USE_FINALIZERS)
         .add_type_method(AlertDialog, add_button, !)
         .add_type_method(AlertDialog, set_default_button, !)
         .add_type_method(AlertDialog, set_button_label, !)

@@ -8,7 +8,7 @@
 void implement_notebook(jlcxx::Module& module)
 {
     auto notebook = module.add_type(Notebook)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("push_front!", [](Notebook& self, void* child_widget, void* label_widget){
         return self.push_front(*((Widget*) child_widget), *((Widget*) label_widget));
     })

@@ -8,7 +8,7 @@
 void implement_drag_event_controller(jlcxx::Module& module)
 {
     auto drag = module.add_type(DragEventController)
-    .constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("get_start_position", [](DragEventController& controller) -> jl_value_t* {
         return box_vector2f(controller.get_start_position());
     })

@@ -5,7 +5,7 @@
 void implement_rotate_event_controller(jlcxx::Module& module)
 {
     auto rotate = module.add_type(RotateEventController)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("get_angle_deta", [](RotateEventController& x){
         return x.get_angle_delta().as_radians();
     })

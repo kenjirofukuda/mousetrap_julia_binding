@@ -5,7 +5,7 @@
 void implement_overlay(jlcxx::Module& module)
 {
     auto overlay = module.add_type(Overlay)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("set_child!", [](Overlay& overlay, void* child){
         overlay.set_child(*((Widget*) child));
     })

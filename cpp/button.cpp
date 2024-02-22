@@ -5,7 +5,7 @@
 void implement_button(jlcxx::Module& module)
 {
     auto button = module.add_type(Button)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(Button, set_has_frame, !)
     .add_type_method(Button, get_has_frame)
     .add_type_method(Button, set_is_circular, !)

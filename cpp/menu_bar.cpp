@@ -5,7 +5,7 @@
 void implement_menu_bar(jlcxx::Module& module)
 {
     auto menubar = module.add_type(MenuBar)
-    .add_constructor(const MenuModel&)
+    .constructor<const MenuModel&>(USE_FINALIZERS)
     ;
 
     add_widget_signals<MenuBar>(menubar, "MenuBar");

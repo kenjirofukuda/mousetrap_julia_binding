@@ -17,8 +17,8 @@ void implement_label(jlcxx::Module& module)
     module.add_enum_value(LabelWrapMode, LABEL_WRAP_MODE, WORD_OR_CHAR);
 
     auto label = module.add_type(Label)
-    .add_constructor()
-    .add_constructor(const std::string&)
+    .constructor<>(USE_FINALIZERS)
+    .constructor<const std::string&>(USE_FINALIZERS)
     .add_type_method(Label, set_text, !)
     .add_type_method(Label, get_text)
     .add_type_method(Label, set_use_markup, !)

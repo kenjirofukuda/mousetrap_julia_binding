@@ -5,7 +5,7 @@
 void implement_toggle_button(jlcxx::Module& module)
 {
     auto toggle = module.add_type(ToggleButton)
-        .add_constructor()
+        .constructor<>(USE_FINALIZERS)
         .add_type_method(ToggleButton, get_is_active)
         .add_type_method(ToggleButton, set_is_active, !)
         .method("set_child!", [](ToggleButton& self, void* widget){

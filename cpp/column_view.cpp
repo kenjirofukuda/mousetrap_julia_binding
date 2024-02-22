@@ -9,7 +9,7 @@ void implement_column_view(jlcxx::Module& module)
     auto column = module.add_type(ColumnViewColumn)
     .constructor([](void* internal){
         return new ColumnView::Column(GTK_COLUMN_VIEW_COLUMN(internal));
-    })
+    }, USE_FINALIZERS)
     .add_type_method(ColumnViewColumn, set_title, !)
     .add_type_method(ColumnViewColumn, get_title)
     .add_type_method(ColumnViewColumn, set_fixed_width, !)
@@ -22,7 +22,7 @@ void implement_column_view(jlcxx::Module& module)
     ;
 
     auto column_view = module.add_type(ColumnView)
-    .add_constructor(SelectionMode)
+    .constructor<SelectionMode>(USE_FINALIZERS)
     .add_type_method(ColumnView, push_back_column, !)
     .add_type_method(ColumnView, push_front_column, !)
     .add_type_method(ColumnView, insert_column, !)

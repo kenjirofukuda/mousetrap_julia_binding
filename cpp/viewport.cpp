@@ -34,7 +34,7 @@ void implement_viewport(jlcxx::Module& module)
     module.add_enum_value(ScrollType, SCROLL_TYPE, SCROLL_END);
 
     auto viewport = module.add_type(Viewport)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(Viewport, set_propagate_natural_height, !)
     .add_type_method(Viewport, get_propagate_natural_height)
     .add_type_method(Viewport, set_propagate_natural_width, !)

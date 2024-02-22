@@ -3,7 +3,7 @@
 void implement_action_bar(jlcxx::Module& module)
 {
     auto bar = module.add_type(ActionBar)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("push_back!", [](ActionBar& bar, void* widget){
         bar.push_back(*((Widget*) widget));
     })

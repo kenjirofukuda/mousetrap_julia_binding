@@ -67,7 +67,7 @@ void implement_animation(jlcxx::Module& module)
     auto animation = module.add_type(Animation)
         .constructor([](void* widget, float time_mys){
             return new Animation(*((Widget*) widget), microseconds(time_mys));
-        })
+        }, USE_FINALIZERS)
         .method("get_state", [](Animation& self){
             return (AnimationState) self.get_state();
         })

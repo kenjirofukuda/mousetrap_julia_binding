@@ -7,7 +7,7 @@
 void implement_transform_bin(jlcxx::Module& module)
 {
     auto bin = module.add_type(TransformBin)
-    .constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("set_child!", [](TransformBin& self, void* widget){
         self.set_child(*((Widget*) widget));
     })

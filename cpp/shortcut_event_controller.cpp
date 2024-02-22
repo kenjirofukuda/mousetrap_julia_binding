@@ -10,7 +10,7 @@ void implement_shortcut_event_controller(jlcxx::Module& module)
     module.add_enum_value(ShortcutScope, SHORTCUT_SCOPE, GLOBAL);
 
     module.add_type(ShortcutEventController)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(ShortcutEventController, add_action, !)
     .add_type_method(ShortcutEventController, remove_action, !)
     .add_type_method(ShortcutEventController, set_scope, !)

@@ -18,11 +18,11 @@ void implement_texture(jlcxx::Module& module)
     module.add_enum_value(TextureScaleMode, TEXTURE_SCALE_MODE, LINEAR);
 
     auto texture = module.add_type(Texture)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     ;
 
     auto render_texture = module.add_type(RenderTexture)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(RenderTexture, bind_as_render_target)
     .add_type_method(RenderTexture, unbind_as_render_target)
     ;

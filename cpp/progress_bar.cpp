@@ -3,7 +3,7 @@
 void implement_progress_bar(jlcxx::Module& module)
 {
     auto bar = module.add_type(ProgressBar)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(ProgressBar, pulse)
     .add_type_method(ProgressBar, set_fraction, !)
     .add_type_method(ProgressBar, get_fraction)
