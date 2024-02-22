@@ -14,7 +14,7 @@ void implement_shape(jlcxx::Module& module)
         jl_unbox_float32(jl_get_property(rgba, "b")),
         jl_unbox_float32(jl_get_property(rgba, "a"))
         ));
-    })
+    }, USE_FINALIZERS)
     .method("get_position", [](Vertex& vertex) -> jl_value_t* {
         return box_vector3f(vertex.position);
     })
