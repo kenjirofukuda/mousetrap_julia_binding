@@ -7,7 +7,7 @@ void implement_frame_clock(jlcxx::Module& module)
     auto frame_clock = module.add_type(FrameClock)
     .constructor([](void* internal){
         return new FrameClock(GDK_FRAME_CLOCK(internal));
-    })
+    }, USE_FINALIZERS)
     .method("get_target_frame_duration", [](FrameClock& self){
         return self.get_target_frame_duration().as_microseconds();
     })
