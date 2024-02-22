@@ -5,7 +5,7 @@
 void implement_action(jlcxx::Module& module)
 {
     auto action = module.add_type(Action)
-    .constructor( [](const std::string& id, void* app_ptr){
+    .constructor([](const std::string& id, void* app_ptr){
         return new Action(id, *((Application*) app_ptr));
     }, USE_FINALIZERS)
     .add_type_method(Action, get_id)

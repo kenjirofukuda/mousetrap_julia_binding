@@ -5,7 +5,7 @@
 void implement_application(jlcxx::Module& module)
 {
     auto application = module.add_type(Application)
-    .add_constructor(const std::string&, bool)
+    .constructor<const std::string&, bool>(USE_FINALIZERS)
     .add_type_method(Application, run, !)
     .add_type_method(Application, quit, !)
     .add_type_method(Application, hold, !)

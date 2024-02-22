@@ -5,8 +5,8 @@
 void implement_key_file(jlcxx::Module& module)
 {
     auto key_file = module.add_type(KeyFile)
-    .add_constructor()
-    .add_constructor(const std::string&)
+    .constructor<>(USE_FINALIZERS)
+    .constructor<const std::string&>(USE_FINALIZERS)
     .add_type_method(KeyFile, as_string)
     .add_type_method(KeyFile, create_from_file, !)
     .add_type_method(KeyFile, create_from_string, !)

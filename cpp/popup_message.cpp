@@ -7,7 +7,7 @@
 void implement_popup_message(jlcxx::Module& module)
 {
     auto message = module.add_type(PopupMessage)
-        .add_constructor(const std::string&, const std::string&)
+        .constructor<const std::string&, const std::string&>(USE_FINALIZERS)
         .add_type_method(PopupMessage, set_title, !)
         .add_type_method(PopupMessage, get_title)
         .add_type_method(PopupMessage, set_button_label, !)
@@ -28,7 +28,7 @@ void implement_popup_message(jlcxx::Module& module)
     add_signal_button_clicked<PopupMessage>(message, "PopupMessage");
 
     auto overlay = module.add_type(PopupMessageOverlay)
-        .add_constructor()
+        .constructor<>(USE_FINALIZERS)
         .method("set_child!", [](PopupMessageOverlay& self, void* widget) -> void {
             self.set_child(*((Widget*) widget));
         })

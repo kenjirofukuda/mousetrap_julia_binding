@@ -5,7 +5,7 @@
 void implement_click_event_controller(jlcxx::Module& module)
 {
     auto click = module.add_type(ClickEventController)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     ;
 
     add_signal_click_pressed<ClickEventController>(click, "ClickEventController");

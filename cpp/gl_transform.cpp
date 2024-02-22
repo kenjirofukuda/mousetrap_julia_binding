@@ -8,7 +8,7 @@ void implement_gl_transform(jlcxx::Module& module)
     #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
 
     auto transform = module.add_type(GLTransform)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("apply_to_2f", [](GLTransform& self, float x, float y){
         return box_vector2f(self.apply_to(Vector2f(x, y)));
     })

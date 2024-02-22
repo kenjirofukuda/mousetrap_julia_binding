@@ -17,7 +17,7 @@ void implement_revealer(jlcxx::Module& module)
     module.add_enum_value(RevealerTransitionType, REVEALER_TRANSITION_TYPE, SWING_DOWN);
 
     auto revealer = module.add_type(Revealer)
-    .add_constructor(RevealerTransitionType)
+    .constructor<RevealerTransitionType>(USE_FINALIZERS)
     .method("set_child!", [](Revealer& self, void* child) {
         self.set_child(*((Widget*) child));
     })

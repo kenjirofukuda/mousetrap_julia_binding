@@ -5,7 +5,7 @@
 void implement_box(jlcxx::Module& module)
 {
     auto box = module.add_type(Box)
-    .add_constructor(Orientation)
+    .constructor<Orientation>(USE_FINALIZERS)
     .method("push_back!", [](Box& box, void* widget){
         box.push_back(*((Widget*) widget));
     })

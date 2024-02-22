@@ -12,7 +12,7 @@ void implement_selection_model(jlcxx::Module& module)
     auto selection = module.add_type(SelectionModel)
     .constructor([](void* internal){
         return new SelectionModel((detail::SelectionModelInternal*) internal);
-    }, USE_FINALIZERS)
+    })
     .method("get_internal", [](SelectionModel& model) -> void* {
         return model.get_internal();
     })

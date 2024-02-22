@@ -82,7 +82,7 @@ void implement_log(jlcxx::Module& module)
             if (res != nullptr)
                 out = jl_unbox_string(res);
 
-            jl_gc_enable(true);
+            jl_gc_enable();
             return out;
         }, task);
     });

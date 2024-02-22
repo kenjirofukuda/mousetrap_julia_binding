@@ -7,7 +7,7 @@
 void implement_flow_box(jlcxx::Module& module)
 {
     auto box = module.add_type(FlowBox)
-        .add_constructor(Orientation)
+        .constructor<Orientation>(USE_FINALIZERS)
         .method("push_back!", [](FlowBox& view, void* widget) -> void {
             view.push_back(*((Widget*) widget));
         })

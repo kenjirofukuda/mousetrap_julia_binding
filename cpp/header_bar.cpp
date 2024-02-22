@@ -5,8 +5,8 @@
 void implement_header_bar(jlcxx::Module& module)
 {
     auto bar = module.add_type(HeaderBar)
-    .add_constructor()
-    .add_constructor(const std::string&)
+    .constructor<>(USE_FINALIZERS)
+    .constructor<const std::string&>(USE_FINALIZERS)
     .constructor([](void* internal){
         return new HeaderBar((detail::HeaderBarInternal*) internal);
     })

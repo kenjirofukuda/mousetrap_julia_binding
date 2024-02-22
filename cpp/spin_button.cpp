@@ -5,7 +5,7 @@
 void implement_spin_button(jlcxx::Module& module)
 {
     auto spin = module.add_type(SpinButton)
-    .add_constructor(float, float, float, Orientation)
+    .constructor<float, float, float, Orientation>(USE_FINALIZERS)
     .method("get_adjustment", [](SpinButton& self) -> void* {
         return self.get_adjustment()->get_internal();
     })

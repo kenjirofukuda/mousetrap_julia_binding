@@ -18,7 +18,7 @@ void implement_render_task(jlcxx::Module& module)
         (transform_maybe == nullptr ? GLTransform() : *((GLTransform*) transform_maybe)),
         blend_mode
         );
-    }, USE_FINALIZERS)
+    })
     .add_type_method(RenderTask, render)
     .add_type_method(RenderTask, set_uniform_float, !)
     .add_type_method(RenderTask, set_uniform_int, !)

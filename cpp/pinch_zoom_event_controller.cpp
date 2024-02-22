@@ -3,7 +3,7 @@
 void implement_pinch_zoom_event_controller(jlcxx::Module& module)
 {
     auto pinch = module.add_type(PinchZoomEventController)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(PinchZoomEventController, get_scale_delta)
     ;
 

@@ -5,7 +5,7 @@
 void implement_switch(jlcxx::Module& module)
 {
     auto widget = module.add_type(Switch)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(Switch, get_is_active)
     .add_type_method(Switch, set_is_active, !)
     ;

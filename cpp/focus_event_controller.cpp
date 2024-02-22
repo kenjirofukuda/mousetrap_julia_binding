@@ -5,7 +5,7 @@
 void implement_focus_event_controller(jlcxx::Module& module)
 {
     auto focus = module.add_type(FocusEventController)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(FocusEventController, self_or_child_is_focused)
     .add_type_method(FocusEventController, self_is_focused)
     ;

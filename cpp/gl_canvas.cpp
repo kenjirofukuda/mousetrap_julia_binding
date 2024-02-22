@@ -121,7 +121,7 @@ namespace mousetrap
 void implement_gl_canvas(jlcxx::Module& module)
 {
     auto canvas = module.add_type(GLArea)
-        .add_constructor()
+        .constructor<>(USE_FINALIZERS)
         .add_type_method(GLArea, make_current)
         .add_type_method(GLArea, queue_render)
         .add_type_method(GLArea, get_auto_render)

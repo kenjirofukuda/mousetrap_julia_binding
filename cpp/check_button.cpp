@@ -10,7 +10,7 @@ void implement_check_button(jlcxx::Module& module)
     module.add_enum_value(CheckButtonState, CHECK_BUTTON_STATE, INACTIVE);
 
     auto check_button = module.add_type(CheckButton)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(CheckButton, set_state, !)
     .add_type_method(CheckButton, get_state)
     .add_type_method(CheckButton, get_is_active)

@@ -5,11 +5,11 @@
 void implement_file_descriptor(jlcxx::Module& module)
 {
     auto file = module.add_type(FileDescriptor)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .constructor([](void* internal){
         return new FileDescriptor(G_FILE(internal));
-    }, USE_FINALIZERS)
-    .add_constructor(const std::string&)
+    })
+    .constructor<const std::string&>(USE_FINALIZERS)
     .add_type_method(FileDescriptor, create_from_path, !)
     .add_type_method(FileDescriptor, create_from_uri, !)
     .add_type_method(FileDescriptor, get_name)

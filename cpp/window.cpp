@@ -9,7 +9,7 @@ void implement_window(jlcxx::Module& module)
     module.add_enum_value(WindowCloseRequestResult, WINDOW_CLOSE_REQUEST_RESULT, PREVENT_CLOSE);
 
     auto window = module.add_type(Window)
-    .add_constructor(Application&)
+    .constructor<Application&>(USE_FINALIZERS)
     .add_type_method(Window, set_application, !)
     .add_type_method(Window, set_maximized, !)
     .add_type_method(Window, set_minimized, !)

@@ -5,7 +5,7 @@
 void implement_separator(jlcxx::Module& module)
 {
     auto separator = module.add_type(Separator)
-    .add_constructor(Orientation)
+    .constructor<Orientation>(USE_FINALIZERS)
     .add_type_method(Separator, set_orientation, !)
     .add_type_method(Separator, get_orientation)
     ;

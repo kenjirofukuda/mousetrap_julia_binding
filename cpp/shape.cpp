@@ -14,7 +14,7 @@ void implement_shape(jlcxx::Module& module)
         jl_unbox_float32(jl_get_property(rgba, "b")),
         jl_unbox_float32(jl_get_property(rgba, "a"))
         ));
-    }, USE_FINALIZERS)
+    })
     .method("get_position", [](Vertex& vertex) -> jl_value_t* {
         return box_vector3f(vertex.position);
     })
@@ -45,7 +45,7 @@ void implement_shape(jlcxx::Module& module)
     };
 
     auto shape = module.add_type(Shape)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(Shape, get_native_handle)
     .method("as_point!", [](Shape& shape, jl_value_t* vec2){
         shape.as_point(unbox_vector2f(vec2));

@@ -5,7 +5,7 @@
 void implement_fixed(jlcxx::Module& module)
 {
     auto fixed = module.add_type(Fixed)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("add_child!", [](Fixed& x, void* widget, jl_value_t* vector2f){
         x.add_child(*((Widget*) widget), unbox_vector2f(vector2f));
     })

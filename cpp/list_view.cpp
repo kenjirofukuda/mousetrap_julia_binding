@@ -5,7 +5,7 @@
 void implement_list_view(jlcxx::Module& module)
 {
     auto list_view = module.add_type(ListView)
-    .add_constructor(Orientation, SelectionMode)
+    .constructor<Orientation, SelectionMode>(USE_FINALIZERS)
     .method("push_back!", [](ListView& view, void* widget, void* iterator) -> void* {
         return (void*) view.push_back(*((Widget*) widget), (ListView::Iterator) iterator);
     })

@@ -12,7 +12,7 @@ void implement_file_chooser(jlcxx::Module& module)
     module.add_enum_value(FileChooserAction, FILE_CHOOSER_ACTION, SELECT_MULTIPLE_FOLDERS);
 
     module.add_type(FileFilter)
-    .add_constructor(const std::string&)
+    .constructor<const std::string&>(USE_FINALIZERS)
     .add_type_method(FileFilter, get_name)
     .add_type_method(FileFilter, add_allowed_pattern, !)
     .add_type_method(FileFilter, add_allow_all_supported_image_formats, !)
@@ -21,7 +21,7 @@ void implement_file_chooser(jlcxx::Module& module)
     ;
 
     auto chooser = module.add_type(FileChooser)
-    .add_constructor(FileChooserAction, const std::string&)
+    .constructor<FileChooserAction, const std::string&>(USE_FINALIZERS)
     .add_type_method(FileChooser, set_accept_label, !)
     .add_type_method(FileChooser, get_accept_label)
     .add_type_method(FileChooser, present, !)

@@ -7,7 +7,7 @@
 void implement_clamp_frame(jlcxx::Module& module)
 {
     auto frame = module.add_type(ClampFrame)
-        .add_constructor(Orientation)
+        .constructor<Orientation>(USE_FINALIZERS)
         .add_type_method(ClampFrame, set_orientation, !)
         .add_type_method(ClampFrame, get_orientation)
         .add_type_method(ClampFrame, set_maximum_size, !)

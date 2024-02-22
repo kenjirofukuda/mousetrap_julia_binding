@@ -5,7 +5,7 @@
 void implement_entry(jlcxx::Module& module)
 {
     auto entry = module.add_type(Entry)
-        .constructor()
+        .constructor<>(USE_FINALIZERS)
         .add_type_method(Entry, get_text)
         .add_type_method(Entry, set_text, !)
         .add_type_method(Entry, set_max_width_chars, !)

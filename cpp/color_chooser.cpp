@@ -9,7 +9,7 @@ void implement_color_chooser(jlcxx::Module& module)
     #if GTK_MINOR_VERSION >= 10
 
     auto chooser = module.add_type(ColorChooser)
-        .add_constructor(const std::string&)
+        .constructor<const std::string&>(USE_FINALIZERS)
         .add_type_method(ColorChooser, present, !)
         .method("get_color", [](ColorChooser& self){
             return box_rgba(self.get_color());

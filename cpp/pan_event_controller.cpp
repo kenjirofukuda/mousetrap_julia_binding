@@ -11,7 +11,7 @@ void implement_pan_event_controller(jlcxx::Module& module)
     module.add_enum_value(PanDirection, PAN_DIRECTION, DOWN);
 
     auto pan = module.add_type(PanEventController)
-    .add_constructor(Orientation)
+    .constructor<Orientation>(USE_FINALIZERS)
     .add_type_method(PanEventController, set_orientation, !)
     .add_type_method(PanEventController, get_orientation)
     ;

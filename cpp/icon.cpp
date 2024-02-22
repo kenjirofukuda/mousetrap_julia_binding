@@ -5,7 +5,7 @@
 void implement_icon(jlcxx::Module& module)
 {
     module.add_type(Icon)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(Icon, create_from_file, !)
     .method("create_from_theme!", [](Icon& icon, void* theme, IconID id, uint64_t square_resolution, uint64_t scale){
         return icon.create_from_theme(*((IconTheme*) theme), id, square_resolution, scale);
@@ -22,7 +22,7 @@ void implement_icon(jlcxx::Module& module)
     });
 
     module.add_type(IconTheme)
-    .add_constructor(const Window&)
+    .constructor<const Window&>(USE_FINALIZERS)
     .add_type_method(IconTheme, get_icon_names)
     .method("has_icon_icon", [](const IconTheme& theme, const Icon& icon) -> bool {
         return theme.has_icon(icon);

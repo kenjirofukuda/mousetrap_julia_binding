@@ -28,7 +28,7 @@ void implement_stack(jlcxx::Module& module)
     module.add_enum_value(StackTransitionType, STACK_TRANSITION_TYPE, ROTATE_LEFT_RIGHT);
 
     auto stack = module.add_type(Stack)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("get_selection_model", [](Stack& stack) -> void* {
         return stack.get_selection_model().get_internal();
     })
@@ -65,12 +65,12 @@ void implement_stack(jlcxx::Module& module)
     add_widget_signals<Stack>(stack, "Stack");
 
     auto sidebar = module.add_type(StackSidebar)
-    .add_constructor(const Stack&)
+    .constructor<const Stack&>(USE_FINALIZERS)
     ;
     add_widget_signals<StackSidebar>(sidebar, "SideBar");
 
     auto switcher = module.add_type(StackSwitcher)
-    .add_constructor(const Stack&)
+    .constructor<const Stack&>(USE_FINALIZERS)
     ;
     add_widget_signals<StackSwitcher>(switcher, "StackSwitcher");
 }

@@ -5,7 +5,7 @@
 void implement_grid(jlcxx::Module& module)
 {
     auto grid = module.add_type(Grid)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("insert!", [](Grid& grid, void* widget, uint64_t row_i, uint64_t col_i, uint64_t n_horizontal_cells, uint64_t n_vertical_cells){
         grid.insert(*((Widget*) widget), Vector2i(row_i, col_i), n_horizontal_cells, n_vertical_cells);
     })

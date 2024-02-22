@@ -23,7 +23,7 @@ void implement_menu_model(jlcxx::Module& module)
     module.add_enum_value(SectionFormat, SECTION_FORMAT, INLINE_BUTTONS);
 
     auto menu_model = module.add_type(MenuModel)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .add_type_method(MenuModel, add_action, !)
     .method("add_widget!", [](MenuModel& model, void* widget){
         model.add_widget(*((Widget*) widget));

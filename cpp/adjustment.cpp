@@ -12,7 +12,7 @@ void implement_adjustment(jlcxx::Module& module)
     .constructor([](void* internal){
         return new Adjustment(GTK_ADJUSTMENT(internal));
     }, USE_FINALIZERS)
-    .add_constructor(float, float, float, float)
+    .constructor<float, float, float, float>(USE_FINALIZERS)
     .add_type_method(Adjustment, get_lower)
     .add_type_method(Adjustment, get_upper)
     .add_type_method(Adjustment, get_value)

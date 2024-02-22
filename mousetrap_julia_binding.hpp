@@ -80,14 +80,13 @@ RGBA unbox_rgba(jl_value_t* in);
 jl_value_t* box_hsva(HSVA in);
 HSVA unbox_hsva(jl_value_t* in);
 
-#define USE_FINALIZERS true
+#define USE_FINALIZERS jlcxx::finalize_policy::yes
 
 #define declare_is_subtype_of(A, B) template<> struct jlcxx::SuperType<A> { typedef B type; };
 #define make_not_mirrored(Name) template<> struct jlcxx::IsMirroredType<Name> : std::false_type {};
 
 #define add_type(Type) add_type<Type>(std::string("_") + #Type)
 #define add_type_method(Type, id, ...) method(#id + std::string(#__VA_ARGS__), &Type::id)
-#define add_constructor(...) constructor<__VA_ARGS__>(USE_FINALIZERS)
 
 #define define_enum_in(module, Enum) \
     module.add_bits<Enum>(std::string("_") + #Enum, jl_int64_type); \

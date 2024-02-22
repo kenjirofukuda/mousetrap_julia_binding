@@ -11,8 +11,8 @@ void implement_image(jlcxx::Module& module)
     module.add_enum_value(InterpolationType, INTERPOLATION_TYPE, HYPERBOLIC);
 
     module.add_type(Image)
-    .add_constructor()
-    .add_constructor(const std::string&)
+    .constructor<>(USE_FINALIZERS)
+    .constructor<const std::string&>(USE_FINALIZERS)
     .constructor([](uint64_t width, uint64_t height, jl_value_t* rgba){
         return new Image(width, height, unbox_rgba(rgba));
     }, USE_FINALIZERS)

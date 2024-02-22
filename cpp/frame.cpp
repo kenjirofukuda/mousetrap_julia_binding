@@ -5,7 +5,7 @@
 void implement_frame(jlcxx::Module& module)
 {
     auto frame = module.add_type(Frame)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("set_child!", [](Frame& x, void* child) {
         x.set_child(*((Widget*) child));
     })

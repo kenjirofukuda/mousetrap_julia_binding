@@ -5,7 +5,7 @@
 void implement_grid_view(jlcxx::Module& module)
 {
     auto grid = module.add_type(GridView)
-    .add_constructor(Orientation, SelectionMode)
+    .constructor<Orientation, SelectionMode>(USE_FINALIZERS)
     .method("push_back!", [](GridView& view, void* widget) -> void {
         view.push_back(*((Widget*) widget));
     })

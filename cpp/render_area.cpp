@@ -14,7 +14,7 @@ void implement_render_area(jlcxx::Module& module)
     module.add_enum_value(AntiAliasingQuality, ANTI_ALIASING_QUALITY, BEST);
 
     auto render_area = module.add_type(RenderArea)
-    .add_constructor(AntiAliasingQuality)
+    .constructor<AntiAliasingQuality>(USE_FINALIZERS)
     .method("add_render_task!", [](RenderArea& area, RenderTask& task){
         area.add_render_task(task);
     })

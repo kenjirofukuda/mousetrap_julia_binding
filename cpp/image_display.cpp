@@ -5,9 +5,9 @@
 void implement_image_display(jlcxx::Module& module)
 {
     auto image_display = module.add_type(ImageDisplay)
-    .add_constructor(const std::string&)
-    .add_constructor(const Image&)
-    .add_constructor(const Icon&)
+    .constructor<const std::string&>(USE_FINALIZERS)
+    .constructor<const Image&>(USE_FINALIZERS)
+    .constructor<const Icon&>(USE_FINALIZERS)
     .method("get_size", [](ImageDisplay& x) -> jl_value_t* {
         return box_vector2i(x.get_size());
     })

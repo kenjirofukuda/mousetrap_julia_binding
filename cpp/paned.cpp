@@ -3,7 +3,7 @@
 void implement_paned(jlcxx::Module& module)
 {
     auto paned = module.add_type(Paned)
-    .add_constructor(Orientation)
+    .constructor<Orientation>(USE_FINALIZERS)
     .add_type_method(Paned, get_position)
     .add_type_method(Paned, set_position, !)
     .method("set_start_child!", [](Paned& paned, void* widget){

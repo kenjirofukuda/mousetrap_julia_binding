@@ -5,7 +5,7 @@
 void implement_popover_menu(jlcxx::Module& module)
 {
     auto popover_menu = module.add_type(PopoverMenu)
-    .add_constructor(const MenuModel&)
+    .constructor<const MenuModel&>(USE_FINALIZERS)
     ;
 
     add_widget_signals<PopoverMenu>(popover_menu, "PopoverMenu");

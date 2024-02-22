@@ -30,7 +30,7 @@ void implement_time(jlcxx::Module& module)
     });
 
     auto clock = module.add_type(Clock)
-    .add_constructor()
+    .constructor<>(USE_FINALIZERS)
     .method("restart!", [](Clock& clock) -> double {
         return clock.restart().as_microseconds();
     })

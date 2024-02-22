@@ -5,7 +5,7 @@
 void implement_center_box(jlcxx::Module& module)
 {
     auto center_box = module.add_type(CenterBox)
-    .add_constructor(Orientation)
+    .constructor<Orientation>(USE_FINALIZERS)
     .method("set_start_child!", [](CenterBox& box, void* widget) {
         box.set_start_child(*((Widget*) widget));
     })
