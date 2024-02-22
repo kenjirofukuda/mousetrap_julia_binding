@@ -66,7 +66,7 @@ void implement_log(jlcxx::Module& module)
     module.method("log_set_file_formatting_function", [](jl_value_t* task){
         log::set_file_formatting_function([](const std::string& message, const std::map<std::string, std::string>& fields){
 
-            jl_gc_enable(false);
+            jl_gc_enable();
 
             static auto* dict_ctor = jl_eval_string("Dict{String, String}");
             static auto* setindex = jl_get_function(jl_base_module, "setindex!");
