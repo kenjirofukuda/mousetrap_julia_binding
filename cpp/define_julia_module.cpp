@@ -1,6 +1,8 @@
 #include "../mousetrap_julia_binding.hpp"
 #include <thread>
 
+#define MOUSETRAP_ENABLE_OPENGL_COMPONENT 0
+
 JLCXX_MODULE define_julia_module(jlcxx::Module& module)
 {
     jl_eval_string("Main.eval(:(import Mousetrap))"); // inject into Main scope
@@ -144,21 +146,6 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
        return ((SignalEmitter*) ptr)->operator GObject*();
     });
 
-    #if MOUSETRAP_ENABLE_OPENGL_COMPONENT
-
-    module.method("initialize", [](){
-       adw_init();
-       detail::mark_gtk_initialized();
-       detail::initialize_opengl();
-    });
-
-    #else
-    module.method("initialize", [](){
-       adw_init();
-       detail::mark_gtk_initialized();
-    });
-    #endif
-
     mousetrap::detail::notify_if_gtk_uninitialized::message = R"(
     Attempting to construct a widget, but the GTK4 backend has not yet been initialized.
 
@@ -186,6 +173,4 @@ JLCXX_MODULE define_julia_module(jlcxx::Module& module)
     # if MOUSETRAP_ENABLE_OPENGL_COMPONENT
         detail::initialize_opengl();
     #endif
-
-    std::cout << "[WARNING] Using mousetrap_dev." << std::endl;
 }
