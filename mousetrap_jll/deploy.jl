@@ -1,5 +1,5 @@
 const VERSION = "0.2.0"
-const mousetrap_commit = "ce80b9ac063170419ffd989921b7d975b74fda72"
+const mousetrap_commit = "333cfbec042acb0cdd641a63ecafc9c413893a86"
 const mousetrap_julia_binding_commit = "f1e9b350873591c31e258c89fbe962a032e0c031"
 
 const linux_repo = "mousetrap_linux_jll"
@@ -10,7 +10,7 @@ const deploy_linux = true
 const deploy_windows = false
 const deploy_apple = false
 
-const deploy_local = false
+const deploy_local = true
 # if local, files will be written to ~/.julia/dev/mousetrap_[linux,windows,apple]_jll
 
 println("deploy linux   : $deploy_linux")
@@ -40,7 +40,7 @@ if deploy_linux
     @info "Configuring `linux/build_tarballs.jl`"
     configure_file("./linux/build_tarballs.jl.in", "./linux/build_tarballs.jl")
 
-    path = "/home/clem/.julia/dev/$linux_repo"
+    path = joinpath(homedir(),".julia/dev/$linux_repo")
     if isfile(path)
         run(`rm -r $path`)
     end
@@ -50,7 +50,7 @@ if deploy_windows
     @info "Configuring `windows/build_tarballs.jl`"
     configure_file("./windows/build_tarballs.jl.in", "./windows/build_tarballs.jl")
 
-    path = "/home/clem/.julia/dev/$windows_repo"
+    path = joinpath(homedir(),".julia/dev/$windows_repo")
     if isfile(path)
         run(`rm -r $path`)
     end
@@ -60,7 +60,7 @@ if deploy_apple
     @info "Configuring `apple/build_tarballs.jl`"
     configure_file("./apple/build_tarballs.jl.in", "./apple/build_tarballs.jl")
 
-    path = "/home/clem/.julia/dev/$apple_repo"
+    path = joinpath(homedir(),".julia/dev/$apple_repo")
     if isfile(path)
         run(`rm -r $path`)
     end
