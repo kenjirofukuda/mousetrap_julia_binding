@@ -1,0 +1,19 @@
+kenjiro@u2204lts 
+---------------- 
+OS: Ubuntu 22.04.4 LTS x86_64 
+Host: VirtualBox 1.2 
+Kernel: 6.5.0-35-generic 
+Uptime: 7 hours, 45 mins 
+Packages: 2833 (dpkg), 35 (snap) 
+Shell: bash 5.1.16 
+Resolution: 1920x1920 
+DE: GNOME 42.9 
+WM: Mutter 
+WM Theme: Adwaita 
+Theme: Yaru-purple [GTK2/3] 
+Icons: Yaru-purple [GTK2/3] 
+Terminal: gnome-terminal 
+CPU: AMD Ryzen 5 5625U with Radeon Graphics (4) @ 2.295GHz 
+GPU: 00:02.0 VMware SVGA II Adapter 
+Memory: 3908MiB / 7932MiB 
+
