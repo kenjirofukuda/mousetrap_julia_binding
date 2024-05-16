@@ -1,6 +1,6 @@
 const VERSION = "0.2.0"
 const mousetrap_commit = "333cfbec042acb0cdd641a63ecafc9c413893a86"
-const mousetrap_julia_binding_commit = "b94f573dc916af72afb8bd61e26e3ece170f8884"
+const mousetrap_julia_binding_commit = "e8ffacc0b9a73c591c35aa5fe2846d033646d615"
 
 const linux_repo = "mousetrap_linux_jll"
 const windows_repo = "mousetrap_windows_jll"
